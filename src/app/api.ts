@@ -8,3 +8,10 @@ export const longPoolingChanges = async () => {
     info?.classList.add("sync-info--hidden");
   }, 13000);
 };
+
+export const askForPermission = async () => {
+  setInterval(async () => {
+    window.perm = await getData(`${URL}&d=perm`);
+    if (!window.perm.canEdit) reRenderFooter();
+  }, 3000);
+};

@@ -1,5 +1,4 @@
-
-export const onLoad = async () => {
+export const initApp = async () => {
   window.changes = await getData(`${URL}&d=changes`);
   window.lookup = await getData(`${URL}&d=lookup`);
   window.tabs = await getData(`${URL}&d=tabs`);
@@ -26,6 +25,12 @@ export const onLoad = async () => {
   });
 
   renderSapClient();
+
+  const searchFilter = document.getElementById("filter-rows");
+  searchFilter.addEventListener("keyup", (e) => {
+    updateRows(false);
+  });
+
   const page = renderTabs(topTabs);
   document.getElementById("app").outerHTML = page;
 

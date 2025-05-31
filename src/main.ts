@@ -1,14 +1,12 @@
 import "./style.css";
 // import "./app/clusterize.js";
-import "./app/clusterize.css";
-import { onLoad } from "./utils/onLoad";
+import { initApp } from "./app/init";
 
 const params = window.location.search;
 const URL = "http://localhost:3000/gl" + params;
-const searchFilter = document.getElementById("filter-rows");
-const sapClient = document.getElementById("sap-client");
 
 const renderSapClient = () => {
+  const sapClient = document.getElementById("sap-client");
   let output = "";
   new URLSearchParams(params).forEach((value, key) => {
     const allowedKeys = ["sapSystem", "client", "bukrs"];
@@ -53,8 +51,8 @@ const removeChange = (theKey, col) => {
   }
 };
 
-window.updateTab = async ( tabId) => {
-    console.log({tabId})
+window.updateTab = async (tabId) => {
+  console.log({ tabId });
   window.activeTab = tabId;
   const tabType = window.tabs.find((t) => t.id === tabId).type;
   window.ingridients = window.lookup[`virtualKey_${tabId}`];
@@ -439,6 +437,10 @@ const onSave = async (btn) => {
 };
 
 const updateRows = async (shouldSave = true) => {
+  const searchFilter = document.getElementById(
+    "filter-rows",
+  ) as HTMLInputElement;
+  const phrase = searchFilter ? searchFilter.value.toLowerCase() : "";
   refreshGroups();
   const type = window.tabs.find((t) => t.id == window.activeTab).type;
   let cols;
@@ -446,19 +448,13 @@ const updateRows = async (shouldSave = true) => {
     cols = Object.keys(window.groupsFiltered[window.groupKeysFiltered[0]]);
     window.rows = window.groupKeysFiltered
       .filter((r) =>
-        JSON.stringify(window.groupsFiltered[r])
-          .toLowerCase()
-          .includes(searchFilter.value.toLowerCase()),
+        JSON.stringify(window.groupsFiltered[r]).toLowerCase().includes(phrase),
       )
       .map((r) => renderRowF({ r, cols }));
   } else {
     cols = getColumns(window.data);
     window.rows = window.data
-      .filter((r) =>
-        JSON.stringify(r)
-          .toLowerCase()
-          .includes(searchFilter.value.toLowerCase()),
-      )
+      .filter((r) => JSON.stringify(r).toLowerCase().includes(phrase))
       .map((row) => renderRow({ row, cols }));
   }
 
@@ -491,7 +487,6 @@ const updateRightContent = (groupId) => {
     window.selectedGroup,
   );
 };
-
 
 const renderTableTab = async () => {
   document.querySelector(".tab__content").innerHTML = renderTable(window.data);
@@ -712,17 +707,4 @@ async function initClusterize() {
   await updateRows(false);
 }
 
-
-const askForPermission = async () => {
-  setInterval(async () => {
-    window.perm = await getData(`${URL}&d=perm`);
-    if (!window.perm.canEdit) reRenderFooter();
-  }, 3000);
-};
-
-
-searchFilter.addEventListener("keyup", (e) => {
-  updateRows(false);
-});
-
-window.onload = onLoad;
+window.onload = initApp;
