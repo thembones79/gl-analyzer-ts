@@ -1,0 +1,16 @@
+{
+  "name": "gl-analyzer-ts",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "start": "cd ./mock/ && pm2 start index.mjs  --name GL-ANALYZER---MOCK-BE && cd .. && vite",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5"
+  }
+}
