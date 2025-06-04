@@ -686,13 +686,5 @@ const currentOrFirstGroup = () =>
 		? window.selectedGroup
 		: window.groupKeys[0];
 
-async function initClusterize() {
-	window.clusterize = await new Clusterize({
-		rows: window.rows,
-		scrollId: "scrollArea",
-		contentId: "contentArea",
-	});
-	await updateRows(false);
-}
 
 window.onload = initApp;
