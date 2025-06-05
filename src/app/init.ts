@@ -1,5 +1,11 @@
 import { updateTab } from "./event-handlers";
 
+declare global {
+  interface Window {
+    updateTab?: any;
+  }
+}
+
 export const initApp = async () => {
   window.updateTab = updateTab;
 
