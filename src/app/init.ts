@@ -1,4 +1,8 @@
+import { updateTab } from "./event-handlers";
+
 export const initApp = async () => {
+  window.updateTab = updateTab;
+
   window.changes = await getData(`${URL}&d=changes`);
   window.lookup = await getData(`${URL}&d=lookup`);
   window.tabs = await getData(`${URL}&d=tabs`);
