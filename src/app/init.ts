@@ -1,4 +1,5 @@
 import { updateTab } from "./event-handlers";
+import { store } from "./store";
 
 declare global {
   interface Window {
@@ -14,7 +15,7 @@ export const initApp = async () => {
   window.tabs = await getData(`${URL}&d=tabs`);
   window.types = await getData(`${URL}&d=types`);
   window.perm = await getData(`${URL}&d=perm`);
-  window.data = await getData(URL);
+  store.data = await getData(URL);
   window.activeTab = window.tabs[0].id;
   window.ingridients = window.lookup[`virtualKey_${window.activeTab}`];
   window.locked = window.perm?.canEdit === false;

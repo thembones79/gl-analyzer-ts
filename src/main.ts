@@ -378,41 +378,6 @@ async function onChangeCheckbox(self, theKey, col) {
   });
 }
 
-async function getData(url) {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error.message);
-  }
-}
-
-async function postData(url, body) {
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: myHeaders,
-    });
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error.message);
-    return { error };
-  }
-}
-
 const onSave = async (btn) => {
   let res = {};
   btn.innerText = "Saving...";
