@@ -1,4 +1,6 @@
-export async function getData(url: string) {
+export const URL = document.querySelector("body")?.dataset?.url || "/";
+
+export async function getData<T>(url: string) {
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -6,7 +8,7 @@ export async function getData(url: string) {
     }
 
     const data = await response.json();
-    return data;
+    return data as T;
   } catch (error: any) {
     console.error(error.message);
   }

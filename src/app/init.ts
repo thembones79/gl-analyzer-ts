@@ -1,3 +1,4 @@
+import { getData, URL } from "./api";
 import { updateTab } from "./event-handlers";
 import { store } from "./store";
 
@@ -10,24 +11,24 @@ declare global {
 export const initApp = async () => {
   window.updateTab = updateTab;
 
-  window.changes = await getData(`${URL}&d=changes`);
-  window.lookup = await getData(`${URL}&d=lookup`);
-  window.tabs = await getData(`${URL}&d=tabs`);
-  window.types = await getData(`${URL}&d=types`);
-  window.perm = await getData(`${URL}&d=perm`);
+  store.changes = await getData(`${URL}&d=changes`);
+  store.lookup = await getData(`${URL}&d=lookup`);
+  store.tabs = await getData(`${URL}&d=tabs`);
+  store.types = await getData(`${URL}&d=types`);
+  store.perm = await getData(`${URL}&d=perm`);
   store.data = await getData(URL);
-  window.activeTab = window.tabs[0].id;
-  window.ingridients = window.lookup[`virtualKey_${window.activeTab}`];
-  window.locked = window.perm?.canEdit === false;
+  store.activeTab = window.tabs[0].id;
+  store.ingridients = window.lookup[`virtualKey_${window.activeTab}`];
+  store.locked = window.perm?.canEdit === false;
 
   try {
     refreshGroups();
-    window.selectedGroup = window.groupKeys[0];
+    store.selectedGroup = store.groupKeys[0];
   } catch (error) {
     console.log("E", { error });
   }
-  const table = renderTable(window.data);
-  const topTabs = window.tabs.map((t) => {
+  const table = renderTable(store.data);
+  const topTabs = store.tabs.map((t) => {
     return {
       id: t.id,
       label: t.label,
@@ -47,13 +48,13 @@ export const initApp = async () => {
 
   await initClusterize();
   // await askForPermission();
-  if (!window.locked) {
+  if (!store.locked) {
     await longPoolingChanges();
   }
 };
 async function initClusterize() {
-  window.clusterize = await new Clusterize({
-    rows: window.rows,
+  store.clusterize = await new Clusterize({
+    rows: store.rows,
     scrollId: "scrollArea",
     contentId: "contentArea",
   });
