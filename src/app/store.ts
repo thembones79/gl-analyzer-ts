@@ -126,7 +126,7 @@ export type TPerms = {
 export type TStore = {
   data?: TData;
   changes?: TChanges;
-  perms?: TPerms;
+  perm?: TPerms;
 };
 
 export type TStoreMethods = Record<
@@ -140,5 +140,5 @@ export type TStoreMethods = Record<
 export const store: TStore = {
   data: undefined,
   changes: undefined,
-  perms: undefined,
+  perm: undefined,
 };
