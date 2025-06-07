@@ -75,13 +75,6 @@ const renderTabs = (topTabs) => {
     `;
 };
 
-const renderTable = (data) => {
-  const cols = getColumns(data);
-  const header = renderHeader(cols);
-  const body = renderTableBody();
-  return `<div class="table-container" id="scrollArea" ><table>${header}${body}</table></div>`;
-};
-
 const getColumns = (data) => Object.keys(data[0]);
 
 const renderHeader = (cols) => {
@@ -446,7 +439,7 @@ const updateRightContent = (groupId) => {
 };
 
 const renderTableTab = async () => {
-  document.querySelector(".tab__content").innerHTML = renderTable(window.data);
+  document.querySelector(".tab__content").innerHTML = Table(window.data);
   await initClusterize();
 };
 

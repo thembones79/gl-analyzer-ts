@@ -118,15 +118,16 @@ export type TData = {
 
 export type TChanges = Record<any, any>;
 
-export type TPerms = {
-  user: string;
-  timestamp: number;
+export type TPerm = {
+  canEdit: boolean;
+  editor: string;
+  message?: string;
 };
 
 export type TStore = {
   data?: TData;
   changes?: TChanges;
-  perm?: TPerms;
+  perm?: TPerm;
 };
 
 export type TStoreMethods = Record<
