@@ -1,4 +1,56 @@
 import Clusterize from "clusterize.js";
+
+export type TLookup = {
+  responsibilityGroups: string[];
+  template: string[];
+  oneTwo: string[];
+  virtualKey_glF: string[];
+  level: string[];
+  dueDate: string[];
+  virtualKey_c2: string[];
+  t880: string[];
+  virtualKey_cl: string[];
+  virtualKey_ai2: string[];
+  virtualKey_gl: string[];
+  clearing: string[];
+  virtualKey_ai: string[];
+  frequency: string[];
+  yesNo: string[];
+  recAcct: string[];
+  keyNo: string[];
+  virtualKey_ai3: string[];
+  freeText: string[];
+  inRowColumn: string[];
+  checkBox: string[];
+  risk: string[];
+  mappedKeyAccountDueDate: TMapped;
+  mappedRiskLevelPreparerRecon: TMappedRiskLevelErRecon;
+  mappedRiskLevelReviewerRecon: TMappedRiskLevelErRecon;
+  mappedRiskLevelApproverRecon: TMappedRiskLevelErRecon;
+  mappedInScopeSka1GlCodes: TMapped;
+};
+
+export type TMapped = {
+  source: string;
+  dict: TMappedInScopeSka1GlCodesDict;
+};
+
+export type TMappedInScopeSka1GlCodesDict = {
+  true: string;
+  false: string;
+};
+
+export type TMappedRiskLevelErRecon = {
+  source: string;
+  dict: TMappedRiskLevelApproverReconDict;
+};
+
+export type TMappedRiskLevelApproverReconDict = {
+  Low: string;
+  Medium: string;
+  High: string;
+};
+
 export type TData = {
   ska1GlCode: string;
   skatGlDescription: string;
@@ -115,7 +167,7 @@ export type TData = {
   gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Cust_RevC: string;
   gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Cust_RevC: string;
   gL_PC_PPC_TP_DC_Ref_Cust_RevC: string;
-}[];
+};
 
 export type TChanges = Record<any, any>;
 
@@ -126,12 +178,18 @@ export type TPerm = {
 };
 
 export type TStore = {
-  data?: TData;
-  changes?: TChanges;
-  perm?: TPerm;
   activeTab?: string;
-  groupKeys?: string[];
+  changes?: TChanges;
   clusterize?: Clusterize;
+  data?: TData[];
+  groupKeys?: string[];
+  groupKeysFiltered?: string[];
+  groups?: Record<string, TData>;
+  groupsFiltered?: Record<string, TData>;
+  ingridients?: string[];
+  locked?: boolean;
+  lookup?: TLookup;
+  perm?: TPerm;
 };
 
 export type TStoreMethods = Record<

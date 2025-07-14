@@ -1,4 +1,5 @@
 import "./style.css";
+import { store } from "./app/store";
 // import "./app/clusterize.js";
 import { initApp } from "./app/init";
 
@@ -481,7 +482,7 @@ const createMappedValue = ({ type, row }) => {
 
 const createGroupedData = () => {
   const groups = {};
-  window.data.forEach((row) => {
+  store?.data?.forEach((row) => {
     const vKey = createVirtualGroupKey(row);
     if (!groups[vKey]) {
       groups[vKey] = { ...row };
