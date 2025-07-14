@@ -142,4 +142,18 @@ export const store: TStore = {
   data: undefined,
   changes: undefined,
   perm: undefined,
+  groups: undefined,
+  groupKeys: undefined,
+  groupsFiltered: undefined,
+  groupKeysFiltered: undefined,
+  selectedGroup: undefined,
+  locked: false,
+  tabs: undefined,
+  activeTab: undefined,
+  types: undefined,
+  lookup: undefined,
+  ingridients: undefined,
+  rows: undefined,
+  clusterize: undefined,
+    
 };
