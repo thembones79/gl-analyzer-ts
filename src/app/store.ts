@@ -1,3 +1,4 @@
+import Clusterize from "clusterize.js";
 export type TData = {
   ska1GlCode: string;
   skatGlDescription: string;
@@ -128,8 +129,9 @@ export type TStore = {
   data?: TData;
   changes?: TChanges;
   perm?: TPerm;
-    activeTab?: string;
-    groupKeys?: string[];
+  activeTab?: string;
+  groupKeys?: string[];
+  clusterize?: Clusterize;
 };
 
 export type TStoreMethods = Record<
@@ -143,6 +145,7 @@ export type TStoreMethods = Record<
 export const store: TStore = {
   activeTab: undefined,
   changes: undefined,
+  clusterize: undefined,
   data: undefined,
   groupKeys: undefined,
   groupKeysFiltered: undefined,
@@ -156,5 +159,4 @@ export const store: TStore = {
   selectedGroup: undefined,
   tabs: undefined,
   types: undefined,
-  clusterize: undefined,
 };

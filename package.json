@@ -12,5 +12,9 @@
   "devDependencies": {
     "typescript": "~5.8.3",
     "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "@types/clusterize.js": "^0.18.3",
+    "clusterize.js": "^1.0.0"
   }
 }

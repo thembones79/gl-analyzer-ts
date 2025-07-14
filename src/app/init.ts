@@ -1,3 +1,4 @@
+import Clusterize from "clusterize.js";
 import { getData, URL } from "./api";
 import { updateTab } from "./event-handlers";
 import { store } from "./store";

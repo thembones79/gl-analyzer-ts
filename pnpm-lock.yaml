@@ -7,6 +7,13 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@types/clusterize.js':
+        specifier: ^0.18.3
+        version: 0.18.3
+      clusterize.js:
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       typescript:
         specifier: ~5.8.3
@@ -267,8 +274,14 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@types/clusterize.js@0.18.3':
+    resolution: {integrity: sha512-udptC3aq8hfaXgmt9lC73OuE4RJYt26D2XIj+fTNDs0wuzAgQ6cyDpQOSkWhU65NroISAWhZ3/aovvV88IX7Gw==}
+
   '@types/estree@1.0.7':
     resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
+
+  clusterize.js@1.0.0:
+    resolution: {integrity: sha512-EEYhO8rOvw9JVaHLgEFdvvg9H6ug/GVl8KgakOoc9hg4FK6xmyYsC4B0Aw/QI6ClPxaGPKBetO+ISvCY8N/uUQ==}
 
   esbuild@0.25.5:
     resolution: {integrity: sha512-P8OtKZRv/5J5hhz0cUAdu/cLuPIKXpQl1R9pZtvmHWQvrAUVd0UNIPT4IB4W3rNOqVO0rlqHmCIbSwxh/c9yUQ==}
@@ -499,7 +512,11 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.41.1':
     optional: true
 
+  '@types/clusterize.js@0.18.3': {}
+
   '@types/estree@1.0.7': {}
+
+  clusterize.js@1.0.0: {}
 
   esbuild@0.25.5:
     optionalDependencies:
