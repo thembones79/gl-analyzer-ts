@@ -128,6 +128,8 @@ export type TStore = {
   data?: TData;
   changes?: TChanges;
   perm?: TPerm;
+    activeTab?: string;
+    groupKeys?: string[];
 };
 
 export type TStoreMethods = Record<
@@ -139,21 +141,20 @@ export type TStoreMethods = Record<
 >;
 
 export const store: TStore = {
-  data: undefined,
-  changes: undefined,
-  perm: undefined,
-  groups: undefined,
-  groupKeys: undefined,
-  groupsFiltered: undefined,
-  groupKeysFiltered: undefined,
-  selectedGroup: undefined,
-  locked: false,
-  tabs: undefined,
   activeTab: undefined,
-  types: undefined,
-  lookup: undefined,
+  changes: undefined,
+  data: undefined,
+  groupKeys: undefined,
+  groupKeysFiltered: undefined,
+  groups: undefined,
+  groupsFiltered: undefined,
   ingridients: undefined,
+  locked: false,
+  lookup: undefined,
+  perm: undefined,
   rows: undefined,
+  selectedGroup: undefined,
+  tabs: undefined,
+  types: undefined,
   clusterize: undefined,
-    
 };
