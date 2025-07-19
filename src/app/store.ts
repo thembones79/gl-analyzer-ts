@@ -1,5 +1,22 @@
 import Clusterize from "clusterize.js";
 
+export interface IGroups extends TData {
+  ska1GlCodes: Record<string, boolean>;
+  groupChanged: boolean;
+}
+
+export interface ICreateMappedValue {
+  type: TCreateMappedValueType;
+  row: TData;
+}
+
+export type TCreateMappedValueType =
+  | "mappedKeyAccountDueDate"
+  | "mappedRiskLevelPreparerRecon"
+  | "mappedRiskLevelReviewerRecon"
+  | "mappedRiskLevelApproverRecon"
+  | "mappedInScopeSka1GlCodes";
+
 export type TLookup = {
   responsibilityGroups: string[];
   template: string[];
@@ -177,19 +194,45 @@ export type TPerm = {
   message?: string;
 };
 
-export type TStore = {
-  activeTab?: string;
-  changes?: TChanges;
-  clusterize?: Clusterize;
-  data?: TData[];
-  groupKeys?: string[];
-  groupKeysFiltered?: string[];
-  groups?: Record<string, TData>;
-  groupsFiltered?: Record<string, TData>;
-  ingridients?: string[];
-  locked?: boolean;
-  lookup?: TLookup;
-  perm?: TPerm;
+export type TFilter =
+  | "checkbox"
+  | "clearing"
+  | "freeText"
+  | "frequency"
+  | "inRowColumn"
+  | "level"
+  | "mappedKeyAccountDueDate"
+  | "responsibilityGroups"
+  | "template";
+
+
+export type TType = {
+  name: string;
+  description: string;
+  type: TFilter;
+  filter: TFilter;
+  visibility: string;
+};
+
+export type TTypes = Record<string, TType>;
+
+export type TTab = {
+  id: string;
+  type: string;
+  label: string;
+  columns: { [key: string]: TColumn };
+};
+
+export type TColumn = {
+  visible: "y" | "n";
+  changeable:
+    | "y"
+    | "n"
+    | "mappedKeyAccountDueDate"
+    | "mappedRiskLevelPreparerRecon"
+    | "mappedRiskLevelReviewerRecon"
+    | "mappedRiskLevelApproverRecon"
+    | "mappedInScopeSka1GlCodes";
 };
 
 export type TStoreMethods = Record<
@@ -199,6 +242,27 @@ export type TStoreMethods = Record<
     set: (v: TStore[keyof TStore]) => void;
   }
 >;
+
+export type TGroups = Record<string, IGroups>;
+
+export type TStore = {
+  activeTab?: string;
+  changes?: TChanges;
+  clusterize?: Clusterize;
+  data?: TData[];
+  groupKeys?: string[];
+  groupKeysFiltered?: string[];
+  groups?: TGroups;
+  groupsFiltered?: TGroups;
+  ingridients?: string[];
+  locked?: boolean;
+  lookup?: TLookup;
+  perm?: TPerm;
+  rows?: string[];
+  selectedGroup?: string;
+  tabs?: TTab[];
+  types?: TTypes;
+};
 
 export const store: TStore = {
   activeTab: undefined,

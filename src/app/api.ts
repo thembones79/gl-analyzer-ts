@@ -1,4 +1,9 @@
-export const URL = document.querySelector("body")?.dataset?.url || "/";
+import { store, type TChanges } from "./store";
+import { updateRows } from "./renderers";
+import { reRenderFooter } from "./renderers";
+const host = document.querySelector("body")?.dataset?.url || "/";
+const params = window.location.search;
+export const URL = host + params;
 
 export async function getData<T>(url: string) {
   try {
@@ -39,8 +44,8 @@ export const longPoolingChanges = async () => {
   setInterval(async () => {
     const info = document.querySelector(".sync-info");
     info?.classList.remove("sync-info--hidden");
-    const pooledChanges = await getData(`${URL}&d=changes`);
-    window.changes = { ...pooledChanges };
+    const pooledChanges = await getData<TChanges>(`${URL}&d=changes`);
+    store.changes = { ...pooledChanges };
     await updateRows(false);
     info?.classList.add("sync-info--hidden");
   }, 13000);
@@ -48,7 +53,7 @@ export const longPoolingChanges = async () => {
 
 export const askForPermission = async () => {
   setInterval(async () => {
-    window.perm = await getData(`${URL}&d=perm`);
-    if (!window.perm.canEdit) reRenderFooter();
+    store.perm = await getData(`${URL}&d=perm`);
+    if (!store.perm?.canEdit) reRenderFooter();
   }, 3000);
 };

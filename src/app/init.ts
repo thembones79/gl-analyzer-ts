@@ -53,7 +53,7 @@ export const initApp = async () => {
     await longPoolingChanges();
   }
 };
-async function initClusterize() {
+export async function initClusterize() {
   store.clusterize = await new Clusterize({
     rows: store.rows,
     scrollId: "scrollArea",
