@@ -13,7 +13,10 @@ export const Table = (data) => {
   return `<div class="table-container" id="scrollArea" ><table>${header}${body}</table></div>`;
 };
 
-const renderTabs = (topTabs) => {
+const renderPlaceholder = () =>
+  `<div class="placeholder">${store.locked ? `&nbsp;&nbsp; <strong>${store.perm.message || "LOCKED!!!"}</strong>` : ""}<div class="sync-info sync-info--hidden">Syncing changes...</div></div>`;
+
+export const renderTabs = (topTabs) => {
   const renderLabels = () =>
     topTabs
       .map(

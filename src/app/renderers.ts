@@ -20,7 +20,7 @@ const rChng = (theKey, col) => {
   }
 };
 
-const addChange = (theKey, col, val) => {
+export const addChange = (theKey, col, val) => {
   if (theKey.includes(",")) {
     theKey.split(",").forEach((k) => aChng(k, col, val));
   } else {
@@ -28,7 +28,7 @@ const addChange = (theKey, col, val) => {
   }
 };
 
-const removeChange = (theKey, col) => {
+export const removeChange = (theKey, col) => {
   if (theKey.includes(",")) {
     theKey.split(",").forEach((k) => rChng(k, col));
   } else {
@@ -36,7 +36,7 @@ const removeChange = (theKey, col) => {
   }
 };
 
-const getColumns = (data: TData[]) => Object.keys(data[0]);
+export const getColumns = (data: TData[]) => Object.keys(data[0]);
 
 export const reRenderFooter = () => {
   const footer = document.querySelector(".footer");
@@ -163,7 +163,7 @@ export const renderAiLeft = () =>
 
 const isChangeAffectsGroup = (col) => store.ingridients.includes(col);
 
-const handleInheritedChanges = ({ col, theKey }) => {
+export const handleInheritedChanges = ({ col, theKey }) => {
   if (!isChangeAffectsGroup(col)) return;
   if (theKey.includes(",")) return;
 
@@ -227,9 +227,8 @@ export const updateRows = async (shouldSave = true) => {
   }
 };
 
-const onChangeGroup = (self) => updateRightContent(self.value);
 
-const updateRightContent = (groupId) => {
+export const updateRightContent = (groupId) => {
   store.selectedGroup = store.groupKeys.includes(groupId)
     ? groupId
     : store.groupKeys[0];
@@ -241,12 +240,12 @@ const updateRightContent = (groupId) => {
   );
 };
 
-const renderTableTab = async () => {
+export const renderTableTab = async () => {
   document.querySelector(".tab__content").innerHTML = Table(store.data);
   await initClusterize();
 };
 
-const renderForm = ({ row, cols }) => {
+export const renderForm = ({ row, cols }) => {
   const ai = store.tabs.find((t) => t.id === store.activeTab).columns;
   const theKey = Object.keys(row.ska1GlCodes);
   const columns = cols
@@ -288,22 +287,19 @@ const getStyle = ({ gl }) => {
   return style;
 };
 
-const renderAiCenter = (groupId = store.groupKeys[0]) => {
+export const renderAiCenter = (groupId = store.groupKeys[0]) => {
   const row = store.groups[groupId];
   const cols = Object.keys(row);
   return renderForm({ row, cols });
 };
 
-const renderAiRight = (groupId = store.groupKeys[0]) => {
+export const renderAiRight = (groupId = store.groupKeys[0]) => {
   const row = store.groups[groupId];
   const cols = Object.keys(row);
   return renderAffectedItems({ row, cols });
 };
 
-const renderPlaceholder = () =>
-  `<div class="placeholder">${store.locked ? `&nbsp;&nbsp; <strong>${store.perm.message || "LOCKED!!!"}</strong>` : ""}<div class="sync-info sync-info--hidden">Syncing changes...</div></div>`;
-
-const renderSapClient = () => {
+export const renderSapClient = () => {
   const sapClient = document.getElementById("sap-client");
   let output = "";
   new URLSearchParams(params).forEach((value, key) => {

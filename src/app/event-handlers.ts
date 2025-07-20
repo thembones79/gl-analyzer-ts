@@ -1,4 +1,13 @@
 import { store } from "./store";
+import {
+  updateRows,
+  handleInheritedChanges,
+  addChange,
+  removeChange,
+  renderAiTab,
+  renderTableTab,
+  updateRightContent,
+} from "./renderers";
 
 export const updateTab = async (tabId: string) => {
   store.activeTab = tabId;
@@ -11,6 +20,9 @@ export const updateTab = async (tabId: string) => {
   if (tabType === "group") return renderAiTab();
   return await renderTableTab();
 };
+
+export const onChangeGroup = (self: HTMLInputElement) =>
+  updateRightContent(self.value);
 
 const onOptionClick = (id, val) => {
   const input = document.getElementById(id);
