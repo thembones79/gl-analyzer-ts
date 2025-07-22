@@ -1,8 +1,8 @@
 import { store, type TChanges } from "./store";
 import { updateRows } from "./renderers";
 import { reRenderFooter } from "./renderers";
-const host = document.querySelector("body")?.dataset?.url || "/";
-const params = window.location.search;
+export const host = document.querySelector("body")?.dataset?.url || "/";
+export const params = window.location.search;
 export const URL = host + params;
 
 export async function getData<T>(url: string) {

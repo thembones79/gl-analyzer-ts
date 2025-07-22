@@ -4,23 +4,29 @@ import {
   type TGroups,
   type ICreateMappedValue,
 } from "./store";
-import { postData, URL } from "./api";
+import { postData, params, URL } from "./api";
 
-const aChng = (theKey, col, val) => {
-  if (!window.changes[theKey]) {
-    window.changes[theKey] = { [col]: val };
+const aChng = (theKey: string, col: string, val: string | boolean) => {
+  if (!store.changes) return;
+  if (!store.changes[theKey]) {
+    store.changes[theKey] = { [col]: val };
   }
-  window.changes[theKey][col] = val;
+  store.changes[theKey][col] = val;
 };
 
-const rChng = (theKey, col) => {
-  delete window.changes[theKey][col];
-  if (!Object.keys(window.changes[theKey]).length) {
-    delete window.changes[theKey];
+const rChng = (theKey: string, col: string) => {
+  if (!store.changes) return;
+  delete store.changes[theKey][col];
+  if (!Object.keys(store.changes[theKey]).length) {
+    delete store.changes[theKey];
   }
 };
 
-export const addChange = (theKey, col, val) => {
+export const addChange = (
+  theKey: string,
+  col: string,
+  val: string | boolean,
+) => {
   if (theKey.includes(",")) {
     theKey.split(",").forEach((k) => aChng(k, col, val));
   } else {
@@ -28,7 +34,7 @@ export const addChange = (theKey, col, val) => {
   }
 };
 
-export const removeChange = (theKey, col) => {
+export const removeChange = (theKey: string, col: string) => {
   if (theKey.includes(",")) {
     theKey.split(",").forEach((k) => rChng(k, col));
   } else {
@@ -161,19 +167,28 @@ export const renderAiLeft = () =>
     )
     .join("");
 
-const isChangeAffectsGroup = (col) => store.ingridients.includes(col);
+const isChangeAffectsGroup = (col: string) => store.ingridients?.includes(col);
 
-export const handleInheritedChanges = ({ col, theKey }) => {
+export interface IHandleInheritedChanges {
+  col: string;
+  theKey: string;
+}
+export const handleInheritedChanges = ({
+  col,
+  theKey,
+}: IHandleInheritedChanges) => {
   if (!isChangeAffectsGroup(col)) return;
   if (theKey.includes(",")) return;
 
-  const tabType = store.tabs.find((t) => t.id === store.activeTab).type;
+  const tabType = store.tabs?.find((t) => t.id === store.activeTab)?.type;
   if (tabType !== "group") return;
 
-  const row = store.data.filter(({ ska1GlCode }) => ska1GlCode === theKey)[0];
+  const row = store.data?.filter(({ ska1GlCode }) => ska1GlCode === theKey)[0];
+  if (!row || !store.tabs || !store.groups) return;
+
   const newVirtKey = createVirtualGroupKey(row);
   const groupData = store.groups[newVirtKey];
-  const ai = store.tabs.find((t) => t.id === store.activeTab).columns;
+  const ai = store.tabs.find((t) => t.id === store.activeTab)?.columns;
   const changeableAiCols = Object.keys(ai).filter(
     (c) => ai[c].changeable === "y",
   );
@@ -226,7 +241,6 @@ export const updateRows = async (shouldSave = true) => {
     btn.classList.remove("btn--hidden");
   }
 };
-
 
 export const updateRightContent = (groupId) => {
   store.selectedGroup = store.groupKeys.includes(groupId)
@@ -293,8 +307,11 @@ export const renderAiCenter = (groupId = store.groupKeys[0]) => {
   return renderForm({ row, cols });
 };
 
-export const renderAiRight = (groupId = store.groupKeys[0]) => {
-  const row = store.groups[groupId];
+export const renderAiRight = (
+  groupId = store.groupKeys && store.groupKeys[0],
+) => {
+  if (!store.groups) return;
+  const row = store.groups[groupId as keyof typeof store.groups];
   const cols = Object.keys(row);
   return renderAffectedItems({ row, cols });
 };

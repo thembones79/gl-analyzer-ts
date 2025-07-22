@@ -1,4 +1,5 @@
-import { store } from "./store";
+import { store, type TChanges } from "./store";
+import { getData, postData, URL } from "./api";
 import {
   updateRows,
   handleInheritedChanges,
@@ -24,15 +25,20 @@ export const updateTab = async (tabId: string) => {
 export const onChangeGroup = (self: HTMLInputElement) =>
   updateRightContent(self.value);
 
-const onOptionClick = (id, val) => {
-  const input = document.getElementById(id);
+export const onOptionClick = (id: string, val: string) => {
+  const input = document.getElementById(id) as HTMLInputElement;
   if (input.value === val) return;
   input.value = val;
+  //@ts-ignore
   input.onchange();
 };
 
-async function onChange(self, theKey, col) {
-  window.changes = await getData(`${URL}&d=changes`);
+export async function onChange(
+  self: HTMLInputElement,
+  theKey: string,
+  col: string,
+) {
+  store.changes = await getData(`${URL}&d=changes`);
   const { placeholder, value, classList } = self;
   if (placeholder === value) {
     classList.remove("diff-values");
@@ -45,8 +51,12 @@ async function onChange(self, theKey, col) {
   updateRows(false);
 }
 
-async function onChangeSelect(self, theKey, col) {
-  window.changes = await getData(`${URL}&d=changes`);
+export async function onChangeSelect(
+  self: HTMLInputElement,
+  theKey: string,
+  col: string,
+) {
+  store.changes = await getData(`${URL}&d=changes`);
   const { title, value, classList } = self;
   if (title === value) {
     classList.remove("diff-values");
@@ -59,9 +69,13 @@ async function onChangeSelect(self, theKey, col) {
   updateRows(false);
 }
 
-async function onChangeCheckbox(self, theKey, col) {
+export async function onChangeCheckbox(
+  self: HTMLInputElement,
+  theKey: string,
+  col: string,
+) {
   getData(`${URL}&d=changes`).then((dc) => {
-    window.changes = dc;
+    store.changes = dc as TChanges;
 
     const { checked, classList, title } = self;
     if (title === `${checked}`) {
@@ -76,11 +90,11 @@ async function onChangeCheckbox(self, theKey, col) {
   });
 }
 
-const onSave = async (btn) => {
-  let res = {};
+export const onSave = async (btn: HTMLButtonElement) => {
+  let res: any = {};
   btn.innerText = "Saving...";
   btn.classList.add("btn--hidden");
-  res = await postData(URL, window.changes);
+  res = store.changes && (await postData(URL, store.changes));
   btn.innerText = "Data was saved ✅";
   if (res.error) {
     btn.innerText = "Data was NOT saved ❌";
