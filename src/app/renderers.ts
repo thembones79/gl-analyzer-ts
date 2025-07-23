@@ -6,7 +6,11 @@ import {
 } from "./store";
 import { postData, params, URL } from "./api";
 
-const aChng = (theKey: string, col: string, val: string | boolean) => {
+const aChng = (
+  theKey: string,
+  col: string,
+  val: string | boolean | string[] | Record<string, boolean>,
+) => {
   if (!store.changes) return;
   if (!store.changes[theKey]) {
     store.changes[theKey] = { [col]: val };
@@ -25,7 +29,7 @@ const rChng = (theKey: string, col: string) => {
 export const addChange = (
   theKey: string,
   col: string,
-  val: string | boolean,
+  val: string | boolean | string[] | Record<string, boolean>,
 ) => {
   if (theKey.includes(",")) {
     theKey.split(",").forEach((k) => aChng(k, col, val));
@@ -189,12 +193,14 @@ export const handleInheritedChanges = ({
   const newVirtKey = createVirtualGroupKey(row);
   const groupData = store.groups[newVirtKey];
   const ai = store.tabs.find((t) => t.id === store.activeTab)?.columns;
-  const changeableAiCols = Object.keys(ai).filter(
-    (c) => ai[c].changeable === "y",
-  );
+  const changeableAiCols = ai
+    ? Object.keys(ai).filter((c) => ai[c].changeable === "y")
+    : [];
   if (groupData) {
     changeableAiCols.forEach((c) => {
-      if (row[c] !== groupData[c]) addChange(theKey, c, groupData[c]);
+      const changedData = groupData[c as keyof typeof groupData];
+      if (row[c as keyof typeof row] !== changedData)
+        addChange(theKey, c, changedData);
     });
   } else {
     changeableAiCols.forEach((c) => {
@@ -204,6 +210,7 @@ export const handleInheritedChanges = ({
 };
 
 export const updateRows = async (shouldSave = true) => {
+    if (!store.data) return;
   const searchFilter = document.getElementById(
     "filter-rows",
   ) as HTMLInputElement;
