@@ -6,6 +6,8 @@ import {
 } from "./store";
 import { postData, params, URL } from "./api";
 
+import { renderRow, renderRowF } from "./components";
+
 const aChng = (
   theKey: string,
   col: string,
@@ -210,19 +212,21 @@ export const handleInheritedChanges = ({
 };
 
 export const updateRows = async (shouldSave = true) => {
-    if (!store.data) return;
+  if (!store.data) return;
   const searchFilter = document.getElementById(
     "filter-rows",
   ) as HTMLInputElement;
   const phrase = searchFilter ? searchFilter.value.toLowerCase() : "";
   refreshGroups();
   const type = store.tabs?.find((t) => t.id == store.activeTab)?.type;
-  let cols;
-  if (type === "tableF") {
+  let cols: string[];
+  if (type === "tableF" && store.groupsFiltered && store.groupKeysFiltered) {
     cols = Object.keys(store.groupsFiltered[store.groupKeysFiltered[0]]);
     store.rows = store.groupKeysFiltered
       .filter((r) =>
-        JSON.stringify(store.groupsFiltered[r]).toLowerCase().includes(phrase),
+        JSON.stringify(store.groupsFiltered ? store.groupsFiltered[r] : [])
+          .toLowerCase()
+          .includes(phrase),
       )
       .map((r) => renderRowF({ r, cols }));
   } else {

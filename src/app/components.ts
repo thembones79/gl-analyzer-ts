@@ -13,7 +13,7 @@ export const Table = (data) => {
   return `<div class="table-container" id="scrollArea" ><table>${header}${body}</table></div>`;
 };
 
-const renderPlaceholder = () =>
+export const renderPlaceholder = () =>
   `<div class="placeholder">${store.locked ? `&nbsp;&nbsp; <strong>${store.perm.message || "LOCKED!!!"}</strong>` : ""}<div class="sync-info sync-info--hidden">Syncing changes...</div></div>`;
 
 export const renderTabs = (topTabs) => {
@@ -40,7 +40,7 @@ export const renderTabs = (topTabs) => {
     `;
 };
 
-const renderHeader = (cols) => {
+export const renderHeader = (cols) => {
   const tab = window.tabs.find((t) => t.id === window.activeTab).columns;
   const columns = cols
     .map(
@@ -51,9 +51,9 @@ const renderHeader = (cols) => {
   return `<thead><tr>${columns}</tr></thead>`;
 };
 
-const renderTableBody = () => `<tbody id="contentArea"></tbody>`;
+export const renderTableBody = () => `<tbody id="contentArea"></tbody>`;
 
-const renderInput = ({
+export const renderInput = ({
   theKey,
   row,
   val,
@@ -68,7 +68,7 @@ const renderInput = ({
   return `<input placeholder="${v}"  ${disabled} ${diffClass} title="${v}" value="${changedVal || v}" onchange="onChange(this,'${theKey}','${c}')" />`;
 };
 
-const renderMapped = ({
+export const renderMapped = ({
   type,
   theKey,
   row,
@@ -84,7 +84,7 @@ const renderMapped = ({
   return `<input placeholder="${v}"  ${disabled} ${diffClass} title="${v}" value="${changedVal || v}" onchange="onChange(this,'${theKey}','${c}')" />`;
 };
 
-const renderSelect = ({
+export const renderSelect = ({
   type,
   theKey,
   val,
@@ -111,7 +111,7 @@ const renderSelect = ({
     </select> `;
 };
 
-const renderDynamicOptionsSelect = ({
+export const renderDynamicOptionsSelect = ({
   type,
   theKey,
   val,
@@ -139,7 +139,7 @@ const renderDynamicOptionsSelect = ({
     </select> `;
 };
 
-const renderCheckbox = ({
+export const renderCheckbox = ({
   theKey,
   val,
   isDisabled,
@@ -159,7 +159,7 @@ const renderCheckbox = ({
   return `<input type='checkbox' title="${val}"  ${disabled} ${diffClass}  ${checked} onchange="onChangeCheckbox(this,'${theKey}','${c}')" />`;
 };
 
-const renderDataList = ({
+export const renderDataList = ({
   type,
   theKey,
   val,
@@ -186,7 +186,7 @@ const renderDataList = ({
         `;
 };
 
-const renderTag = (options) => {
+export const renderTag = (options) => {
   const { type } = options;
   if (type === "checkbox") return renderCheckbox(options);
   if (type === "freeText") return renderInput(options);
@@ -199,7 +199,7 @@ export interface IRow {
   row: TData;
   cols: string[];
 }
-export const renderRow = ({ row, cols }: IRow) => {
+export export const renderRow = ({ row, cols }: IRow) => {
   if (!store.tabs || !store.activeTab || !store.types) return "";
   const tab = store.tabs.find((t) => t.id === "h")?.columns;
   if (!tab) return "";
@@ -233,7 +233,7 @@ export const renderRow = ({ row, cols }: IRow) => {
   return `<tr>${columns}</tr>`;
 };
 
-const renderRowF = ({ r, cols }) => {
+export const renderRowF = ({ r, cols }) => {
   const tab = store.tabs.find((t) => t.id === window.activeTab).columns;
   const row = window.groupsFiltered[r];
   const columns = cols
