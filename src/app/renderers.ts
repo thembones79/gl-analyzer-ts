@@ -253,16 +253,23 @@ export const updateRows = async (shouldSave = true) => {
   }
 };
 
-export const updateRightContent = (groupId) => {
-  store.selectedGroup = store.groupKeys.includes(groupId)
+export const updateRightContent = (groupId: string) => {
+  if (!store.groupKeys) return;
+  store.selectedGroup = store.groupKeys?.includes(groupId)
     ? groupId
     : store.groupKeys[0];
 
-  document.querySelector(".ai-box__center > article").innerHTML =
-    renderAiCenter(store.selectedGroup);
-  document.querySelector(".ai-box__right > article").innerHTML = renderAiRight(
-    store.selectedGroup,
-  );
+  const aiCenter = document.querySelector(
+    ".ai-box__center > article",
+  ) as HTMLDivElement;
+
+  aiCenter.innerHTML = renderAiCenter(store.selectedGroup);
+
+  const aiRight = document.querySelector(
+    ".ai-box__right > article",
+  ) as HTMLDivElement;
+
+  aiRight.innerHTML = renderAiRight(store.selectedGroup);
 };
 
 export const renderTableTab = async () => {
@@ -313,6 +320,7 @@ const getStyle = ({ gl }) => {
 };
 
 export const renderAiCenter = (groupId = store.groupKeys[0]) => {
+  if (!store.groups) return "";
   const row = store.groups[groupId];
   const cols = Object.keys(row);
   return renderForm({ row, cols });
@@ -321,7 +329,7 @@ export const renderAiCenter = (groupId = store.groupKeys[0]) => {
 export const renderAiRight = (
   groupId = store.groupKeys && store.groupKeys[0],
 ) => {
-  if (!store.groups) return;
+  if (!store.groups) return "";
   const row = store.groups[groupId as keyof typeof store.groups];
   const cols = Object.keys(row);
   return renderAffectedItems({ row, cols });
@@ -368,9 +376,10 @@ export const ai = () => {
 };
 
 export const renderAiTab = () => {
-  document.querySelector(".tab__content").innerHTML = ai();
+  const tabContent = document.querySelector(".tab__content") as HTMLDivElement;
+  tabContent.innerHTML = ai();
   store.selectedGroup = currentOrFirstGroup();
   updateRightContent(store.selectedGroup);
-  const activeLabel = document.getElementById("active-label");
+  const activeLabel = document.getElementById("active-label") as HTMLDivElement;
   activeLabel.scrollIntoView();
 };
