@@ -304,18 +304,18 @@ export const renderRow = ({ row, cols }: IRow) => {
 
 export const renderRowF = ({ row, cols }: IRow) => {
   const tab = store.tabs.find((t) => t.id === store.activeTab).columns;
-  const row = store.groupsFiltered[r];
+  const rowInScope = store.groupsFiltered[row];
   const columns = cols
     .map((c) => {
       const keyColumnName = "ska1GlCode";
       const { type } =
         store.types[c] === undefined ? "freeText" : store.types[c];
-      const theKey = row[keyColumnName];
-      const val = row[c];
+      const theKey = rowInScope[keyColumnName];
+      const val = rowInScope[c];
 
       let changeable = tab[c] === undefined ? "n" : tab[c].changeable;
       if (changeable.startsWith("mapped")) {
-        changeable = createMappedValue({ type: changeable, row });
+        changeable = createMappedValue({ type: changeable, row: rowInScope });
       }
       const isDisabled = changeable !== "y";
 
@@ -360,10 +360,11 @@ export const ai = () => {
 export const renderForm = ({ row, cols }: IRenderForm) => {
   if (!store.tabs || !store.activeTab || !store.types) return "";
   const ai = store.tabs.find((t) => t.id === store.activeTab)?.columns || {};
-  const theKey = Object.keys(row.ska1GlCodes);
+  const theKey = Object.keys(row.ska1GlCodes).join(",");
   const columns = cols
     .map((c) => {
-      const { type } = store.types ? store.types[c] : { type: "checkboxList" };
+      const record = store.types ? store.types[c] : { type: "freeText" };
+      const type = record.type as TFilter;
       const val = row[c as keyof typeof row];
       const isDisabled = ai[c] && ai[c].changeable !== "y";
 

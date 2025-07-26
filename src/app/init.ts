@@ -3,7 +3,7 @@ import { renderApp, renderSapClient } from "./renderers";
 import { refreshGroups, updateRows } from "./data-transformers";
 import { longPoolingChanges } from "./api";
 import { getData, URL } from "./api";
-import { updateTab } from "./event-handlers";
+import * as handlers from "./event-handlers";
 import { store, type TLookup } from "./store";
 
 declare global {
@@ -14,7 +14,8 @@ declare global {
 
 export const initApp = async () => {
   // bind event handlers into global scope
-  window.updateTab = updateTab;
+  // window.updateTab = updateTab;
+    window = {...window, ...handlers}
 
   // populate the store
   store.changes = await getData(`${URL}&d=changes`);
