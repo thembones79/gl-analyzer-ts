@@ -7,11 +7,35 @@ import {
   type TCreateMappedValueType,
   type TTypes,
 } from "./store";
-import { createMappedValue, getColumns } from "./data-transformers";
+import {
+  createMappedValue,
+  currentOrFirstGroup,
+  getColumns,
+} from "./data-transformers";
 
 export interface IGroups extends TRow {
   ska1GlCodes: Record<string, boolean>;
   groupChanged: boolean;
+}
+
+export interface IRenderTabs {
+  id: string;
+  label: string;
+  content: string;
+}
+
+export interface IRow {
+  row: TRow;
+  cols: string[];
+}
+
+export interface IRenderForm {
+  row: IGroups;
+  cols: string[];
+}
+
+export interface IRenderAffectedItems {
+  row: IGroups;
 }
 
 export const Table = (data?: TRow[]) => {
@@ -34,11 +58,6 @@ export const renderFooter = () => {
 export const renderPlaceholder = () =>
   `<div class="placeholder">${store.locked ? `&nbsp;&nbsp; <strong>${store.perm?.message || "LOCKED!!!"}</strong>` : ""}<div class="sync-info sync-info--hidden">Syncing changes...</div></div>`;
 
-export interface IRenderTabs {
-  id: string;
-  label: string;
-  content: string;
-}
 export const renderTabs = (topTabs: IRenderTabs[]) => {
   const renderLabels = () =>
     topTabs
@@ -75,12 +94,13 @@ export const renderAiLeft = () =>
     )
     .join("");
 
-export const renderHeader = (cols) => {
-  const tab = window.tabs.find((t) => t.id === window.activeTab).columns;
+export const renderHeader = (cols: string[]) => {
+  if (!store.types) return "";
+  const tab = store.tabs?.find((t) => t.id === store.activeTab)?.columns;
   const columns = cols
     .map(
       (c) =>
-        `${tab[c] && tab[c].visible === "y" ? ` <th title="${window.types[c].description}">${window.types[c].name}</th>` : ""}`,
+        `${tab && tab[c] && tab[c].visible === "y" ? ` <th title="${store.types ? store.types[c].description : ""}">${store.types ? store.types[c].name : ""}</th>` : ""}`,
     )
     .join("");
   return `<thead><tr>${columns}</tr></thead>`;
@@ -131,7 +151,7 @@ export const renderSelect = ({
   const disabled = isDisabled ? "disabled" : "";
   const diffClass = isDiffer ? "class='diff-values'" : "";
 
-  const options = window.lookup[type]
+  const options = store.lookup[type]
     .map((o) => {
       const value = changedVal || val;
       const selected = value === o ? "selected" : "";
@@ -159,7 +179,7 @@ export const renderDynamicOptionsSelect = ({
   const disabled = isDisabled ? "disabled" : "";
   const diffClass = isDiffer ? "class='diff-values'" : "";
 
-  const options = (row[window.lookup[type]] || [])
+  const options = (row[store.lookup[type]] || [])
     .map((o) => {
       const value = changedVal || val;
       const selected = value === o ? "selected" : "";
@@ -208,7 +228,7 @@ export const renderDataList = ({
   const diffClass = isDiffer ? "class='diff-values'" : "";
   const value = changedVal || val;
   const id = `${theKey}_${c}`;
-  const options = (row[window.lookup[type]] || [])
+  const options = (row[store.lookup[type]] || [])
     .map((o) => {
       return ` <div class="popover__item" onclick="onOptionClick('${id}','${o}')"> ${o} </div> `;
     })
@@ -230,10 +250,6 @@ export const renderTag = (options) => {
   return renderSelect(options);
 };
 
-export interface IRow {
-  row: TRow;
-  cols: string[];
-}
 export const renderRow = ({ row, cols }: IRow) => {
   if (!store.tabs || !store.activeTab || !store.types) return "";
   const tab = store.tabs.find((t) => t.id === "h")?.columns;
@@ -269,13 +285,13 @@ export const renderRow = ({ row, cols }: IRow) => {
 };
 
 export const renderRowF = ({ r, cols }) => {
-  const tab = store.tabs.find((t) => t.id === window.activeTab).columns;
-  const row = window.groupsFiltered[r];
+  const tab = store.tabs.find((t) => t.id === store.activeTab).columns;
+  const row = store.groupsFiltered[r];
   const columns = cols
     .map((c) => {
       const keyColumnName = "ska1GlCode";
       const { type } =
-        window.types[c] === undefined ? "freeText" : window.types[c];
+        store.types[c] === undefined ? "freeText" : store.types[c];
       const theKey = row[keyColumnName];
       const val = row[c];
 
@@ -286,10 +302,10 @@ export const renderRowF = ({ r, cols }) => {
       const isDisabled = changeable !== "y";
 
       if (
-        window.changes[theKey] &&
-        Object.keys(window.changes[theKey]).includes(c)
+        store.changes[theKey] &&
+        Object.keys(store.changes[theKey]).includes(c)
       ) {
-        const changedVal = window.changes[theKey][c];
+        const changedVal = store.changes[theKey][c];
         const isDiffer = val !== changedVal;
         return `${tab[c] === undefined ? "" : tab[c].visible === "y" ? `<td>${renderTag({ type, theKey, val, isDisabled, isDiffer, c, changedVal, row })}</td>` : ""}`;
       }
@@ -323,11 +339,6 @@ export const ai = () => {
         `;
 };
 
-export interface IRenderForm {
-  row: IGroups;
-  cols: string[];
-}
-
 export const renderForm = ({ row, cols }: IRenderForm) => {
   if (!store.tabs || !store.activeTab || !store.types) return "";
   const ai = store.tabs.find((t) => t.id === store.activeTab)?.columns || {};
@@ -354,9 +365,6 @@ export const renderForm = ({ row, cols }: IRenderForm) => {
   return `<div>${columns}</div>`;
 };
 
-export interface IRenderAffectedItems {
-  row: IGroups;
-}
 const renderAffectedItems = ({ row }: IRenderAffectedItems) => {
   const theKey = Object.keys(row.ska1GlCodes);
   const affectedItems = theKey
