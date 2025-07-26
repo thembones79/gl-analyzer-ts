@@ -29,7 +29,7 @@ export type TLookup = {
   virtualKey_ai3: string[];
   freeText: string[];
   inRowColumn: string[];
-  checkBox: string[];
+  checkbox: string[];
   risk: string[];
   mappedKeyAccountDueDate: TMapped;
   mappedRiskLevelPreparerRecon: TMappedRiskLevelErRecon;

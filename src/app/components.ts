@@ -13,6 +13,7 @@ import {
   currentOrFirstGroup,
   createVirtualGroupKey,
   getColumns,
+  refreshGroups,
 } from "./data-transformers";
 
 export interface IGroups extends TRow {
@@ -21,14 +22,14 @@ export interface IGroups extends TRow {
 }
 
 export interface IRenderField {
-  type: TFilter;
+  type: TFilter | TCreateMappedValueType;
   theKey: string;
   row: TRow;
-  val: string;
-  isDisabled: boolean;
-  isDiffer: boolean;
+  val: string | boolean | string[] | Record<string, boolean>;
+  isDisabled?: boolean;
+  isDiffer?: boolean;
   c: string;
-  changedVal: string;
+  changedVal?: string;
 }
 
 export interface IRenderTabs {
@@ -275,7 +276,7 @@ export const renderRow = ({ row, cols }: IRow) => {
     .map((c) => {
       const keyColumnName = "ska1GlCode";
       const typeItem = store.types && store.types[c as keyof TTypes];
-      const type = typeItem ? typeItem.type : "freetext";
+      const type = typeItem ? typeItem.type : "freeText";
 
       const theKey = row[keyColumnName];
       const val = row[c as keyof TRow];
@@ -301,7 +302,7 @@ export const renderRow = ({ row, cols }: IRow) => {
   return `<tr>${columns}</tr>`;
 };
 
-export const renderRowF = ({ r, cols }) => {
+export const renderRowF = ({ row, cols }: IRow) => {
   const tab = store.tabs.find((t) => t.id === store.activeTab).columns;
   const row = store.groupsFiltered[r];
   const columns = cols

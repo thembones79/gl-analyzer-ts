@@ -3,13 +3,16 @@ import {
   type TRow,
   type TGroups,
   type TCreateMappedValueType,
+  type TFilter,
+  type TMapped,
+  type TMappedRiskLevelErRecon,
 } from "./store";
 import { postData, URL } from "./api";
 import { renderRow, renderRowF } from "./components";
 import { renderAiTab } from "./renderers";
 
 export interface ICreateMappedValue {
-  type: TCreateMappedValueType;
+  type: TCreateMappedValueType | TFilter;
   row: TRow;
 }
 
@@ -82,7 +85,9 @@ export const createMappedValue = ({ type, row }: ICreateMappedValue) => {
   const changedRecordKey = row.ska1GlCode;
   const areChanges = store.changes && store.changes[changedRecordKey];
   if (!store.lookup) return "";
-  const { source, dict } = store.lookup[type];
+  const { source, dict } = store.lookup[type] as
+    | TMapped
+    | TMappedRiskLevelErRecon;
   const sourceVal = source
     ? areChanges && areChanges[source]
       ? areChanges[source]
@@ -117,10 +122,7 @@ const createGroupedDataFiltered = () => {
   const filteredData = store.data
     ? store.data?.filter((row) => {
         const changedValue = store.changes && store.changes[row.ska1GlCode];
-        if (changedValue === undefined) return row.inScope;
-        const scope = changedValue.inScope;
-        if (scope === undefined) return row.inScope;
-        return scope;
+        return changedValue.inScope || row.inScope;
       })
     : [];
 
