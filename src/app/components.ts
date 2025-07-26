@@ -18,6 +18,16 @@ export interface IGroups extends TRow {
   groupChanged: boolean;
 }
 
+export interface IRenderInput {
+  theKey: string;
+  row: string;
+  val: string;
+  isDisabled: boolean;
+  isDiffer: boolean;
+  c: string;
+  changedVal: string;
+}
+
 export interface IRenderTabs {
   id: string;
   label: string;
@@ -116,7 +126,7 @@ export const renderInput = ({
   isDiffer,
   c,
   changedVal,
-}) => {
+}: IRenderInput) => {
   const disabled = isDisabled ? "disabled" : "";
   const diffClass = isDiffer ? "class='diff-values'" : "";
   const v = c === "accountItem" ? createVirtualGroupKey(row) : val;
