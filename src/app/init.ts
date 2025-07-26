@@ -1,6 +1,6 @@
 import Clusterize from "clusterize.js";
-import { renderTabs, Table } from "./components";
-import { refreshGroups, updateRows, renderSapClient } from "./renderers";
+import { renderApp, renderSapClient } from "./renderers";
+import { refreshGroups, updateRows } from "./data-transformers";
 import { longPoolingChanges } from "./api";
 import { getData, URL } from "./api";
 import { updateTab } from "./event-handlers";
@@ -35,16 +35,9 @@ export const initApp = async () => {
   } catch (error) {
     console.log("E", { error });
   }
-  const table = Table(store.data);
-  const topTabs = store.tabs?.map((t) => {
-    return {
-      id: t.id,
-      label: t.label,
-      content: table,
-    };
-  });
 
   renderSapClient();
+  renderApp();
 
   const searchFilter = document.getElementById("filter-rows");
   searchFilter &&
@@ -52,16 +45,13 @@ export const initApp = async () => {
       updateRows(false);
     });
 
-  const page = renderTabs(topTabs || []);
-  const app = document.getElementById("app") as HTMLDivElement;
-  app.outerHTML = page;
-
   await initClusterize();
   // await askForPermission();
   if (!store.locked) {
     await longPoolingChanges();
   }
 };
+
 export async function initClusterize() {
   store.clusterize = new Clusterize({
     rows: store.rows,

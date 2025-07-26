@@ -1,15 +1,18 @@
 // Components are functions that returns template strings (for example: `<div></div>`)
 // Name starts with big letter
 
-import { createMappedValue } from "./renderers";
 import {
   store,
   type TRow,
   type TCreateMappedValueType,
   type TTypes,
 } from "./store";
+import { createMappedValue, getColumns } from "./data-transformers";
 
-import { getColumns } from "./data-transformers";
+export interface IGroups extends TRow {
+  ska1GlCodes: Record<string, boolean>;
+  groupChanged: boolean;
+}
 
 export const Table = (data?: TRow[]) => {
   if (!data) return "";
@@ -294,4 +297,95 @@ export const renderRowF = ({ r, cols }) => {
     })
     .join("");
   return `<tr>${columns}</tr>`;
+};
+
+export const ai = () => {
+  refreshGroups();
+  return `
+        <section class="ai-box">
+        <fieldset class="ai-box__left">
+            <legend>Select a group:</legend>
+            ${renderAiLeft()}
+        </fieldset>
+        <fieldset class="ai-box__center">
+            <legend>Make batch changes:</legend>
+            <article>
+                ${renderAiCenter()}
+            </article>
+        </fieldset>
+        <fieldset class="ai-box__right">
+            <legend>Affected items:</legend>
+            <article>
+                ${renderAiRight()}
+            </article>
+        </fieldset>
+        </section>
+        `;
+};
+
+export interface IRenderForm {
+  row: IGroups;
+  cols: string[];
+}
+
+export const renderForm = ({ row, cols }: IRenderForm) => {
+  if (!store.tabs || !store.activeTab || !store.types) return "";
+  const ai = store.tabs.find((t) => t.id === store.activeTab)?.columns || {};
+  const theKey = Object.keys(row.ska1GlCodes);
+  const columns = cols
+    .map((c) => {
+      const { type } = store.types ? store.types[c] : { type: "checkboxList" };
+      const val = row[c as keyof typeof row];
+      const isDisabled = ai[c] && ai[c].changeable !== "y";
+
+      if (
+        store.changes &&
+        store.changes[theKey[0]] &&
+        Object.keys(store.changes[theKey[0]]).includes(c)
+      ) {
+        const changedVal = store.changes[theKey[0]][c];
+        const isDiffer = val !== changedVal;
+        return `${ai[c] && ai[c].visible === "y" ? `<div class="form-item"><label>${c}</label>${renderTag({ type, theKey, val, isDisabled, isDiffer, c, changedVal, row })}</div>` : ""}`;
+      }
+      return `${ai[c] && ai[c].visible === "y" ? `<div class="form-item"><label>${c}</label>${renderTag({ type, theKey, val, isDisabled, c, row })}</div>` : ""}`;
+    })
+    .join("");
+
+  return `<div>${columns}</div>`;
+};
+
+export interface IRenderAffectedItems {
+  row: IGroups;
+}
+const renderAffectedItems = ({ row }: IRenderAffectedItems) => {
+  const theKey = Object.keys(row.ska1GlCodes);
+  const affectedItems = theKey
+    .map((ska1GlCode) => `<div${getStyle(ska1GlCode)}>${ska1GlCode}</div>`)
+    .join("");
+
+  return `<div>${affectedItems}</div>`;
+};
+
+const getStyle = (ska1GlCode: string) => {
+  if (!store.data) return "";
+  const row = store.data.find((r) => r.ska1GlCode === ska1GlCode);
+  if (!row) return "";
+  const color = createMappedValue({ type: "mappedInScopeSka1GlCodes", row });
+  const style = color ? ` style="color: ${color}";` : "";
+  return style;
+};
+
+export const renderAiCenter = (groupId?: string) => {
+  if (!store.groups || !store.groupKeys) return "";
+  const row = store.groups[groupId || store.groupKeys[0]];
+  const cols = Object.keys(row);
+  return renderForm({ row, cols });
+};
+
+export const renderAiRight = (
+  groupId = store.groupKeys && store.groupKeys[0],
+) => {
+  if (!store.groups) return "";
+  const row = store.groups[groupId as keyof typeof store.groups];
+  return renderAffectedItems({ row });
 };

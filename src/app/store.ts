@@ -1,14 +1,5 @@
 import Clusterize from "clusterize.js";
-
-export interface IGroups extends TRow {
-  ska1GlCodes: Record<string, boolean>;
-  groupChanged: boolean;
-}
-
-export interface ICreateMappedValue {
-  type: TCreateMappedValueType;
-  row: TRow;
-}
+import { type IGroups } from "./components";
 
 export type TCreateMappedValueType =
   | "mappedKeyAccountDueDate"

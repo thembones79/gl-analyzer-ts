@@ -1,14 +1,12 @@
 import { store, type TChanges } from "./store";
 import { getData, postData, URL } from "./api";
+import { renderAiTab, renderTableTab, updateRightContent } from "./renderers";
 import {
   updateRows,
   handleInheritedChanges,
-  renderAiTab,
-  renderTableTab,
-  updateRightContent,
-} from "./renderers";
-
-import { addChange, removeChange } from "./data-transformers";
+  addChange,
+  removeChange,
+} from "./data-transformers";
 
 export const updateTab = async (tabId: string) => {
   store.activeTab = tabId;

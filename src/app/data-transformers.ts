@@ -2,8 +2,21 @@ import {
   store,
   type TRow,
   type TGroups,
-  type ICreateMappedValue,
+  type TCreateMappedValueType,
 } from "./store";
+import { postData, URL } from "./api";
+import { renderRow, renderRowF } from "./components";
+import { renderAiTab } from "./renderers";
+
+export interface ICreateMappedValue {
+  type: TCreateMappedValueType;
+  row: TRow;
+}
+
+export interface IHandleInheritedChanges {
+  col: string;
+  theKey: string;
+}
 
 const aChng = (
   theKey: string,
@@ -141,4 +154,80 @@ export const currentOrFirstGroup = () => {
   if (!store.selectedGroup) return store.groupKeys[0];
   if (store.groupKeys.includes(store.selectedGroup)) return store.selectedGroup;
   return store.groupKeys[0];
+};
+
+const isChangeAffectsGroup = (col: string) => store.ingridients?.includes(col);
+
+export const handleInheritedChanges = ({
+  col,
+  theKey,
+}: IHandleInheritedChanges) => {
+  if (!isChangeAffectsGroup(col)) return;
+  if (theKey.includes(",")) return;
+
+  const tabType = store.tabs?.find((t) => t.id === store.activeTab)?.type;
+  if (tabType !== "group") return;
+
+  const row = store.data?.filter(({ ska1GlCode }) => ska1GlCode === theKey)[0];
+  if (!row || !store.tabs || !store.groups) return;
+
+  const newVirtKey = createVirtualGroupKey(row);
+  const groupData = store.groups[newVirtKey];
+  const ai = store.tabs.find((t) => t.id === store.activeTab)?.columns;
+  const changeableAiCols = ai
+    ? Object.keys(ai).filter((c) => ai[c].changeable === "y")
+    : [];
+  if (groupData) {
+    changeableAiCols.forEach((c) => {
+      const changedData = groupData[c as keyof typeof groupData];
+      if (row[c as keyof typeof row] !== changedData)
+        addChange(theKey, c, changedData);
+    });
+  } else {
+    changeableAiCols.forEach((c) => {
+      removeChange(theKey, c);
+    });
+  }
+};
+
+export const updateRows = async (shouldSave = true) => {
+  if (!store.data) return;
+  const searchFilter = document.getElementById(
+    "filter-rows",
+  ) as HTMLInputElement;
+  const phrase = searchFilter ? searchFilter.value.toLowerCase() : "";
+  refreshGroups();
+  const type = store.tabs?.find((t) => t.id == store.activeTab)?.type;
+  let cols: string[];
+  if (type === "tableF" && store.groupsFiltered && store.groupKeysFiltered) {
+    cols = Object.keys(store.groupsFiltered[store.groupKeysFiltered[0]]);
+    store.rows = store.groupKeysFiltered
+      .filter((r) =>
+        JSON.stringify(store.groupsFiltered ? store.groupsFiltered[r] : [])
+          .toLowerCase()
+          .includes(phrase),
+      )
+      .map((r) => renderRowF({ r, cols }));
+  } else {
+    cols = getColumns(store.data);
+    store.rows = store.data
+      .filter((r) => JSON.stringify(r).toLowerCase().includes(phrase))
+      .map((row) => renderRow({ row, cols }));
+  }
+
+  store.clusterize?.update(store.rows);
+
+  refreshGroups();
+  if (store.activeTab === "ai") {
+    renderAiTab();
+  }
+
+  store.changes && (await postData(URL, store.changes));
+
+  if (shouldSave) {
+    const btn = document.querySelector("button.btn") as HTMLButtonElement;
+    if (!btn) return;
+    btn.innerText = "Save";
+    btn.classList.remove("btn--hidden");
+  }
 };
