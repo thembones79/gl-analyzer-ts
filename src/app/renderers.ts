@@ -3,10 +3,12 @@ import {
   type TData,
   type TGroups,
   type ICreateMappedValue,
+  type IGroups,
 } from "./store";
 import { postData, params, URL } from "./api";
 
-import { renderRow, renderRowF } from "./components";
+import { renderRow, renderRowF, Table, renderTag } from "./components";
+import { initClusterize } from "./init";
 
 const aChng = (
   theKey: string,
@@ -273,20 +275,27 @@ export const updateRightContent = (groupId: string) => {
 };
 
 export const renderTableTab = async () => {
-  document.querySelector(".tab__content").innerHTML = Table(store.data);
+  const tabContent = document.querySelector(".tab__content") as HTMLDivElement;
+  tabContent.innerHTML = Table(store.data);
   await initClusterize();
 };
 
-export const renderForm = ({ row, cols }) => {
-  const ai = store.tabs.find((t) => t.id === store.activeTab).columns;
+export interface IRenderForm {
+  row: IGroups;
+  cols: string[];
+}
+export const renderForm = ({ row, cols }: IRenderForm) => {
+  if (!store.tabs || !store.activeTab || !store.types) return "";
+  const ai = store.tabs.find((t) => t.id === store.activeTab)?.columns || {};
   const theKey = Object.keys(row.ska1GlCodes);
   const columns = cols
     .map((c) => {
-      const { type } = store.types[c] || { type: "checkboxList" };
-      const val = row[c];
+      const { type } = store.types ? store.types[c] : { type: "checkboxList" };
+      const val = row[c as keyof typeof row];
       const isDisabled = ai[c] && ai[c].changeable !== "y";
 
       if (
+        store.changes &&
         store.changes[theKey[0]] &&
         Object.keys(store.changes[theKey[0]]).includes(c)
       ) {
@@ -301,27 +310,30 @@ export const renderForm = ({ row, cols }) => {
   return `<div>${columns}</div>`;
 };
 
-const renderAffectedItems = ({ row, cols }) => {
+export interface IRenderAffectedItems {
+  row: IGroups;
+}
+const renderAffectedItems = ({ row }: IRenderAffectedItems) => {
   const theKey = Object.keys(row.ska1GlCodes);
-  const color = createMappedValue({ type: "mappedInScopeSka1GlCodes", row });
-  const style = color ? ` style="color: ${color}";` : "";
   const affectedItems = theKey
-    .map((x) => `<div${getStyle({ gl: x })}>${x}</div>`)
+    .map((ska1GlCode) => `<div${getStyle(ska1GlCode)}>${ska1GlCode}</div>`)
     .join("");
 
   return `<div>${affectedItems}</div>`;
 };
 
-const getStyle = ({ gl }) => {
-  const row = store.data.find((r) => r.ska1GlCode === gl);
+const getStyle = (ska1GlCode: string) => {
+  if (!store.data) return "";
+  const row = store.data.find((r) => r.ska1GlCode === ska1GlCode);
+  if (!row) return "";
   const color = createMappedValue({ type: "mappedInScopeSka1GlCodes", row });
   const style = color ? ` style="color: ${color}";` : "";
   return style;
 };
 
-export const renderAiCenter = (groupId = store.groupKeys[0]) => {
-  if (!store.groups) return "";
-  const row = store.groups[groupId];
+export const renderAiCenter = (groupId?: string) => {
+  if (!store.groups || !store.groupKeys) return "";
+  const row = store.groups[groupId || store.groupKeys[0]];
   const cols = Object.keys(row);
   return renderForm({ row, cols });
 };
@@ -331,8 +343,7 @@ export const renderAiRight = (
 ) => {
   if (!store.groups) return "";
   const row = store.groups[groupId as keyof typeof store.groups];
-  const cols = Object.keys(row);
-  return renderAffectedItems({ row, cols });
+  return renderAffectedItems({ row });
 };
 
 export const renderSapClient = () => {
