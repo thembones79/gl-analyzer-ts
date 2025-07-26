@@ -3,19 +3,32 @@ import { renderApp, renderSapClient } from "./renderers";
 import { refreshGroups, updateRows } from "./data-transformers";
 import { longPoolingChanges } from "./api";
 import { getData, URL } from "./api";
-import * as handlers from "./event-handlers";
+import {
+  updateTab,
+  onChange,
+  onChangeCheckbox,
+  onChangeGroup,
+  onOptionClick,
+} from "./event-handlers";
 import { store, type TLookup } from "./store";
 
 declare global {
   interface Window {
     updateTab?: any;
+    onChangeGroup?: any;
+    onChange?: any;
+    onChangeCheckbox?: any;
+    onOptionClick?: any;
   }
 }
 
 export const initApp = async () => {
   // bind event handlers into global scope
-  // window.updateTab = updateTab;
-    window = {...window, ...handlers}
+  window.updateTab = updateTab;
+  window.onChange = onChange;
+  window.onChangeCheckbox = onChangeCheckbox;
+  window.onChangeGroup = onChangeGroup;
+  window.onOptionClick = onOptionClick;
 
   // populate the store
   store.changes = await getData(`${URL}&d=changes`);
