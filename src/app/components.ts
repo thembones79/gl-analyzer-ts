@@ -1,22 +1,42 @@
+// Components are functions that returns template strings (for example: `<div></div>`)
+// Name starts with big letter
+
 import { createMappedValue } from "./renderers";
 import {
   store,
-  type TData,
+  type TRow,
   type TCreateMappedValueType,
   type TTypes,
 } from "./store";
 
-export const Table = (data) => {
+import { getColumns } from "./data-transformers";
+
+export const Table = (data?: TRow[]) => {
+  if (!data) return "";
   const cols = getColumns(data);
   const header = renderHeader(cols);
   const body = renderTableBody();
   return `<div class="table-container" id="scrollArea" ><table>${header}${body}</table></div>`;
 };
 
-export const renderPlaceholder = () =>
-  `<div class="placeholder">${store.locked ? `&nbsp;&nbsp; <strong>${store.perm.message || "LOCKED!!!"}</strong>` : ""}<div class="sync-info sync-info--hidden">Syncing changes...</div></div>`;
+export const renderFooter = () => {
+  const message = store.perm?.editor
+    ? `<div class="footer"><p>You are not allowed do save! User: <strong>${store.perm.editor}</strong> is editing now! Please refresh the page and try again later :)</p></div>`
+    : `<div class="footer"><h2>Bro! Who are you?</h2></div>`;
+  return store.perm?.canEdit
+    ? `<div class="footer"><button class="btn btn--hidden" onclick="onSave(this)">Save</button></div>`
+    : message;
+};
 
-export const renderTabs = (topTabs) => {
+export const renderPlaceholder = () =>
+  `<div class="placeholder">${store.locked ? `&nbsp;&nbsp; <strong>${store.perm?.message || "LOCKED!!!"}</strong>` : ""}<div class="sync-info sync-info--hidden">Syncing changes...</div></div>`;
+
+export interface IRenderTabs {
+  id: string;
+  label: string;
+  content: string;
+}
+export const renderTabs = (topTabs: IRenderTabs[]) => {
   const renderLabels = () =>
     topTabs
       .map(
@@ -27,7 +47,7 @@ export const renderTabs = (topTabs) => {
       .join("");
 
   const renderContents = () =>
-    `<div class="tab__content" ${window.locked ? "inert" : ""}>${topTabs[0].content}</div>`;
+    `<div class="tab__content" ${store.locked ? "inert" : ""}>${topTabs[0].content}</div>`;
 
   return `
         <div class="tab-wrap">
@@ -39,6 +59,18 @@ export const renderTabs = (topTabs) => {
         </div>
     `;
 };
+
+export const renderAiLeft = () =>
+  store.groupKeys
+    ?.map(
+      (g) => `
+        <div>
+        <input class="tab tab--inverted" type="radio" id="${g}" name="drone" value="${g}" ${currentOrFirstGroup() === g ? "checked" : ""}  onchange="onChangeGroup(this)" />
+        <label id="${currentOrFirstGroup() === g ? "active-label" : ""}"   class="${store.groups && store.groups[g].groupChanged ? "group--changed" : ""}" for="${g}">${g}</label>
+        </div>
+        `,
+    )
+    .join("");
 
 export const renderHeader = (cols) => {
   const tab = window.tabs.find((t) => t.id === window.activeTab).columns;
@@ -196,10 +228,10 @@ export const renderTag = (options) => {
 };
 
 export interface IRow {
-  row: TData;
+  row: TRow;
   cols: string[];
 }
-export export const renderRow = ({ row, cols }: IRow) => {
+export const renderRow = ({ row, cols }: IRow) => {
   if (!store.tabs || !store.activeTab || !store.types) return "";
   const tab = store.tabs.find((t) => t.id === "h")?.columns;
   if (!tab) return "";
@@ -210,7 +242,7 @@ export export const renderRow = ({ row, cols }: IRow) => {
       const type = typeItem ? typeItem.type : "freetext";
 
       const theKey = row[keyColumnName];
-      const val = row[c as keyof TData];
+      const val = row[c as keyof TRow];
       const changeable = tab[c].changeable as TCreateMappedValueType;
       let mappedValue = "";
       if (changeable.startsWith("mapped")) {

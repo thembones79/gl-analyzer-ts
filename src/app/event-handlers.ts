@@ -3,12 +3,12 @@ import { getData, postData, URL } from "./api";
 import {
   updateRows,
   handleInheritedChanges,
-  addChange,
-  removeChange,
   renderAiTab,
   renderTableTab,
   updateRightContent,
 } from "./renderers";
+
+import { addChange, removeChange } from "./data-transformers";
 
 export const updateTab = async (tabId: string) => {
   store.activeTab = tabId;

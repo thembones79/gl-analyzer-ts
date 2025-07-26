@@ -1,56 +1,26 @@
+// Renderers perform DOM manipulations
+// Name starts with render
+
 import {
   store,
-  type TData,
+  type TRow,
   type TGroups,
   type ICreateMappedValue,
   type IGroups,
 } from "./store";
 import { postData, params, URL } from "./api";
 
-import { renderRow, renderRowF, Table, renderTag } from "./components";
+import {
+  renderFooter,
+  renderRow,
+  renderRowF,
+  Table,
+  renderTag,
+} from "./components";
+
+import { addChange, removeChange, getColumns } from "./data-transformers";
+
 import { initClusterize } from "./init";
-
-const aChng = (
-  theKey: string,
-  col: string,
-  val: string | boolean | string[] | Record<string, boolean>,
-) => {
-  if (!store.changes) return;
-  if (!store.changes[theKey]) {
-    store.changes[theKey] = { [col]: val };
-  }
-  store.changes[theKey][col] = val;
-};
-
-const rChng = (theKey: string, col: string) => {
-  if (!store.changes) return;
-  delete store.changes[theKey][col];
-  if (!Object.keys(store.changes[theKey]).length) {
-    delete store.changes[theKey];
-  }
-};
-
-export const addChange = (
-  theKey: string,
-  col: string,
-  val: string | boolean | string[] | Record<string, boolean>,
-) => {
-  if (theKey.includes(",")) {
-    theKey.split(",").forEach((k) => aChng(k, col, val));
-  } else {
-    aChng(theKey, col, val);
-  }
-};
-
-export const removeChange = (theKey: string, col: string) => {
-  if (theKey.includes(",")) {
-    theKey.split(",").forEach((k) => rChng(k, col));
-  } else {
-    rChng(theKey, col);
-  }
-};
-
-export const getColumns = (data: TData[]) => Object.keys(data[0]);
 
 export const reRenderFooter = () => {
   const footer = document.querySelector(".footer");
@@ -58,122 +28,6 @@ export const reRenderFooter = () => {
   footer.outerHTML = renderFooter();
 };
 
-export const renderFooter = () => {
-  const message = store.perm?.editor
-    ? `<div class="footer"><p>You are not allowed do save! User: <strong>${store.perm.editor}</strong> is editing now! Please refresh the page and try again later :)</p></div>`
-    : `<div class="footer"><h2>Bro! Who are you?</h2></div>`;
-  return store.perm?.canEdit
-    ? `<div class="footer"><button class="btn btn--hidden" onclick="onSave(this)">Save</button></div>`
-    : message;
-};
-
-export const createVirtualGroupKey = (row: TData) => {
-  const changedRecordKey = row.ska1GlCode;
-  const areChanges = store.changes && store.changes[changedRecordKey];
-  return store.ingridients
-    ? store.ingridients
-        .map((i) => {
-          const ingridientValue =
-            areChanges && areChanges[i] !== undefined
-              ? areChanges[i]
-              : row[i as keyof typeof row];
-          if (i === "oneSided") return ingridientValue ? "1S" : "2S";
-          return ingridientValue;
-        })
-        .filter(Boolean)
-        .join("_")
-    : "";
-};
-
-export const createMappedValue = ({ type, row }: ICreateMappedValue) => {
-  const changedRecordKey = row.ska1GlCode;
-  const areChanges = store.changes && store.changes[changedRecordKey];
-  if (!store.lookup) return "";
-  const { source, dict } = store.lookup[type];
-  const sourceVal = source
-    ? areChanges && areChanges[source]
-      ? areChanges[source]
-      : row[source as keyof typeof row]
-    : "";
-  const mappedVal =
-    sourceVal !== undefined ? dict[sourceVal as keyof typeof dict] : "";
-
-  return mappedVal;
-};
-
-export const createGroupedData = () => {
-  const groups: TGroups = {};
-  store?.data?.forEach((row) => {
-    const vKey = createVirtualGroupKey(row) as keyof typeof groups;
-    const groupCodes = Object.keys(groups[vKey].ska1GlCodes);
-    const changedCodes = store.changes ? Object.keys(store.changes) : [];
-    const groupChanged =
-      changedCodes.includes(row.ska1GlCode) &&
-      groupCodes.includes(row.ska1GlCode);
-    if (!groups[vKey]) {
-      const ska1GlCodes = {};
-      groups[vKey] = { ...row, ska1GlCodes, groupChanged };
-    }
-    groups[vKey].ska1GlCodes[row.ska1GlCode] = true;
-  });
-  return groups;
-};
-
-const createGroupedDataFiltered = () => {
-  const groups: TGroups = {};
-  const filteredData = store.data
-    ? store.data?.filter((row) => {
-        const changedValue = store.changes && store.changes[row.ska1GlCode];
-        if (changedValue === undefined) return row.inScope;
-        const scope = changedValue.inScope;
-        if (scope === undefined) return row.inScope;
-        return scope;
-      })
-    : [];
-
-  filteredData.forEach((row) => {
-    const vKey = createVirtualGroupKey(row) as keyof typeof groups;
-    const groupCodes = Object.keys(groups[vKey].ska1GlCodes);
-    const changedCodes = store.changes ? Object.keys(store.changes) : [];
-    const groupChanged =
-      changedCodes.includes(row.ska1GlCode) &&
-      groupCodes.includes(row.ska1GlCode);
-    if (!groups[vKey]) {
-      const ska1GlCodes = {};
-      groups[vKey] = { ...row, ska1GlCodes, groupChanged };
-    }
-    groups[vKey].ska1GlCodes[row.ska1GlCode] = true;
-  });
-  return groups;
-};
-
-export const refreshGroups = () => {
-  store.groups = createGroupedData();
-  store.groupKeys = Object.keys(store.groups).filter(Boolean).sort();
-  store.groupsFiltered = createGroupedDataFiltered();
-  store.groupKeysFiltered = Object.keys(store.groupsFiltered)
-    .filter(Boolean)
-    .sort();
-};
-
-export const currentOrFirstGroup = () => {
-  if (!store.groupKeys) return "";
-  if (!store.selectedGroup) return store.groupKeys[0];
-  if (store.groupKeys.includes(store.selectedGroup)) return store.selectedGroup;
-  return store.groupKeys[0];
-};
-
-export const renderAiLeft = () =>
-  store.groupKeys
-    ?.map(
-      (g) => `
-        <div>
-        <input class="tab tab--inverted" type="radio" id="${g}" name="drone" value="${g}" ${currentOrFirstGroup() === g ? "checked" : ""}  onchange="onChangeGroup(this)" />
-        <label id="${currentOrFirstGroup() === g ? "active-label" : ""}"   class="${store.groups && store.groups[g].groupChanged ? "group--changed" : ""}" for="${g}">${g}</label>
-        </div>
-        `,
-    )
-    .join("");
 
 const isChangeAffectsGroup = (col: string) => store.ingridients?.includes(col);
 
@@ -275,6 +129,7 @@ export const updateRightContent = (groupId: string) => {
 };
 
 export const renderTableTab = async () => {
+  if (!store.data) return;
   const tabContent = document.querySelector(".tab__content") as HTMLDivElement;
   tabContent.innerHTML = Table(store.data);
   await initClusterize();

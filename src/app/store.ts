@@ -1,13 +1,13 @@
 import Clusterize from "clusterize.js";
 
-export interface IGroups extends TData {
+export interface IGroups extends TRow {
   ska1GlCodes: Record<string, boolean>;
   groupChanged: boolean;
 }
 
 export interface ICreateMappedValue {
   type: TCreateMappedValueType;
-  row: TData;
+  row: TRow;
 }
 
 export type TCreateMappedValueType =
@@ -68,7 +68,7 @@ export type TMappedRiskLevelApproverReconDict = {
   High: string;
 };
 
-export type TData = {
+export type TRow = {
   ska1GlCode: string;
   skatGlDescription: string;
   ska1GlGroup: string;
@@ -205,7 +205,6 @@ export type TFilter =
   | "responsibilityGroups"
   | "template";
 
-
 export type TType = {
   name: string;
   description: string;
@@ -249,7 +248,7 @@ export type TStore = {
   activeTab?: string;
   changes?: TChanges;
   clusterize?: Clusterize;
-  data?: TData[];
+  data?: TRow[];
   groupKeys?: string[];
   groupKeysFiltered?: string[];
   groups?: TGroups;
