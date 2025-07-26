@@ -6,10 +6,12 @@ import {
   type TRow,
   type TCreateMappedValueType,
   type TTypes,
+  type TFilter,
 } from "./store";
 import {
   createMappedValue,
   currentOrFirstGroup,
+  createVirtualGroupKey,
   getColumns,
 } from "./data-transformers";
 
@@ -18,9 +20,10 @@ export interface IGroups extends TRow {
   groupChanged: boolean;
 }
 
-export interface IRenderInput {
+export interface IRenderField {
+  type: TFilter;
   theKey: string;
-  row: string;
+  row: TRow;
   val: string;
   isDisabled: boolean;
   isDiffer: boolean;
@@ -126,7 +129,7 @@ export const renderInput = ({
   isDiffer,
   c,
   changedVal,
-}: IRenderInput) => {
+}: IRenderField) => {
   const disabled = isDisabled ? "disabled" : "";
   const diffClass = isDiffer ? "class='diff-values'" : "";
   const v = c === "accountItem" ? createVirtualGroupKey(row) : val;
@@ -137,12 +140,11 @@ export const renderMapped = ({
   type,
   theKey,
   row,
-  val,
   isDisabled,
   isDiffer,
   c,
   changedVal,
-}) => {
+}: IRenderField) => {
   const disabled = isDisabled ? "disabled" : "";
   const diffClass = isDiffer ? "class='diff-values'" : "";
   const v = createMappedValue({ type, row });
@@ -157,19 +159,21 @@ export const renderSelect = ({
   isDiffer,
   c,
   changedVal,
-}) => {
+}: IRenderField) => {
   const disabled = isDisabled ? "disabled" : "";
   const diffClass = isDiffer ? "class='diff-values'" : "";
 
-  const options = store.lookup[type]
-    .map((o) => {
-      const value = changedVal || val;
-      const selected = value === o ? "selected" : "";
-      return `
+  const options = (
+    store.lookup && Array.isArray(store.lookup[type])
+      ? store.lookup[type].map((o) => {
+          const value = changedVal || val;
+          const selected = value === o ? "selected" : "";
+          return `
         <option value="${o}" ${selected}>${o}</option>
         `;
-    })
-    .join("");
+        })
+      : []
+  ).join("");
 
   return `<select ${disabled} ${diffClass} title="${val}" onchange="onChangeSelect(this,'${theKey}','${c}')" >
         ${options}
@@ -185,12 +189,15 @@ export const renderDynamicOptionsSelect = ({
   c,
   changedVal,
   row,
-}) => {
+}: IRenderField) => {
   const disabled = isDisabled ? "disabled" : "";
   const diffClass = isDiffer ? "class='diff-values'" : "";
 
-  const options = (row[store.lookup[type]] || [])
-    .map((o) => {
+  if (!store.lookup) return "";
+  const inRowColumn = store.lookup[type];
+
+  const options = (row[inRowColumn] || [])
+    .map((o: string) => {
       const value = changedVal || val;
       const selected = value === o ? "selected" : "";
       return `
@@ -211,7 +218,7 @@ export const renderCheckbox = ({
   isDiffer,
   c,
   changedVal,
-}) => {
+}: IRenderField) => {
   const disabled = isDisabled ? "disabled" : "";
   const diffClass = isDiffer ? "class='diff-values'" : "";
   let checked = "INIT";
@@ -233,13 +240,13 @@ export const renderDataList = ({
   c,
   changedVal,
   row,
-}) => {
+}: IRenderField) => {
   const disabled = isDisabled ? "disabled" : "";
   const diffClass = isDiffer ? "class='diff-values'" : "";
   const value = changedVal || val;
   const id = `${theKey}_${c}`;
   const options = (row[store.lookup[type]] || [])
-    .map((o) => {
+    .map((o: string) => {
       return ` <div class="popover__item" onclick="onOptionClick('${id}','${o}')"> ${o} </div> `;
     })
     .join("");
@@ -251,7 +258,7 @@ export const renderDataList = ({
         `;
 };
 
-export const renderTag = (options) => {
+export const renderTag = (options: IRenderField) => {
   const { type } = options;
   if (type === "checkbox") return renderCheckbox(options);
   if (type === "freeText") return renderInput(options);
