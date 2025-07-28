@@ -1,5 +1,5 @@
 import { store, type TChanges } from "./store";
-import { updateRows } from "./renderers";
+import { updateRows } from "./data-transformers";
 import { reRenderFooter } from "./renderers";
 export const host = document.querySelector("body")?.dataset?.url || "/";
 export const params = window.location.search;

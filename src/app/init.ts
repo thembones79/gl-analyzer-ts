@@ -9,6 +9,8 @@ import {
   onChangeCheckbox,
   onChangeGroup,
   onOptionClick,
+  onChangeSelect,
+  onSave,
 } from "./event-handlers";
 import { store, type TLookup } from "./store";
 
@@ -19,6 +21,8 @@ declare global {
     onChange?: any;
     onChangeCheckbox?: any;
     onOptionClick?: any;
+    onChangeSelect?: any;
+    onSave?: any;
   }
 }
 
@@ -29,6 +33,8 @@ export const initApp = async () => {
   window.onChangeCheckbox = onChangeCheckbox;
   window.onChangeGroup = onChangeGroup;
   window.onOptionClick = onOptionClick;
+  window.onChangeSelect = onChangeSelect;
+  window.onSave = onSave;
 
   // populate the store
   store.changes = await getData(`${URL}&d=changes`);

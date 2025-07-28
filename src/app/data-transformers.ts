@@ -103,7 +103,9 @@ export const createGroupedData = () => {
   const groups: TGroups = {};
   store?.data?.forEach((row) => {
     const vKey = createVirtualGroupKey(row) as keyof typeof groups;
-    const groupCodes = Object.keys(groups[vKey].ska1GlCodes);
+    const groupCodes = groups[vKey]
+      ? Object.keys(groups[vKey].ska1GlCodes)
+      : [];
     const changedCodes = store.changes ? Object.keys(store.changes) : [];
     const groupChanged =
       changedCodes.includes(row.ska1GlCode) &&
@@ -122,13 +124,15 @@ const createGroupedDataFiltered = () => {
   const filteredData = store.data
     ? store.data?.filter((row) => {
         const changedValue = store.changes && store.changes[row.ska1GlCode];
-        return changedValue.inScope || row.inScope;
+        return changedValue?.inScope || row.inScope;
       })
     : [];
 
   filteredData.forEach((row) => {
     const vKey = createVirtualGroupKey(row) as keyof typeof groups;
-    const groupCodes = Object.keys(groups[vKey].ska1GlCodes);
+    const groupCodes = groups[vKey]
+      ? Object.keys(groups[vKey].ska1GlCodes)
+      : [];
     const changedCodes = store.changes ? Object.keys(store.changes) : [];
     const groupChanged =
       changedCodes.includes(row.ska1GlCode) &&
