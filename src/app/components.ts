@@ -43,6 +43,11 @@ export interface IRow {
   cols: string[];
 }
 
+export interface IRowF {
+  rowStr: string;
+  cols: string[];
+}
+
 export interface IRenderForm {
   row: IGroups;
   cols: string[];
@@ -302,32 +307,42 @@ export const renderRow = ({ row, cols }: IRow) => {
   return `<tr>${columns}</tr>`;
 };
 
-export const renderRowF = ({ row, cols }: IRow) => {
-  const tab = store.tabs.find((t) => t.id === store.activeTab).columns;
-  const rowInScope = store.groupsFiltered[row];
+export const renderRowF = ({ rowStr, cols }: IRowF) => {
+  if (!store.changes || !store.types || !store.tabs) return "";
+
+  const tab = store.tabs?.find((t) => t.id === store.activeTab)?.columns;
+  const rowInScope = store.groupsFiltered && store.groupsFiltered[rowStr];
   const columns = cols
     .map((c) => {
       const keyColumnName = "ska1GlCode";
       const { type } =
-        store.types[c] === undefined ? "freeText" : store.types[c];
-      const theKey = rowInScope[keyColumnName];
-      const val = rowInScope[c];
+        store.types && store.types[c] !== undefined
+          ? store.types[c]
+          : { type: "freeText" };
+      const theKey = rowInScope && rowInScope[keyColumnName];
+      const val = rowInScope && rowInScope[c as keyof typeof rowInScope];
 
-      let changeable = tab[c] === undefined ? "n" : tab[c].changeable;
+      let changeable = tab && tab[c] !== undefined ? tab[c].changeable : "n";
       if (changeable.startsWith("mapped")) {
+        //@ts-ignore
         changeable = createMappedValue({ type: changeable, row: rowInScope });
       }
       const isDisabled = changeable !== "y";
 
       if (
+        store.changes &&
+        theKey &&
+        tab &&
         store.changes[theKey] &&
         Object.keys(store.changes[theKey]).includes(c)
       ) {
         const changedVal = store.changes[theKey][c];
         const isDiffer = val !== changedVal;
-        return `${tab[c] === undefined ? "" : tab[c].visible === "y" ? `<td>${renderTag({ type, theKey, val, isDisabled, isDiffer, c, changedVal, row })}</td>` : ""}`;
+        //@ts-ignore
+        return `${tab[c] === undefined ? "" : tab[c].visible === "y" ? `<td>${renderTag({ type, theKey, val, isDisabled, isDiffer, c, changedVal, row: rowInScope })}</td>` : ""}`;
       }
-      return `${tab[c] === undefined ? "" : tab[c].visible === "y" ? `<td>${renderTag({ type, theKey, val, isDisabled, c, row })}</td>` : ""}`;
+      //@ts-ignore
+      return `${tab[c] === undefined ? "" : tab[c].visible === "y" ? `<td>${renderTag({ type, theKey, val, isDisabled, c, row: rowInScope })}</td>` : ""}`;
     })
     .join("");
   return `<tr>${columns}</tr>`;
@@ -364,7 +379,8 @@ export const renderForm = ({ row, cols }: IRenderForm) => {
   const columns = cols
     .map((c) => {
       const record = store.types ? store.types[c] : { type: "freeText" };
-      const type = record.type as TFilter;
+        console.log({t:store.types, record})
+      const type = ( record ? record.type : "freeText") as TFilter;
       const val = row[c as keyof typeof row];
       const isDisabled = ai[c] && ai[c].changeable !== "y";
 

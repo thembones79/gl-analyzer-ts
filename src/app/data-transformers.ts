@@ -213,7 +213,7 @@ export const updateRows = async (shouldSave = true) => {
           .toLowerCase()
           .includes(phrase),
       )
-      .map((r) => renderRowF({ r, cols }));
+      .map((rowStr) => renderRowF({ rowStr, cols }));
   } else {
     cols = getColumns(store.data);
     store.rows = store.data
