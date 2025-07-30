@@ -275,7 +275,7 @@ export const renderTag = (options: IRenderField) => {
 
 export const renderRow = ({ row, cols }: IRow) => {
   if (!store.tabs || !store.activeTab || !store.types) return "";
-  const tab = store.tabs.find((t) => t.id === "h")?.columns;
+  const tab = store.tabs.find((t) => t.id === store.activeTab)?.columns;
   if (!tab) return "";
   const columns = cols
     .map((c) => {
@@ -379,7 +379,6 @@ export const renderForm = ({ row, cols }: IRenderForm) => {
   const columns = cols
     .map((c) => {
       const record = store.types ? store.types[c] : { type: "freeText" };
-        console.log({t:store.types, record})
       const type = ( record ? record.type : "freeText") as TFilter;
       const val = row[c as keyof typeof row];
       const isDisabled = ai[c] && ai[c].changeable !== "y";

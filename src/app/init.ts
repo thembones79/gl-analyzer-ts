@@ -1,6 +1,6 @@
 import Clusterize from "clusterize.js";
 import { renderApp, renderSapClient } from "./renderers";
-import { refreshGroups, updateRows } from "./data-transformers";
+import { getColumns, refreshGroups, updateRows } from "./data-transformers";
 import { longPoolingChanges } from "./api";
 import { getData, URL } from "./api";
 import {
@@ -13,6 +13,7 @@ import {
   onSave,
 } from "./event-handlers";
 import { store, type TLookup } from "./store";
+import { renderRow } from "./components";
 
 declare global {
   interface Window {
@@ -48,6 +49,12 @@ export const initApp = async () => {
     store.lookup[`virtualKey_${store.activeTab}` as keyof TLookup]) ||
     []) as string[];
   store.locked = store.perm?.canEdit === false;
+  store.rows =
+    store.data &&
+    store.data.map((row) =>
+      renderRow({ row, cols: getColumns(store.data || []) }),
+    );
+
 
   try {
     refreshGroups();
@@ -58,6 +65,7 @@ export const initApp = async () => {
 
   renderSapClient();
   renderApp();
+  await initClusterize();
 
   const searchFilter = document.getElementById("filter-rows");
   searchFilter &&
@@ -65,7 +73,6 @@ export const initApp = async () => {
       updateRows(false);
     });
 
-  await initClusterize();
   // await askForPermission();
   if (!store.locked) {
     await longPoolingChanges();
