@@ -237,33 +237,6 @@ export const renderCheckbox = ({
   return `<input type='checkbox' title="${val}"  ${disabled} ${diffClass}  ${checked} onchange="onChangeCheckbox(this,'${theKey}','${c}')" />`;
 };
 
-export const renderDataList = ({
-  type,
-  theKey,
-  val,
-  isDisabled,
-  isDiffer,
-  c,
-  changedVal,
-  row,
-}: IRenderField) => {
-  const disabled = isDisabled ? "disabled" : "";
-  const diffClass = isDiffer ? "class='diff-values'" : "";
-  const value = changedVal || val;
-  const id = `${theKey}_${c}`;
-  const options = (row[store.lookup[type]] || [])
-    .map((o: string) => {
-      return ` <div class="popover__item" onclick="onOptionClick('${id}','${o}')"> ${o} </div> `;
-    })
-    .join("");
-
-  return `<input placeholder="${val}" id="${id}"  ${disabled} ${diffClass} title="${val}" value="${value}" onchange="onChange(this,'${theKey}','${c}')" />
-            <div class="popover">
-                ${options}
-            </div>
-        `;
-};
-
 export const renderTag = (options: IRenderField) => {
   const { type } = options;
   if (type === "checkbox") return renderCheckbox(options);
