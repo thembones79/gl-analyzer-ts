@@ -286,7 +286,7 @@ export const renderRow = ({ row, cols }: IRow) => {
       const theKey = row[keyColumnName];
       const val = row[c as keyof TRow];
       const changeable = tab[c].changeable as TCreateMappedValueType;
-      let mappedValue = "";
+      let mappedValue = changeable;
       if (changeable.startsWith("mapped")) {
         mappedValue = createMappedValue({ type: changeable, row });
       }
