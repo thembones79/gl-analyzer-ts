@@ -202,7 +202,8 @@ export const renderDynamicOptionsSelect = ({
   if (!store.lookup) return "";
   const inRowColumn = store.lookup[type];
 
-  const options = (row[inRowColumn] || [])
+  //@ts-ignore
+  const options = (Array.isArray(inRowColumn) ? row[inRowColumn[0]] : [])
     .map((o: string) => {
       const value = changedVal || val;
       const selected = value === o ? "selected" : "";
@@ -259,9 +260,9 @@ export const renderRow = ({ row, cols }: IRow) => {
       const theKey = row[keyColumnName];
       const val = row[c as keyof TRow];
       const changeable = tab[c].changeable as TCreateMappedValueType;
-      let mappedValue = changeable;
+      let mappedValue = changeable as string;
       if (changeable.startsWith("mapped")) {
-        mappedValue = createMappedValue({ type: changeable, row });
+        mappedValue = createMappedValue({ type: changeable, row }) as string;
       }
       const isDisabled = mappedValue !== "y";
 
@@ -352,7 +353,7 @@ export const renderForm = ({ row, cols }: IRenderForm) => {
   const columns = cols
     .map((c) => {
       const record = store.types ? store.types[c] : { type: "freeText" };
-      const type = ( record ? record.type : "freeText") as TFilter;
+      const type = (record ? record.type : "freeText") as TFilter;
       const val = row[c as keyof typeof row];
       const isDisabled = ai[c] && ai[c].changeable !== "y";
 
