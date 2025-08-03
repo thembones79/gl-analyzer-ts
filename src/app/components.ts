@@ -23,7 +23,7 @@ export interface IGroups extends TRow {
 
 export interface IRenderField {
   type: TFilter | TCreateMappedValueType;
-  theKey: string;
+  theKey: string | string[];
   row: TRow;
   val: string | boolean | string[] | Record<string, boolean>;
   isDisabled?: boolean;
@@ -349,7 +349,7 @@ export const ai = () => {
 export const renderForm = ({ row, cols }: IRenderForm) => {
   if (!store.tabs || !store.activeTab || !store.types) return "";
   const ai = store.tabs.find((t) => t.id === store.activeTab)?.columns || {};
-  const theKey = Object.keys(row.ska1GlCodes).join(",");
+  const theKey = Object.keys(row.ska1GlCodes);
   const columns = cols
     .map((c) => {
       const record = store.types ? store.types[c] : { type: "freeText" };
@@ -391,7 +391,9 @@ const getStyle = (ska1GlCode: string) => {
   return style;
 };
 
-export const renderAiCenter = (groupId?: string) => {
+export const renderAiCenter = (
+  groupId = store.groupKeys && store.groupKeys[0],
+) => {
   if (!store.groups || !store.groupKeys) return "";
   const row = store.groups[groupId || store.groupKeys[0]];
   const cols = Object.keys(row);

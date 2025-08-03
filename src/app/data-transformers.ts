@@ -101,20 +101,22 @@ export const createMappedValue = ({ type, row }: ICreateMappedValue) => {
 
 export const createGroupedData = () => {
   const groups: TGroups = {};
-  store?.data?.forEach((row) => {
-    const vKey = createVirtualGroupKey(row) as keyof typeof groups;
-    const groupCodes = groups[vKey]
-      ? Object.keys(groups[vKey].ska1GlCodes)
-      : [];
-    const changedCodes = store.changes ? Object.keys(store.changes) : [];
+  store.data?.forEach((row) => {
+    const vKey = createVirtualGroupKey(row);
+    if (!groups[vKey]) {
+      //@ts-ignore
+      groups[vKey] = { ...row };
+      groups[vKey].ska1GlCodes = {};
+    }
+    groups[vKey].ska1GlCodes[row.ska1GlCode] = true;
+    const groupCodes = Object.keys(groups[vKey].ska1GlCodes);
+    const changedCodes = Object.keys(store.changes || {});
     const groupChanged =
       changedCodes.includes(row.ska1GlCode) &&
       groupCodes.includes(row.ska1GlCode);
-    if (!groups[vKey]) {
-      const ska1GlCodes = {};
-      groups[vKey] = { ...row, ska1GlCodes, groupChanged };
+    if (groupChanged) {
+      groups[vKey].groupChanged = true;
     }
-    groups[vKey].ska1GlCodes[row.ska1GlCode] = true;
   });
   return groups;
 };
