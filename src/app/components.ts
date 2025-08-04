@@ -65,7 +65,7 @@ export const Table = (data?: TRow[]) => {
   return `<div class="table-container" id="scrollArea" ><table>${header}${body}</table></div>`;
 };
 
-export const renderFooter = () => {
+export const Footer = () => {
   const message = store.perm?.editor
     ? `<div class="footer"><p>You are not allowed do save! User: <strong>${store.perm.editor}</strong> is editing now! Please refresh the page and try again later :)</p></div>`
     : `<div class="footer"><h2>Bro! Who are you?</h2></div>`;

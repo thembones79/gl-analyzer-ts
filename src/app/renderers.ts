@@ -7,7 +7,7 @@ import {
   ai,
   renderAiRight,
   renderAiCenter,
-  renderFooter,
+  Footer,
   renderTabs,
   Table,
 } from "./components";
@@ -17,7 +17,7 @@ import { initClusterize } from "./init";
 export const reRenderFooter = () => {
   const footer = document.querySelector(".footer");
   if (!footer) return;
-  footer.outerHTML = renderFooter();
+  footer.outerHTML = Footer();
 };
 
 export const updateRightContent = (groupId: string) => {
