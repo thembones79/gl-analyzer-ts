@@ -74,11 +74,11 @@ export const Footer = () => {
     : message;
 };
 
-export const renderPlaceholder = () =>
+export const Placeholder = () =>
   `<div class="placeholder">${store.locked ? `&nbsp;&nbsp; <strong>${store.perm?.message || "LOCKED!!!"}</strong>` : ""}<div class="sync-info sync-info--hidden">Syncing changes...</div></div>`;
 
 export const renderTabs = (topTabs: IRenderTabs[]) => {
-  const renderLabels = () =>
+  const Labels = () =>
     topTabs
       .map(
         (t, i) => `
@@ -93,10 +93,10 @@ export const renderTabs = (topTabs: IRenderTabs[]) => {
   return `
         <div class="tab-wrap">
         <div id="toptabs-labels">
-        ${renderLabels()}
+        ${Labels()}
         </div>
         ${renderContents()}
-        ${renderPlaceholder()}
+        ${Placeholder()}
         </div>
     `;
 };
