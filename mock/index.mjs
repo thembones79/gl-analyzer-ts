@@ -1,13 +1,13 @@
 import express from "express";
 import fs from "fs";
 import cors from "cors";
-const glData = JSON.parse(fs.readFileSync("./demo_v2.json", "utf-8"));
+const glData = JSON.parse(fs.readFileSync("./mock/demo_v2.json", "utf-8"));
 const data = () => {
   return {
-    changes: JSON.parse(fs.readFileSync("./changes.json", "utf-8")),
-    lookup: JSON.parse(fs.readFileSync("./lookup.json", "utf-8")),
-    tabs: JSON.parse(fs.readFileSync("./tabs.json", "utf-8")),
-    types: JSON.parse(fs.readFileSync("./types.json", "utf-8")),
+    changes: JSON.parse(fs.readFileSync("./mock/changes.json", "utf-8")),
+    lookup: JSON.parse(fs.readFileSync("./mock/lookup.json", "utf-8")),
+    tabs: JSON.parse(fs.readFileSync("./mock/tabs.json", "utf-8")),
+    types: JSON.parse(fs.readFileSync("./mock/types.json", "utf-8")),
   };
 };
 const app = express();
@@ -25,7 +25,7 @@ app.get("/gl", (req, res) => {
 app.post("/gl", (req, res) => {
   const content = JSON.stringify(req.body);
   try {
-    fs.writeFileSync("./changes.json", content);
+    fs.writeFileSync("./mock/changes.json", content);
   } catch (error) {
     console.error(error);
   }
@@ -39,7 +39,7 @@ app.listen(port, () => {
 const handlePermissions = (req, res) => {
   if (!req.query.user) return res.json({ canEdit: false, editor: null });
 
-  const valid = JSON.parse(fs.readFileSync("./perm.json", "utf-8"));
+  const valid = JSON.parse(fs.readFileSync("./mock/perm.json", "utf-8"));
 
   const { user } = req.query;
   const timestamp = Date.now();
@@ -55,7 +55,7 @@ const handlePermissions = (req, res) => {
   }
 
   try {
-    fs.writeFileSync("./perm.json", JSON.stringify(requesting));
+    fs.writeFileSync("./mock/perm.json", JSON.stringify(requesting));
   } catch (error) {
     console.error(error);
   }

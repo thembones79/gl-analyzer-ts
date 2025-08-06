@@ -6,11 +6,18 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "start": "cd ./mock/ && pm2 start index.mjs  --name GL-ANALYZER---MOCK-BE && cd .. && vite",
+    "be": "nodemon ./mock/index.mjs",
+    "start": "concurrently -p '[{name}]' -n 'BACKEND,FRONTEND' -c 'bgBlue.bold,bgMagenta.bold' \"npm run be\" 'vite'",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "concurrently": "^9.2.0",
+    "nodemon": "^3.1.10",
     "typescript": "~5.8.3",
     "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "@types/clusterize.js": "^0.18.3",
+    "clusterize.js": "^1.0.0"
   }
 }

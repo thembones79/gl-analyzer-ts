@@ -1,4 +1,65 @@
-export type TData = {
+import Clusterize from "clusterize.js";
+import { type IGroups } from "./components";
+
+export type TCreateMappedValueType =
+  | "mappedKeyAccountDueDate"
+  | "mappedRiskLevelPreparerRecon"
+  | "mappedRiskLevelReviewerRecon"
+  | "mappedRiskLevelApproverRecon"
+  | "mappedInScopeSka1GlCodes";
+
+export type TLookup = {
+  responsibilityGroups: string[];
+  template: string[];
+  oneTwo: string[];
+  virtualKey_glF: string[];
+  level: string[];
+  dueDate: string[];
+  virtualKey_c2: string[];
+  t880: string[];
+  virtualKey_cl: string[];
+  virtualKey_ai2: string[];
+  virtualKey_gl: string[];
+  clearing: string[];
+  virtualKey_ai: string[];
+  frequency: string[];
+  yesNo: string[];
+  recAcct: string[];
+  keyNo: string[];
+  virtualKey_ai3: string[];
+  freeText: string[];
+  inRowColumn: string[];
+  checkbox: string[];
+  risk: string[];
+  mappedKeyAccountDueDate: TMapped;
+  mappedRiskLevelPreparerRecon: TMappedRiskLevelErRecon;
+  mappedRiskLevelReviewerRecon: TMappedRiskLevelErRecon;
+  mappedRiskLevelApproverRecon: TMappedRiskLevelErRecon;
+  mappedInScopeSka1GlCodes: TMapped;
+};
+
+export type TMapped = {
+  source: string;
+  dict: TMappedInScopeSka1GlCodesDict;
+};
+
+export type TMappedInScopeSka1GlCodesDict = {
+  true: string;
+  false: string;
+};
+
+export type TMappedRiskLevelErRecon = {
+  source: string;
+  dict: TMappedRiskLevelApproverReconDict;
+};
+
+export type TMappedRiskLevelApproverReconDict = {
+  Low: string;
+  Medium: string;
+  High: string;
+};
+
+export type TRow = {
   ska1GlCode: string;
   skatGlDescription: string;
   ska1GlGroup: string;
@@ -114,7 +175,7 @@ export type TData = {
   gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Cust_RevC: string;
   gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Cust_RevC: string;
   gL_PC_PPC_TP_DC_Ref_Cust_RevC: string;
-}[];
+};
 
 export type TChanges = Record<any, any>;
 
@@ -124,10 +185,44 @@ export type TPerm = {
   message?: string;
 };
 
-export type TStore = {
-  data?: TData;
-  changes?: TChanges;
-  perm?: TPerm;
+export type TFilter =
+  | "checkbox"
+  | "clearing"
+  | "freeText"
+  | "frequency"
+  | "inRowColumn"
+  | "level"
+  | "mappedKeyAccountDueDate"
+  | "responsibilityGroups"
+  | "template";
+
+export type TType = {
+  name: string;
+  description: string;
+  type: TFilter;
+  filter: TFilter;
+  visibility: string;
+};
+
+export type TTypes = Record<string, TType>;
+
+export type TTab = {
+  id: string;
+  type: string;
+  label: string;
+  columns: { [key: string]: TColumn };
+};
+
+export type TColumn = {
+  visible: "y" | "n";
+  changeable:
+    | "y"
+    | "n"
+    | "mappedKeyAccountDueDate"
+    | "mappedRiskLevelPreparerRecon"
+    | "mappedRiskLevelReviewerRecon"
+    | "mappedRiskLevelApproverRecon"
+    | "mappedInScopeSka1GlCodes";
 };
 
 export type TStoreMethods = Record<
@@ -138,8 +233,42 @@ export type TStoreMethods = Record<
   }
 >;
 
+export type TGroups = Record<string, IGroups>;
+
+export type TStore = {
+  activeTab?: string;
+  changes?: TChanges;
+  clusterize?: Clusterize;
+  data?: TRow[];
+  groupKeys?: string[];
+  groupKeysFiltered?: string[];
+  groups?: TGroups;
+  groupsFiltered?: TGroups;
+  ingridients?: string[];
+  locked?: boolean;
+  lookup?: TLookup;
+  perm?: TPerm;
+  rows?: string[];
+  selectedGroup?: string;
+  tabs?: TTab[];
+  types?: TTypes;
+};
+
 export const store: TStore = {
-  data: undefined,
+  activeTab: undefined,
   changes: undefined,
+  clusterize: undefined,
+  data: undefined,
+  groupKeys: undefined,
+  groupKeysFiltered: undefined,
+  groups: undefined,
+  groupsFiltered: undefined,
+  ingridients: undefined,
+  locked: false,
+  lookup: undefined,
   perm: undefined,
+  rows: undefined,
+  selectedGroup: undefined,
+  tabs: undefined,
+  types: undefined,
 };
