@@ -13,7 +13,7 @@ import {
   onSave,
 } from "./event-handlers";
 import { store, type TLookup } from "./store";
-import { renderRow } from "./components";
+import { Row } from "./components";
 
 declare global {
   interface Window {
@@ -52,7 +52,7 @@ export const initApp = async () => {
   store.rows =
     store.data &&
     store.data.map((row) =>
-      renderRow({ row, cols: getColumns(store.data || []) }),
+      Row({ row, cols: getColumns(store.data || []) }),
     );
 
 

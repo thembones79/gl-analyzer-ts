@@ -8,7 +8,7 @@ import {
   type TMappedRiskLevelErRecon,
 } from "./store";
 import { postData, URL } from "./api";
-import { renderRow, renderRowF } from "./components";
+import { Row, RowF } from "./components";
 import { renderAiTab } from "./renderers";
 
 export interface ICreateMappedValue {
@@ -215,12 +215,12 @@ export const updateRows = async (shouldSave = true) => {
           .toLowerCase()
           .includes(phrase),
       )
-      .map((rowStr) => renderRowF({ rowStr, cols }));
+      .map((rowStr) => RowF({ rowStr, cols }));
   } else {
     cols = getColumns(store.data);
     store.rows = store.data
       .filter((r) => JSON.stringify(r).toLowerCase().includes(phrase))
-      .map((row) => renderRow({ row, cols }));
+      .map((row) => Row({ row, cols }));
   }
 
   store.clusterize?.update(store.rows);

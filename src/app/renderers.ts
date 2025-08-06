@@ -4,11 +4,11 @@
 import { store } from "./store";
 import { params } from "./api";
 import {
-  ai,
-  renderAiRight,
-  renderAiCenter,
+  Ai,
+  AiRight,
+  AiCenter,
   Footer,
-  renderTabs,
+  Tabs,
   Table,
 } from "./components";
 import { currentOrFirstGroup } from "./data-transformers";
@@ -30,13 +30,13 @@ export const updateRightContent = (groupId: string) => {
     ".ai-box__center > article",
   ) as HTMLDivElement;
 
-  aiCenter.innerHTML = renderAiCenter(store.selectedGroup);
+  aiCenter.innerHTML = AiCenter(store.selectedGroup);
 
   const aiRight = document.querySelector(
     ".ai-box__right > article",
   ) as HTMLDivElement;
 
-  aiRight.innerHTML = renderAiRight(store.selectedGroup);
+  aiRight.innerHTML = AiRight(store.selectedGroup);
 };
 
 export const renderTableTab = async () => {
@@ -64,7 +64,7 @@ export const renderSapClient = () => {
 
 export const renderAiTab = () => {
   const tabContent = document.querySelector(".tab__content") as HTMLDivElement;
-  tabContent.innerHTML = ai();
+  tabContent.innerHTML = Ai();
   store.selectedGroup = currentOrFirstGroup();
   updateRightContent(store.selectedGroup);
   const activeLabel = document.getElementById("active-label") as HTMLDivElement;
@@ -80,7 +80,7 @@ export const renderApp = () => {
       content: table,
     };
   });
-  const page = renderTabs(topTabs || []);
+  const page = Tabs(topTabs || []);
   const app = document.getElementById("app") as HTMLDivElement;
   app.outerHTML = page;
 };
