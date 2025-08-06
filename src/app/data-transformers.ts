@@ -227,7 +227,7 @@ export const updateRows = async (shouldSave = true) => {
 
   refreshGroups();
   if (store.activeTab === "ai") {
-    renderAiTab();
+    renderAiTab(true);
   }
 
   store.changes && (await postData(URL, store.changes));

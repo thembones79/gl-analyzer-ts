@@ -10,6 +10,7 @@ import {
   Footer,
   Tabs,
   Table,
+  AiLeft,
 } from "./components";
 import { currentOrFirstGroup } from "./data-transformers";
 import { initClusterize } from "./init";
@@ -18,6 +19,14 @@ export const reRenderFooter = () => {
   const footer = document.querySelector(".footer");
   if (!footer) return;
   footer.outerHTML = Footer();
+};
+
+export const updateLeftContent = () => {
+  const aiLeft = document.querySelector(
+    ".ai-box__left",
+  ) as HTMLDivElement;
+
+  aiLeft.innerHTML = AiLeft();
 };
 
 export const updateRightContent = (groupId: string) => {
@@ -62,11 +71,16 @@ export const renderSapClient = () => {
   }
 };
 
-export const renderAiTab = () => {
+export const renderAiTab = (doNotRefreshCenterForm?: boolean) => {
   const tabContent = document.querySelector(".tab__content") as HTMLDivElement;
-  tabContent.innerHTML = Ai();
-  store.selectedGroup = currentOrFirstGroup();
-  updateRightContent(store.selectedGroup);
+  if (doNotRefreshCenterForm) {
+    updateLeftContent();
+  } else {
+    tabContent.innerHTML = Ai();
+    store.selectedGroup = currentOrFirstGroup();
+    updateRightContent(store.selectedGroup);
+  }
+
   const activeLabel = document.getElementById("active-label") as HTMLDivElement;
   activeLabel.scrollIntoView();
 };

@@ -111,7 +111,7 @@ export const AiLeft = () =>
         </div>
         `,
     )
-    .join("");
+    .join("") || '';
 
 export const Header = (cols: string[]) => {
   if (!store.types) return "";
