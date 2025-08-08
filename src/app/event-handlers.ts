@@ -49,6 +49,11 @@ export async function onChange(
   updateRows(false);
 }
 
+export async function onChangeFilters(self: HTMLInputElement) {
+  console.log({ self });
+  updateRows(false);
+}
+
 export async function onChangeSelect(
   self: HTMLInputElement,
   theKey: string,

@@ -119,7 +119,7 @@ export const Header = (cols: string[]) => {
   const columns = cols
     .map(
       (c) =>
-        `${tab && tab[c] && tab[c].visible === "y" ? ` <th title="${store.types ? store.types[c].description : ""}"><input type="search" /><div>${store.types ? store.types[c].name : ""}</div></th>` : ""}`,
+        `${tab && tab[c] && tab[c].visible === "y" ? ` <th title="${store.types ? store.types[c].description : ""}"><input oninput="onChangeFilters(this)" type="search" id="id_${c}" /><div>${store.types ? store.types[c].name : ""}</div></th>` : ""}`,
     )
     .join("");
   return `<thead><tr>${columns}</tr></thead>`;
