@@ -50,9 +50,8 @@ export async function onChange(
   updateRows(false);
 }
 
-export async function onChangeFilters(self: HTMLInputElement) {
+export async function onChangeFilters() {
   if (!store.data) return;
-  const columnId = self.id.split("_")[1] as keyof TRow;
 
   const notEmptyInputs = Array.from(
     document.querySelectorAll("[type='search']"),
@@ -63,16 +62,16 @@ export async function onChangeFilters(self: HTMLInputElement) {
   console.log({ columnIds, notEmptyInputs });
 
   store.multiFilteredRowData = store.data.filter((row) => {
-    const condition = (columnId: keyof TRow) => {
+    const condition = (columnId: string) => {
       const searchInput = document.querySelector(
         `#id_${columnId}`,
       ) as HTMLInputElement;
       const phrase = searchInput ? searchInput.value.toLowerCase() : "";
 
-      return `${row[columnId]}`.toLowerCase().startsWith(phrase);
+      return `${row[columnId as keyof TRow]}`.toLowerCase().startsWith(phrase);
     };
 
-    return condition(columnId);
+    return columnIds.every(condition);
   });
   updateRows(false);
 }

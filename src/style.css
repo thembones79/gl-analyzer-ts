@@ -102,6 +102,14 @@ thead tr > th {
   top: 0;
 }
 
+th {
+  vertical-align: top;
+}
+
+[type="search"] {
+  margin-bottom: 0.4rem;
+}
+
 thead tr > :first-child {
   z-index: 3;
   left: 0;
