@@ -10,7 +10,7 @@ import {
   onChangeGroup,
   onOptionClick,
   onChangeSelect,
-    onChangeFilters,
+  onChangeFilters,
   onSave,
 } from "./event-handlers";
 import { store, type TLookup } from "./store";
@@ -54,10 +54,7 @@ export const initApp = async () => {
   store.locked = store.perm?.canEdit === false;
   store.rows =
     store.data &&
-    store.data.map((row) =>
-      Row({ row, cols: getColumns(store.data || []) }),
-    );
-
+    store.data.map((row) => Row({ row, cols: getColumns(store.data || []) }));
 
   try {
     refreshGroups();
