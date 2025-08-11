@@ -214,7 +214,7 @@ export const updateRows = async (shouldSave = true) => {
     ? store.multiFilteredRowData
     : store.data;
   if (type === "tableF" && store.groupsFiltered && store.groupKeysFiltered) {
-    cols = Object.keys(store.groupsFiltered[store.groupKeysFiltered[0]]);
+    cols = Object.keys(store.groupsFiltered[store.groupKeysFiltered[0]] || {});
     store.rows = store.groupKeysFiltered
       .filter((r) =>
         JSON.stringify(store.groupsFiltered ? store.groupsFiltered[r] : [])

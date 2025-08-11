@@ -53,6 +53,15 @@ export async function onChange(
 export async function onChangeFilters(self: HTMLInputElement) {
   if (!store.data) return;
   const columnId = self.id.split("_")[1] as keyof TRow;
+
+  const notEmptyInputs = Array.from(
+    document.querySelectorAll("[type='search']"),
+    //@ts-ignore
+  ).filter((i) => i.value !== "");
+
+  const columnIds = notEmptyInputs.map((i) => i.id.split("_")[1]);
+  console.log({ columnIds, notEmptyInputs });
+
   store.multiFilteredRowData = store.data.filter((row) => {
     const condition = (columnId: keyof TRow) => {
       const searchInput = document.querySelector(
