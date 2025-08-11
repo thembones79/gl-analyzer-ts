@@ -10,6 +10,7 @@ import {
   onChangeGroup,
   onOptionClick,
   onChangeSelect,
+  onChangeFilters,
   onSave,
 } from "./event-handlers";
 import { store, type TLookup } from "./store";
@@ -23,6 +24,7 @@ declare global {
     onChangeCheckbox?: any;
     onOptionClick?: any;
     onChangeSelect?: any;
+    onChangeFilters?: any;
     onSave?: any;
   }
 }
@@ -35,6 +37,7 @@ export const initApp = async () => {
   window.onChangeGroup = onChangeGroup;
   window.onOptionClick = onOptionClick;
   window.onChangeSelect = onChangeSelect;
+  window.onChangeFilters = onChangeFilters;
   window.onSave = onSave;
 
   // populate the store
@@ -51,10 +54,7 @@ export const initApp = async () => {
   store.locked = store.perm?.canEdit === false;
   store.rows =
     store.data &&
-    store.data.map((row) =>
-      Row({ row, cols: getColumns(store.data || []) }),
-    );
-
+    store.data.map((row) => Row({ row, cols: getColumns(store.data || []) }));
 
   try {
     refreshGroups();

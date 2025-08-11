@@ -1,4 +1,4 @@
-import { store, type TChanges } from "./store";
+import { store, type TChanges, type TRow } from "./store";
 import { getData, postData, URL } from "./api";
 import { renderAiTab, renderTableTab, updateRightContent } from "./renderers";
 import {
@@ -16,6 +16,7 @@ export const updateTab = async (tabId: string) => {
   store.ingridients = store.lookup
     ? store.lookup[`virtualKey_${tabId}` as keyof typeof store.ingridients]
     : [];
+  store.multiFilteredRowData = undefined;
   if (tabType === "group") return renderAiTab();
   return await renderTableTab();
 };
@@ -46,6 +47,32 @@ export async function onChange(
     addChange(theKey, col, value);
   }
   handleInheritedChanges({ col, theKey });
+  updateRows(false);
+}
+
+export async function onChangeFilters() {
+  if (!store.data) return;
+
+  const notEmptyInputs = Array.from(
+    document.querySelectorAll("[type='search']"),
+    //@ts-ignore
+  ).filter((i) => i.value !== "");
+
+  const columnIds = notEmptyInputs.map((i) => i.id.split("_")[1]);
+  console.log({ columnIds, notEmptyInputs });
+
+  store.multiFilteredRowData = store.data.filter((row) => {
+    const condition = (columnId: string) => {
+      const searchInput = document.querySelector(
+        `#id_${columnId}`,
+      ) as HTMLInputElement;
+      const phrase = searchInput ? searchInput.value.toLowerCase() : "";
+
+      return `${row[columnId as keyof TRow]}`.toLowerCase().startsWith(phrase);
+    };
+
+    return columnIds.every(condition);
+  });
   updateRows(false);
 }
 

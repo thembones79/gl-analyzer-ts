@@ -240,6 +240,7 @@ export type TStore = {
   changes?: TChanges;
   clusterize?: Clusterize;
   data?: TRow[];
+  multiFilteredRowData?: TRow[];
   groupKeys?: string[];
   groupKeysFiltered?: string[];
   groups?: TGroups;
@@ -259,6 +260,7 @@ export const store: TStore = {
   changes: undefined,
   clusterize: undefined,
   data: undefined,
+  multiFilteredRowData: undefined,
   groupKeys: undefined,
   groupKeysFiltered: undefined,
   groups: undefined,

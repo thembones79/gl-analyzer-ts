@@ -123,8 +123,11 @@ export const createGroupedData = () => {
 
 const createGroupedDataFiltered = () => {
   const groups: TGroups = {};
-  const filteredData = store.data
-    ? store.data?.filter((row) => {
+  const theData = store?.multiFilteredRowData
+    ? store.multiFilteredRowData
+    : store.data;
+  const filteredData = theData
+    ? theData?.filter((row) => {
         const changedValue = store.changes && store.changes[row.ska1GlCode];
         return changedValue?.inScope || row.inScope;
       })
@@ -207,8 +210,11 @@ export const updateRows = async (shouldSave = true) => {
   refreshGroups();
   const type = store.tabs?.find((t) => t.id == store.activeTab)?.type;
   let cols: string[];
+  const theData = store?.multiFilteredRowData
+    ? store.multiFilteredRowData
+    : store.data;
   if (type === "tableF" && store.groupsFiltered && store.groupKeysFiltered) {
-    cols = Object.keys(store.groupsFiltered[store.groupKeysFiltered[0]]);
+    cols = Object.keys(store.groupsFiltered[store.groupKeysFiltered[0]] || {});
     store.rows = store.groupKeysFiltered
       .filter((r) =>
         JSON.stringify(store.groupsFiltered ? store.groupsFiltered[r] : [])
@@ -218,7 +224,7 @@ export const updateRows = async (shouldSave = true) => {
       .map((rowStr) => RowF({ rowStr, cols }));
   } else {
     cols = getColumns(store.data);
-    store.rows = store.data
+    store.rows = theData
       .filter((r) => JSON.stringify(r).toLowerCase().includes(phrase))
       .map((row) => Row({ row, cols }));
   }
