@@ -1,7 +1,6 @@
 import { store, type TChanges } from "./store";
 import { updateRows } from "./data-transformers";
-import { reRenderFooter } from "./renderers";
-import { Placeholder } from "./components";
+import { reRenderFooter, reRenderPlaceholder } from "./renderers";
 export const host = document.querySelector("body")?.dataset?.url || "/";
 export const params = window.location.search;
 export const URL = host + params;
@@ -16,23 +15,17 @@ const setError = () => {
     content.setAttribute("inert", "true");
   }
 
-  const placeholder = document.querySelector(".placeholder") as HTMLDivElement;
-  if (placeholder) {
-    placeholder.outerHTML = Placeholder();
-  }
+  reRenderPlaceholder();
 };
 
 const removeError = () => {
   const content = document.querySelector(".tab__content") as HTMLDivElement;
 
-  if (content) {
+  if (content && !store.locked) {
     content.removeAttribute("inert");
   }
 
-  const placeholder = document.querySelector(".placeholder") as HTMLDivElement;
-  if (placeholder) {
-    placeholder.outerHTML = Placeholder();
-  }
+  reRenderPlaceholder();
 };
 
 export async function getData<T>(url: string) {

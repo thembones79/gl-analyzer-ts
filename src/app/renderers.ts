@@ -11,6 +11,7 @@ import {
   Tabs,
   Table,
   AiLeft,
+  Placeholder,
 } from "./components";
 import { currentOrFirstGroup } from "./data-transformers";
 import { initClusterize } from "./init";
@@ -22,9 +23,7 @@ export const reRenderFooter = () => {
 };
 
 export const updateLeftContent = () => {
-  const aiLeft = document.querySelector(
-    ".ai-box__left",
-  ) as HTMLDivElement;
+  const aiLeft = document.querySelector(".ai-box__left") as HTMLDivElement;
 
   aiLeft.innerHTML = AiLeft();
 };
@@ -97,4 +96,11 @@ export const renderApp = () => {
   const page = Tabs(topTabs || []);
   const app = document.getElementById("app") as HTMLDivElement;
   app.outerHTML = page;
+};
+
+export const reRenderPlaceholder = () => {
+  const placeholder = document.querySelector(".placeholder") as HTMLDivElement;
+  if (placeholder) {
+    placeholder.outerHTML = Placeholder();
+  }
 };
