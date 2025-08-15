@@ -1,5 +1,4 @@
-import Clusterize from "clusterize.js";
-import { type IGroups } from "./components";
+import Clusterize from "clusterize.js"; import { type IGroups } from "./components";
 
 export type TCreateMappedValueType =
   | "mappedKeyAccountDueDate"
@@ -253,6 +252,7 @@ export type TStore = {
   selectedGroup?: string;
   tabs?: TTab[];
   types?: TTypes;
+  error?: string;
 };
 
 export const store: TStore = {
@@ -273,4 +273,5 @@ export const store: TStore = {
   selectedGroup: undefined,
   tabs: undefined,
   types: undefined,
+  error: undefined,
 };

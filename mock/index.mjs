@@ -1,6 +1,8 @@
 import express from "express";
 import fs from "fs";
+import multer from "multer";
 import cors from "cors";
+const STATUS = 200;
 const glData = JSON.parse(fs.readFileSync("./mock/demo_v2.json", "utf-8"));
 const data = () => {
   return {
@@ -13,23 +15,23 @@ const data = () => {
 const app = express();
 const port = 3000;
 app.use(cors());
-app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/gl", (req, res) => {
   if (req.query.d) {
     req.query.d === "perm"
       ? handlePermissions(req, res)
-      : res.json(data()[req.query.d]);
-  } else res.json(glData);
+      : res.status(STATUS).json(data()[req.query.d]);
+  } else res.status(STATUS).json(glData);
 });
-app.post("/gl", (req, res) => {
-  const content = JSON.stringify(req.body);
+app.post("/gl", multer().none(), (req, res) => {
+  const content = req.body.json;
   try {
     fs.writeFileSync("./mock/changes.json", content);
   } catch (error) {
     console.error(error);
   }
-  res.json(req.body);
+  res.status(STATUS).json(req.body);
 });
 
 app.listen(port, () => {
@@ -59,5 +61,9 @@ const handlePermissions = (req, res) => {
   } catch (error) {
     console.error(error);
   }
-  res.json({ canEdit: true, editor: requesting.user, message:"Turlaj pyzy Kmieciu!!!" });
+  res.json({
+    canEdit: true,
+    editor: requesting.user,
+    message: "Turlaj pyzy Kmieciu!!!",
+  });
 };
