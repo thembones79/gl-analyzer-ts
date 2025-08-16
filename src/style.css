@@ -171,6 +171,10 @@ table {
   table-layout: fixed;
 }
 
+label {
+  font-size: 12px;
+}
+
 .loader {
   display: flex;
   flex-direction: column;
