@@ -80,6 +80,7 @@ export const initApp = async () => {
 };
 
 export async function initClusterize() {
+  if (!store.rows || (store.rows && !store.rows[0])) return;
   store.clusterize = new Clusterize({
     rows: store.rows,
     scrollId: "scrollArea",

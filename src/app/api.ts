@@ -1,9 +1,32 @@
 import { store, type TChanges } from "./store";
 import { updateRows } from "./data-transformers";
-import { reRenderFooter } from "./renderers";
+import { reRenderFooter, reRenderPlaceholder } from "./renderers";
 export const host = document.querySelector("body")?.dataset?.url || "/";
 export const params = window.location.search;
 export const URL = host + params;
+
+const ERROR_MESSAGE =
+  "Ups something went wrong... on BACK END! Please login and refresh the app. If the issue would last longer than 15 minutes, please report it to trash@siemens.com";
+
+const setError = () => {
+  const content = document.querySelector(".tab__content") as HTMLDivElement;
+
+  if (content) {
+    content.setAttribute("inert", "true");
+  }
+
+  reRenderPlaceholder();
+};
+
+const removeError = () => {
+  const content = document.querySelector(".tab__content") as HTMLDivElement;
+
+  if (content && !store.locked) {
+    content.removeAttribute("inert");
+  }
+
+  reRenderPlaceholder();
+};
 
 export async function getData<T>(url: string) {
   try {
@@ -13,28 +36,34 @@ export async function getData<T>(url: string) {
     }
 
     const data = await response.json();
+    store.error = undefined;
+    removeError();
     return data as T;
   } catch (error: any) {
+    store.error = ERROR_MESSAGE;
+    setError();
     console.error(error.message);
   }
 }
-
 export async function postData(url: string, body: Record<string, any>) {
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
+  const formData = new FormData();
+  formData.append("json", JSON.stringify(body));
   try {
     const response = await fetch(url, {
       method: "POST",
-      body: JSON.stringify(body),
-      headers: myHeaders,
+      body: formData,
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
 
     const data = await response.json();
+    store.error = undefined;
+    removeError();
     return data;
   } catch (error: any) {
+    store.error = ERROR_MESSAGE;
+    setError();
     console.error(error.message);
     return { error };
   }

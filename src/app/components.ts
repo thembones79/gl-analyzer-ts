@@ -75,7 +75,7 @@ export const Footer = () => {
 };
 
 export const Placeholder = () =>
-  `<div class="placeholder">${store.locked ? `&nbsp;&nbsp; <strong>${store.perm?.message || "LOCKED!!!"}</strong>` : ""}<div class="sync-info sync-info--hidden">Syncing changes...</div></div>`;
+  `<div class="placeholder">${store.locked ? `<strong>${store.perm?.message || "LOCKED!!!"}</strong>` : store.error || ""}<div class="sync-info sync-info--hidden">Syncing changes...</div></div>`;
 
 export const Tabs = (topTabs: ITabs[]) => {
   const Labels = () =>
@@ -88,7 +88,7 @@ export const Tabs = (topTabs: ITabs[]) => {
       .join("");
 
   const Contents = () =>
-    `<div class="tab__content" ${store.locked ? "inert" : ""}>${topTabs[0].content}</div>`;
+    `<div class="tab__content" ${(store.locked || store.error) ? "inert" : ""}>${topTabs&&topTabs[0]?topTabs[0].content:""}</div>`;
 
   return `
         <div class="tab-wrap">
@@ -111,7 +111,7 @@ export const AiLeft = () =>
         </div>
         `,
     )
-    .join("") || '';
+    .join("") || "";
 
 export const Header = (cols: string[]) => {
   if (!store.types) return "";
@@ -391,18 +391,14 @@ const getStyle = (ska1GlCode: string) => {
   return style;
 };
 
-export const AiCenter = (
-  groupId = store.groupKeys && store.groupKeys[0],
-) => {
+export const AiCenter = (groupId = store.groupKeys && store.groupKeys[0]) => {
   if (!store.groups || !store.groupKeys) return "";
   const row = store.groups[groupId || store.groupKeys[0]];
   const cols = Object.keys(row);
   return Form({ row, cols });
 };
 
-export const AiRight = (
-  groupId = store.groupKeys && store.groupKeys[0],
-) => {
+export const AiRight = (groupId = store.groupKeys && store.groupKeys[0]) => {
   if (!store.groups) return "";
   const row = store.groups[groupId as keyof typeof store.groups];
   return AffectedItems({ row });
