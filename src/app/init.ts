@@ -12,6 +12,7 @@ import {
   onChangeSelect,
   onChangeFilters,
   onSave,
+  onExportTableToCSVButtonClick,
 } from "./event-handlers";
 import { store, type TLookup } from "./store";
 import { Row } from "./components";
@@ -73,6 +74,8 @@ export const initApp = async () => {
       updateRows(false);
     });
 
+  const downloadButton = document.querySelector("button");
+  downloadButton && downloadButton.addEventListener("click",() => {onExportTableToCSVButtonClick("table.csv")});
   // await askForPermission();
   if (!store.locked) {
     await longPoolingChanges();

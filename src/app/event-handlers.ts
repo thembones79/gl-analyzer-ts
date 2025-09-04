@@ -128,3 +128,30 @@ export const onSave = async (btn: HTMLButtonElement) => {
     }, 3000);
   }
 };
+
+export async function onExportTableToCSVButtonClick(fileName:string){
+  
+const csv = store?.csv?.map(row =>
+  row.map(cell => saveValue(cell)).join(",")
+).join("\n") || "";
+downloadCSV(csv, fileName);
+}
+
+const downloadCSV = (csvContent:string, filename:string) => {
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+
+  link.href = window.URL.createObjectURL(blob);
+  link.download = filename;
+  link.style.display = "none";
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
+function saveValue(input: unknown): string {
+  const str = String(input);
+  return `"${str.replace(/"/g, '""')}"`;
+}
+

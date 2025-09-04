@@ -253,6 +253,7 @@ export type TStore = {
   tabs?: TTab[];
   types?: TTypes;
   error?: string;
+  csv?: string[][];
 };
 
 export const store: TStore = {
@@ -274,4 +275,5 @@ export const store: TStore = {
   tabs: undefined,
   types: undefined,
   error: undefined,
+  csv: undefined,
 };
