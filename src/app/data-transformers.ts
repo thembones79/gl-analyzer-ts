@@ -213,6 +213,7 @@ export const updateRows = async (shouldSave = true) => {
   const theData = store?.multiFilteredRowData
     ? store.multiFilteredRowData
     : store.data;
+    store?.csv?.splice(1);
   if (type === "tableF" && store.groupsFiltered && store.groupKeysFiltered) {
     cols = Object.keys(store.groupsFiltered[store.groupKeysFiltered[0]] || {});
     store.rows = store.groupKeysFiltered

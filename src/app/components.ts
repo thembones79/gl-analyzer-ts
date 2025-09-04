@@ -115,7 +115,15 @@ export const AiLeft = () =>
 
 export const Header = (cols: string[]) => {
   if (!store.types) return "";
+  const types = store.types;
   const tab = store.tabs?.find((t) => t.id === store.activeTab)?.columns;
+  if(!tab) return "";
+  store.csv = [];
+  const header = Object.values(cols)
+  .filter(col => tab[col]?.visible === "y")
+  .map(col => types[col]?.name ?? "");
+  store.csv.push(header);
+
   const columns = cols
     .map(
       (c) =>
@@ -250,6 +258,7 @@ export const Field = (options: IField) => {
 export const Row = ({ row, cols }: IRow) => {
   if (!store.tabs || !store.activeTab || !store.types) return "";
   const tab = store.tabs.find((t) => t.id === store.activeTab)?.columns;
+  const colm: string[] = [];
   if (!tab) return "";
   const columns = cols
     .map((c) => {
@@ -273,19 +282,35 @@ export const Row = ({ row, cols }: IRow) => {
       ) {
         const changedVal = store.changes[theKey][c];
         const isDiffer = val !== changedVal;
+        if(tab[c] !== undefined){
+		  		if(tab[c].visible === "y"){
+        const v = (c === "accountItem" || c === "accountItemClearing" || c === "accountItemClearing_RevC") ? createVirtualGroupKey(row) : changedVal			
+		colm.push(v);
+		}
+		}
         return `${tab[c].visible === "y" ? `<td>${Field({ type, theKey, val, isDisabled, isDiffer, c, changedVal, row })}</td>` : ""}`;
       }
+      if(tab[c] !== undefined){
+        if(tab[c].visible === "y"){
+    const v = (c === "accountItem" || c === "accountItemClearing" || c === "accountItemClearing_RevC") ? createVirtualGroupKey(row) : val
+    colm.push(String(v));
+  }
+  }
       return `${tab[c].visible === "y" ? `<td>${Field({ type, theKey, val, isDisabled, c, row })}</td>` : ""}`;
     })
     .join("");
+    store?.csv?.push(colm);
   return `<tr>${columns}</tr>`;
 };
 
 export const RowF = ({ rowStr, cols }: IRowF) => {
   if (!store.changes || !store.types || !store.tabs) return "";
-
   const tab = store.tabs?.find((t) => t.id === store.activeTab)?.columns;
+  const row = store.groupsFiltered?.[rowStr];
+  if (!row) return "";
+  const colm: string[] = [];
   const rowInScope = store.groupsFiltered && store.groupsFiltered[rowStr];
+  if (!tab) return "";
   const columns = cols
     .map((c) => {
       const keyColumnName = "ska1GlCode";
@@ -312,9 +337,21 @@ export const RowF = ({ rowStr, cols }: IRowF) => {
       ) {
         const changedVal = store.changes[theKey][c];
         const isDiffer = val !== changedVal;
+        if(tab[c] !== undefined){
+		  		if(tab[c].visible === "y"){
+        const v = (c === "accountItem" || c === "accountItemClearing" || c === "accountItemClearing_RevC") ? createVirtualGroupKey(row) : changedVal			
+		colm.push(v);
+		}
+		}
         //@ts-ignore
         return `${tab[c] === undefined ? "" : tab[c].visible === "y" ? `<td>${Field({ type, theKey, val, isDisabled, isDiffer, c, changedVal, row: rowInScope })}</td>` : ""}`;
       }
+      if(tab[c] !== undefined){
+        if(tab[c].visible === "y"){
+    const v = (c === "accountItem" || c === "accountItemClearing" || c === "accountItemClearing_RevC") ? createVirtualGroupKey(row) : val
+    colm.push(String(v));
+  }
+  }
       //@ts-ignore
       return `${tab[c] === undefined ? "" : tab[c].visible === "y" ? `<td>${Field({ type, theKey, val, isDisabled, c, row: rowInScope })}</td>` : ""}`;
     })
