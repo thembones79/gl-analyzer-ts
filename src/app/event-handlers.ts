@@ -118,7 +118,7 @@ export const onSave = async (btn: HTMLButtonElement) => {
   let res: any = {};
   btn.innerText = "Saving...";
   btn.classList.add("btn--hidden");
-  res = store.changes && (await postData(URL, store.changes));
+  res = store.changes && (await postData(`${URL}&save=true`, store.changes));
   btn.innerText = "Data was saved ✅";
   if (res.error) {
     btn.innerText = "Data was NOT saved ❌";

@@ -93,11 +93,11 @@ export const renderApp = () => {
       content: table,
     };
   });
+  console.log({topTabs});
   const page = Tabs(topTabs || []);
   const app = document.getElementById("app") as HTMLDivElement;
   app.outerHTML = page;
 };
-
 export const reRenderPlaceholder = () => {
   const placeholder = document.querySelector(".placeholder") as HTMLDivElement;
   if (placeholder) {

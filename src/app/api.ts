@@ -1,9 +1,10 @@
 import { store, type TChanges } from "./store";
 import { updateRows } from "./data-transformers";
 import { reRenderFooter, reRenderPlaceholder } from "./renderers";
-export const host = document.querySelector("body")?.dataset?.url || "/";
+const host = document.querySelector("body")?.dataset?.url || null;
 export const params = window.location.search;
-export const URL = host + params;
+//const pathname = window.location.pathname;
+export const URL = host ? host + params : window.location.href;
 
 const ERROR_MESSAGE =
   "Ups something went wrong... on BACK END! Please login and refresh the app. If the issue would last longer than 15 minutes, please report it to trash@siemens.com";

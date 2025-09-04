@@ -236,7 +236,7 @@ export const updateRows = async (shouldSave = true) => {
     renderAiTab(true);
   }
 
-  store.changes && (await postData(URL, store.changes));
+  store.changes && (await postData(`${URL}&save=true`, store.changes));
 
   if (shouldSave) {
     const btn = document.querySelector("button.btn") as HTMLButtonElement;
