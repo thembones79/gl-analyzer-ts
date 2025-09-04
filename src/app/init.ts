@@ -41,12 +41,12 @@ export const initApp = async () => {
   window.onSave = onSave;
 
   // populate the store
-  store.changes = await getData(`${URL}&d=changes`);
-  store.lookup = await getData(`${URL}&d=lookup`);
-  store.tabs = await getData(`${URL}&d=tabs`);
-  store.types = await getData(`${URL}&d=types`);
-  store.perm = await getData(`${URL}&d=perm`);
-  store.data = await getData(URL);
+  store.changes = await getData(`${URL}&get=delta`);
+  store.lookup = await getData(`${URL}&get=glLookupFields`);
+  store.tabs = await getData(`${URL}&get=glTableConfig`);
+  store.types = await getData(`${URL}&get=glTableNames`);
+  store.perm = await getData(`${URL}&get=perm`);
+  store.data = await getData(`${URL}&get=glTable`);
   store.activeTab = store.tabs && store.tabs[0].id;
   store.ingridients = ((store.lookup &&
     store.lookup[`virtualKey_${store.activeTab}` as keyof TLookup]) ||

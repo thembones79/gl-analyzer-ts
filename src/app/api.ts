@@ -73,7 +73,7 @@ export const longPoolingChanges = async () => {
   setInterval(async () => {
     const info = document.querySelector(".sync-info");
     info?.classList.remove("sync-info--hidden");
-    const pooledChanges = await getData<TChanges>(`${URL}&d=changes`);
+    const pooledChanges = await getData<TChanges>(`${URL}&get=delta`);
     store.changes = { ...pooledChanges };
     await updateRows(false);
     info?.classList.add("sync-info--hidden");
@@ -82,7 +82,7 @@ export const longPoolingChanges = async () => {
 
 export const askForPermission = async () => {
   setInterval(async () => {
-    store.perm = await getData(`${URL}&d=perm`);
+    store.perm = await getData(`${URL}&get=perm`);
     if (!store.perm?.canEdit) reRenderFooter();
   }, 3000);
 };

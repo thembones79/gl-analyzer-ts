@@ -37,7 +37,7 @@ export async function onChange(
   theKey: string,
   col: string,
 ) {
-  store.changes = await getData(`${URL}&d=changes`);
+  store.changes = await getData(`${URL}&get=delta`);
   const { placeholder, value, classList } = self;
   if (placeholder === value) {
     classList.remove("diff-values");
@@ -80,7 +80,7 @@ export async function onChangeSelect(
   theKey: string,
   col: string,
 ) {
-  store.changes = await getData(`${URL}&d=changes`);
+  store.changes = await getData(`${URL}&get=delta`);
   const { title, value, classList } = self;
   if (title === value) {
     classList.remove("diff-values");
@@ -98,7 +98,7 @@ export async function onChangeCheckbox(
   theKey: string,
   col: string,
 ) {
-  getData(`${URL}&d=changes`).then((dc) => {
+  getData(`${URL}&get=delta`).then((dc) => {
     store.changes = dc as TChanges;
 
     const { checked, classList, title } = self;
