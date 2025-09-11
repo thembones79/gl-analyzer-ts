@@ -356,6 +356,7 @@ export const RowF = ({ rowStr, cols }: IRowF) => {
       return `${tab[c] === undefined ? "" : tab[c].visible === "y" ? `<td>${Field({ type, theKey, val, isDisabled, c, row: rowInScope })}</td>` : ""}`;
     })
     .join("");
+    store?.csv?.push(colm);
   return `<tr>${columns}</tr>`;
 };
 

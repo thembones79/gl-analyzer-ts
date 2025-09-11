@@ -134,7 +134,6 @@ export async function onExportTableToCSVButtonClick(fileName:string){
 const csv = store?.csv?.map(row =>
   row.map(cell => saveValue(cell)).join(",")
 ).join("\n") || "";
-console.log(csv);
 downloadCSV(csv, fileName);
 }
 
