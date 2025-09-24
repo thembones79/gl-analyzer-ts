@@ -84,6 +84,11 @@ export const longPoolingChanges = async () => {
 export const askForPermission = async () => {
   setInterval(async () => {
     store.perm = await getData(`${URL}&get=perm`);
-    if (!store.perm?.canEdit) reRenderFooter();
+    store.locked = store.perm?.canEdit === false;
+    if (store.locked) {
+      setError();
+    } else {
+      removeError();
+    }
   }, 3000);
 };
