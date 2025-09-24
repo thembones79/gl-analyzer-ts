@@ -97,7 +97,6 @@ export const renderApp = () => {
   const app = document.getElementById("app") as HTMLDivElement;
   app.outerHTML = page;
 };
-
 export const reRenderPlaceholder = () => {
   const placeholder = document.querySelector(".placeholder") as HTMLDivElement;
   if (placeholder) {

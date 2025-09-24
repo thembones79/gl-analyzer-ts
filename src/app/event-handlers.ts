@@ -37,7 +37,7 @@ export async function onChange(
   theKey: string,
   col: string,
 ) {
-  store.changes = await getData(`${URL}&d=changes`);
+  store.changes = await getData(`${URL}&get=delta`);
   const { placeholder, value, classList } = self;
   if (placeholder === value) {
     classList.remove("diff-values");
@@ -80,7 +80,7 @@ export async function onChangeSelect(
   theKey: string,
   col: string,
 ) {
-  store.changes = await getData(`${URL}&d=changes`);
+  store.changes = await getData(`${URL}&get=delta`);
   const { title, value, classList } = self;
   if (title === value) {
     classList.remove("diff-values");
@@ -98,7 +98,7 @@ export async function onChangeCheckbox(
   theKey: string,
   col: string,
 ) {
-  getData(`${URL}&d=changes`).then((dc) => {
+  getData(`${URL}&get=delta`).then((dc) => {
     store.changes = dc as TChanges;
 
     const { checked, classList, title } = self;
@@ -118,7 +118,7 @@ export const onSave = async (btn: HTMLButtonElement) => {
   let res: any = {};
   btn.innerText = "Saving...";
   btn.classList.add("btn--hidden");
-  res = store.changes && (await postData(URL, store.changes));
+  res = store.changes && (await postData(`${URL}&save=true`, store.changes));
   btn.innerText = "Data was saved ✅";
   if (res.error) {
     btn.innerText = "Data was NOT saved ❌";
@@ -128,3 +128,30 @@ export const onSave = async (btn: HTMLButtonElement) => {
     }, 3000);
   }
 };
+
+export async function onExportTableToCSVButtonClick(fileName:string){
+  
+const csv = store?.csv?.map(row =>
+  row.map(cell => saveValue(cell)).join(",")
+).join("\n") || "";
+downloadCSV(csv, fileName);
+}
+
+const downloadCSV = (csvContent:string, filename:string) => {
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+
+  link.href = window.URL.createObjectURL(blob);
+  link.download = filename;
+  link.style.display = "none";
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
+function saveValue(input: unknown): string {
+  const str = String(input);
+  return `"${str.replace(/"/g, '""')}"`;
+}
+

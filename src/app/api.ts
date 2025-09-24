@@ -1,9 +1,10 @@
 import { store, type TChanges } from "./store";
 import { updateRows } from "./data-transformers";
 import { reRenderFooter, reRenderPlaceholder } from "./renderers";
-export const host = document.querySelector("body")?.dataset?.url || "/";
+const host = document.querySelector("body")?.dataset?.url || null;
 export const params = window.location.search;
-export const URL = host + params;
+//const pathname = window.location.pathname;
+export const URL = host ? host + params : window.location.href;
 
 const ERROR_MESSAGE =
   "Ups something went wrong... on BACK END! Please login and refresh the app. If the issue would last longer than 15 minutes, please report it to trash@siemens.com";
@@ -73,7 +74,7 @@ export const longPoolingChanges = async () => {
   setInterval(async () => {
     const info = document.querySelector(".sync-info");
     info?.classList.remove("sync-info--hidden");
-    const pooledChanges = await getData<TChanges>(`${URL}&d=changes`);
+    const pooledChanges = await getData<TChanges>(`${URL}&get=delta`);
     store.changes = { ...pooledChanges };
     await updateRows(false);
     info?.classList.add("sync-info--hidden");
@@ -82,7 +83,12 @@ export const longPoolingChanges = async () => {
 
 export const askForPermission = async () => {
   setInterval(async () => {
-    store.perm = await getData(`${URL}&d=perm`);
-    if (!store.perm?.canEdit) reRenderFooter();
+    store.perm = await getData(`${URL}&get=perm`);
+    store.locked = store.perm?.canEdit === false;
+    if (store.locked) {
+      setError();
+    } else {
+      removeError();
+    }
   }, 3000);
 };

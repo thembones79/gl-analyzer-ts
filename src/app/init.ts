@@ -1,7 +1,7 @@
 import Clusterize from "clusterize.js";
 import { renderApp, renderSapClient } from "./renderers";
 import { getColumns, refreshGroups, updateRows } from "./data-transformers";
-import { longPoolingChanges } from "./api";
+import { longPoolingChanges, askForPermission } from "./api";
 import { getData, URL } from "./api";
 import {
   updateTab,
@@ -12,6 +12,7 @@ import {
   onChangeSelect,
   onChangeFilters,
   onSave,
+  onExportTableToCSVButtonClick,
 } from "./event-handlers";
 import { store, type TLookup } from "./store";
 import { Row } from "./components";
@@ -41,12 +42,12 @@ export const initApp = async () => {
   window.onSave = onSave;
 
   // populate the store
-  store.changes = await getData(`${URL}&d=changes`);
-  store.lookup = await getData(`${URL}&d=lookup`);
-  store.tabs = await getData(`${URL}&d=tabs`);
-  store.types = await getData(`${URL}&d=types`);
-  store.perm = await getData(`${URL}&d=perm`);
-  store.data = await getData(URL);
+  store.changes = await getData(`${URL}&get=delta`);
+  store.lookup = await getData(`${URL}&get=glLookupFields`);
+  store.tabs = await getData(`${URL}&get=glTableConfig`);
+  store.types = await getData(`${URL}&get=glTableNames`);
+  store.perm = await getData(`${URL}&get=perm`);
+  store.data = await getData(`${URL}&get=glTable`);
   store.activeTab = store.tabs && store.tabs[0].id;
   store.ingridients = ((store.lookup &&
     store.lookup[`virtualKey_${store.activeTab}` as keyof TLookup]) ||
@@ -73,7 +74,12 @@ export const initApp = async () => {
       updateRows(false);
     });
 
-  // await askForPermission();
+  const downloadButton = document.querySelector("button");
+  downloadButton &&
+    downloadButton.addEventListener("click", () => {
+      onExportTableToCSVButtonClick("table.csv");
+    });
+  await askForPermission();
   if (!store.locked) {
     await longPoolingChanges();
   }

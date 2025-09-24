@@ -99,9 +99,9 @@ export const createMappedValue = ({ type, row }: ICreateMappedValue) => {
   return mappedVal;
 };
 
-export const createGroupedData = () => {
+export const createGroupedData = (storeData = store.data) => {
   const groups: TGroups = {};
-  store.data?.forEach((row) => {
+  storeData?.forEach((row) => {
     const vKey = createVirtualGroupKey(row);
     if (!groups[vKey]) {
       //@ts-ignore
@@ -122,33 +122,16 @@ export const createGroupedData = () => {
 };
 
 const createGroupedDataFiltered = () => {
-  const groups: TGroups = {};
-  const theData = store?.multiFilteredRowData
-    ? store.multiFilteredRowData
-    : store.data;
-  const filteredData = theData
-    ? theData?.filter((row) => {
-        const changedValue = store.changes && store.changes[row.ska1GlCode];
-        return changedValue?.inScope || row.inScope;
-      })
-    : [];
-
-  filteredData.forEach((row) => {
-    const vKey = createVirtualGroupKey(row) as keyof typeof groups;
-    const groupCodes = groups[vKey]
-      ? Object.keys(groups[vKey].ska1GlCodes)
-      : [];
-    const changedCodes = store.changes ? Object.keys(store.changes) : [];
-    const groupChanged =
-      changedCodes.includes(row.ska1GlCode) &&
-      groupCodes.includes(row.ska1GlCode);
-    if (!groups[vKey]) {
-      const ska1GlCodes = {};
-      groups[vKey] = { ...row, ska1GlCodes, groupChanged };
-    }
-    groups[vKey].ska1GlCodes[row.ska1GlCode] = true;
-  });
-  return groups;
+  const storeData = store.data;
+  if(!storeData) return {};
+  const filteredData = storeData.filter((row) => {
+  const changedValue = store.changes?.[row.ska1GlCode]
+  if (changedValue === undefined) return row.inScope;
+  const scope = changedValue.inScope
+  if (scope === undefined) return row.inScope;
+  return scope;
+});
+return createGroupedData(filteredData);
 };
 
 export const refreshGroups = () => {
@@ -213,6 +196,7 @@ export const updateRows = async (shouldSave = true) => {
   const theData = store?.multiFilteredRowData
     ? store.multiFilteredRowData
     : store.data;
+    store?.csv?.splice(1);
   if (type === "tableF" && store.groupsFiltered && store.groupKeysFiltered) {
     cols = Object.keys(store.groupsFiltered[store.groupKeysFiltered[0]] || {});
     store.rows = store.groupKeysFiltered
@@ -236,8 +220,7 @@ export const updateRows = async (shouldSave = true) => {
     renderAiTab(true);
   }
 
-  store.changes && (await postData(URL, store.changes));
-
+  store.changes && (await postData(`${URL}&save=true`, store.changes));
   if (shouldSave) {
     const btn = document.querySelector("button.btn") as HTMLButtonElement;
     if (!btn) return;

@@ -3,13 +3,13 @@ import fs from "fs";
 import multer from "multer";
 import cors from "cors";
 const STATUS = 200;
-const glData = JSON.parse(fs.readFileSync("./mock/demo_v2.json", "utf-8"));
 const data = () => {
   return {
-    changes: JSON.parse(fs.readFileSync("./mock/changes.json", "utf-8")),
-    lookup: JSON.parse(fs.readFileSync("./mock/lookup.json", "utf-8")),
-    tabs: JSON.parse(fs.readFileSync("./mock/tabs.json", "utf-8")),
-    types: JSON.parse(fs.readFileSync("./mock/types.json", "utf-8")),
+    delta: JSON.parse(fs.readFileSync("./mock/changes.json", "utf-8")),
+    glLookupFields: JSON.parse(fs.readFileSync("./mock/lookup.json", "utf-8")),
+    glTableConfig: JSON.parse(fs.readFileSync("./mock/tabs.json", "utf-8")),
+    glTableNames: JSON.parse(fs.readFileSync("./mock/types.json", "utf-8")),
+    glTable: JSON.parse(fs.readFileSync("./mock/demo_v2.json", "utf-8")),
   };
 };
 const app = express();
@@ -18,11 +18,11 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/gl", (req, res) => {
-  if (req.query.d) {
-    req.query.d === "perm"
+  if (req.query.get) {
+    req.query.get === "perm"
       ? handlePermissions(req, res)
-      : res.status(STATUS).json(data()[req.query.d]);
-  } else res.status(STATUS).json(glData);
+      : res.status(STATUS).json(data()[req.query.get]);
+  } 
 });
 app.post("/gl", multer().none(), (req, res) => {
   const content = req.body.json;
