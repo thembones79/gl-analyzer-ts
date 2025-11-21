@@ -22,7 +22,7 @@ app.get("/gl", (req, res) => {
     req.query.get === "perm"
       ? handlePermissions(req, res)
       : res.status(STATUS).json(data()[req.query.get]);
-  } else res.status(STATUS).json(glData);
+  } 
 });
 app.post("/gl", multer().none(), (req, res) => {
   const content = req.body.json;

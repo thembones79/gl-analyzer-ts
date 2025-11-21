@@ -1,7 +1,7 @@
 import Clusterize from "clusterize.js";
 import { renderApp, renderSapClient } from "./renderers";
 import { getColumns, refreshGroups, updateRows } from "./data-transformers";
-import { longPoolingChanges } from "./api";
+import { longPoolingChanges, askForPermission } from "./api";
 import { getData, URL } from "./api";
 import {
   updateTab,
@@ -75,8 +75,11 @@ export const initApp = async () => {
     });
 
   const downloadButton = document.querySelector("button");
-  downloadButton && downloadButton.addEventListener("click",() => {onExportTableToCSVButtonClick("table.csv")});
-  // await askForPermission();
+  downloadButton &&
+    downloadButton.addEventListener("click", () => {
+      onExportTableToCSVButtonClick("table.csv");
+    });
+  await askForPermission();
   if (!store.locked) {
     await longPoolingChanges();
   }
