@@ -363,12 +363,12 @@
     "filter": "freeText",
     "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
   },
-  "ska1DelFi": {
+  "ska1DelFl": {
     "name": "DelFl",
     "description": "???",
     "type": "freeText",
     "filter": "freeText",
-    "visibility": "c2:1;cl:1;gl:2"
+    "visibility": "c2:1;cl:1;gl:2;clF:1"
   },
   "skb1HouseBank": {
     "name": "House Bank",
@@ -846,7 +846,7 @@
     "filter": "freeText",
     "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
   },
-  "gl_DC_ABSDC_RevC": {
+  "gL_DC_ABSDC_RevC": {
     "name": "GL_DC_ABSDC",
     "description": "???",
     "type": "clearing",
@@ -930,7 +930,7 @@
     "filter": "freeText",
     "visibility": "c2:1;cl:1;gl:1"
   },
-  "gl_DC_ABSDC_RevC_RevC": {
+  "gL_DC_ABSDC_RevC_RevC": {
     "name": "GL_DC_ABSDC_RevC",
     "description": "???",
     "type": "clearing",

@@ -257,11 +257,13 @@ export const Field = (options: IField) => {
 
 export const Row = ({ row, cols }: IRow) => {
   if (!store.tabs || !store.activeTab || !store.types) return "";
+  //console.log(store.activeTab);
   const tab = store.tabs.find((t) => t.id === store.activeTab)?.columns;
   const colm: string[] = [];
   if (!tab) return "";
   const columns = cols
     .map((c) => {
+      //console.log(c + ";" + tab[c]);
       const keyColumnName = "ska1GlCode";
       const typeItem = store.types && store.types[c as keyof TTypes];
       const type = typeItem ? typeItem.type : "freeText";
