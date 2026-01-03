@@ -88,7 +88,7 @@ export const Tabs = (topTabs: ITabs[]) => {
       .join("");
 
   const Contents = () =>
-    `<div class="tab__content" ${(store.locked || store.error) ? "inert" : ""}>${topTabs&&topTabs[0]?topTabs[0].content:""}</div>`;
+    `<div class="tab__content" >${topTabs&&topTabs[0]?topTabs[0].content:""}</div>`;
 
   return `
         <div class="tab-wrap">
