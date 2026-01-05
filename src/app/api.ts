@@ -1,16 +1,19 @@
 import { store, type TChanges } from "./store";
 import { updateRows } from "./data-transformers";
-import { reRenderFooter, reRenderPlaceholder } from "./renderers";
+import { reRenderPlaceholder } from "./renderers";
 const host = document.querySelector("body")?.dataset?.url || null;
 export const params = window.location.search;
-//const pathname = window.location.pathname;
 export const URL = host ? host + params : window.location.href;
 
 const ERROR_MESSAGE =
   "Ups something went wrong... on BACK END! Please login and refresh the app. If the issue would last longer than 15 minutes, please report it to trash@siemens.com";
 
 const setError = () => {
-  const content = document.querySelector(".tab__content") as HTMLDivElement;
+  const tbody = document.querySelector("tbody") as HTMLDivElement;
+  const aiBoxCenter = document.querySelector(
+    ".ai-box__center",
+  ) as HTMLDivElement;
+  const content = tbody || aiBoxCenter;
 
   if (content) {
     content.setAttribute("inert", "true");
@@ -20,7 +23,7 @@ const setError = () => {
 };
 
 const removeError = () => {
-  const content = document.querySelector(".tab__content") as HTMLDivElement;
+  const content = document.querySelector("[inert]") as HTMLDivElement;
 
   if (content && !store.locked) {
     content.removeAttribute("inert");
