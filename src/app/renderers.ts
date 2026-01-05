@@ -25,7 +25,9 @@ export const reRenderFooter = () => {
 export const updateLeftContent = () => {
   const aiLeft = document.querySelector(".ai-box__left") as HTMLDivElement;
 
-  aiLeft.innerHTML = AiLeft();
+  aiLeft.innerHTML = 
+  `<legend>Select a group:</legend>
+  ${AiLeft()}`;
 };
 
 export const updateRightContent = (groupId: string) => {
@@ -81,7 +83,7 @@ export const renderAiTab = (doNotRefreshCenterForm?: boolean) => {
   }
 
   const activeLabel = document.getElementById("active-label") as HTMLDivElement;
-  activeLabel.scrollIntoView();
+  if(activeLabel) activeLabel.scrollIntoView();
 };
 
 export const renderApp = () => {

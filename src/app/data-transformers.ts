@@ -61,7 +61,12 @@ export const removeChange = (theKey: string, col: string) => {
   }
 };
 
-export const getColumns = (data: TRow[]) => Object.keys(data[0]);
+
+export const getColumns = (data: TRow[]) => {
+  if (!data || data.length === 0) return [];
+  return Object.keys(data[0]);
+};
+
 
 export const createVirtualGroupKey = (row: TRow) => {
   const changedRecordKey = row.ska1GlCode;
@@ -126,9 +131,9 @@ const createGroupedDataFiltered = () => {
   if(!storeData) return {};
   const filteredData = storeData.filter((row) => {
   const changedValue = store.changes?.[row.ska1GlCode]
-  if (changedValue === undefined) return row.inScope;
-  const scope = changedValue.inScope
-  if (scope === undefined) return row.inScope;
+  if (changedValue === undefined) return row.inScope || row.inScopeClearing || row.inScopeClearing_RevC;
+  const scope = changedValue.inScope || changedValue.inScopeClearing || changedValue.inScopeClearing_RevC
+  if (scope === undefined) return row.inScope || row.inScopeClearing || row.inScopeClearing_RevC;
   return scope;
 });
 return createGroupedData(filteredData);
@@ -199,6 +204,14 @@ export const updateRows = async (shouldSave = true) => {
     store?.csv?.splice(1);
   if (type === "tableF" && store.groupsFiltered && store.groupKeysFiltered) {
     cols = Object.keys(store.groupsFiltered[store.groupKeysFiltered[0]] || {});
+    const grpKeyFil = store.groupKeysFiltered;
+    const fltrdRws = grpKeyFil.filter((r) =>
+      JSON.stringify(store.groupsFiltered ? store.groupsFiltered[r] : [])
+        .toLowerCase()
+        .includes(phrase),
+    );
+    const mpdRws = fltrdRws.map((rowStr) => RowF({ rowStr, cols }));
+    console.log(mpdRws);
     store.rows = store.groupKeysFiltered
       .filter((r) =>
         JSON.stringify(store.groupsFiltered ? store.groupsFiltered[r] : [])

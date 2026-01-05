@@ -257,20 +257,21 @@ export const Field = (options: IField) => {
 
 export const Row = ({ row, cols }: IRow) => {
   if (!store.tabs || !store.activeTab || !store.types) return "";
-  //console.log(store.activeTab);
+  const isDebug = window.location.search.includes("debug=true");
+  if(isDebug) console.log(store.activeTab);
   const tab = store.tabs.find((t) => t.id === store.activeTab)?.columns;
   const colm: string[] = [];
   if (!tab) return "";
   const columns = cols
     .map((c) => {
-      //console.log(c + ";" + tab[c]);
+      if(isDebug) console.log(c + ";" + tab[c]);
       const keyColumnName = "ska1GlCode";
       const typeItem = store.types && store.types[c as keyof TTypes];
       const type = typeItem ? typeItem.type : "freeText";
 
       const theKey = row[keyColumnName];
       const val = row[c as keyof TRow];
-      const changeable = tab[c].changeable as TCreateMappedValueType;
+      const changeable = (tab[c] ? tab[c].changeable : "n") as TCreateMappedValueType ;
       let mappedValue = changeable as string;
       if (changeable.startsWith("mapped")) {
         mappedValue = createMappedValue({ type: changeable, row }) as string;
@@ -290,15 +291,15 @@ export const Row = ({ row, cols }: IRow) => {
 		colm.push(v);
 		}
 		}
-        return `${tab[c].visible === "y" ? `<td>${Field({ type, theKey, val, isDisabled, isDiffer, c, changedVal, row })}</td>` : ""}`;
+        return `${(tab[c] && tab[c].visible === "y") ? `<td>${Field({ type, theKey, val, isDisabled, isDiffer, c, changedVal, row })}</td>` : ""}`;
       }
       if(tab[c] !== undefined){
-        if(tab[c].visible === "y"){
+        if(tab[c] && tab[c].visible === "y"){
     const v = (c === "accountItem" || c === "accountItemClearing" || c === "accountItemClearing_RevC") ? createVirtualGroupKey(row) : val
     colm.push(String(v));
   }
   }
-      return `${tab[c].visible === "y" ? `<td>${Field({ type, theKey, val, isDisabled, c, row })}</td>` : ""}`;
+      return `${(tab[c] && tab[c].visible === "y") ? `<td>${Field({ type, theKey, val, isDisabled, c, row })}</td>` : ""}`;
     })
     .join("");
     store?.csv?.push(colm);
@@ -414,7 +415,7 @@ export const Form = ({ row, cols }: IForm) => {
 };
 
 const AffectedItems = ({ row }: IAffectedItems) => {
-  const theKey = Object.keys(row.ska1GlCodes);
+  const theKey = row ? Object.keys(row.ska1GlCodes) : [];
   const affectedItems = theKey
     .map((ska1GlCode) => `<div${getStyle(ska1GlCode)}>${ska1GlCode}</div>`)
     .join("");
@@ -434,6 +435,7 @@ const getStyle = (ska1GlCode: string) => {
 export const AiCenter = (groupId = store.groupKeys && store.groupKeys[0]) => {
   if (!store.groups || !store.groupKeys) return "";
   const row = store.groups[groupId || store.groupKeys[0]];
+  if (!row) return "";
   const cols = Object.keys(row);
   return Form({ row, cols });
 };
