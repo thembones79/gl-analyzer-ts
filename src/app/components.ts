@@ -88,7 +88,7 @@ export const Tabs = (topTabs: ITabs[]) => {
       .join("");
 
   const Contents = () =>
-    `<div class="tab__content" ${(store.locked || store.error) ? "inert" : ""}>${topTabs&&topTabs[0]?topTabs[0].content:""}</div>`;
+      `<div class="tab__content" >${topTabs && topTabs[0] ? topTabs[0].content : ""}</div>`;
 
   return `
         <div class="tab-wrap">
@@ -133,7 +133,8 @@ export const Header = (cols: string[]) => {
   return `<thead><tr>${columns}</tr></thead>`;
 };
 
-export const TableBody = () => `<tbody id="contentArea"></tbody>`;
+export const TableBody = () =>
+  `<tbody id="contentArea" ${store.locked || store.error ? "inert" : ""}></tbody>`;
 
 export const Input = ({
   theKey,
@@ -371,7 +372,7 @@ export const Ai = () => {
             <legend>Select a group:</legend>
             ${AiLeft()}
         </fieldset>
-        <fieldset class="ai-box__center">
+        <fieldset class="ai-box__center" ${store.locked || store.error ? "inert" : ""}>
             <legend>Make batch changes:</legend>
             <article>
                 ${AiCenter()}

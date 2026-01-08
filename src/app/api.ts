@@ -8,18 +8,22 @@ export const URL = host + params;
 const ERROR_MESSAGE =
   "Ups something went wrong... on BACK END! Please login and refresh the app. If the issue would last longer than 15 minutes, please report it to trash@siemens.com";
 
-const setError = () => {
-  const content = document.querySelector(".tab__content") as HTMLDivElement;
-
-  if (content) {
-    content.setAttribute("inert", "true");
-  }
+  const setError = () => {
+    const tbody = document.querySelector("tbody") as HTMLDivElement;
+    const aiBoxCenter = document.querySelector(
+      ".ai-box__center",
+    ) as HTMLDivElement;
+    const content = tbody || aiBoxCenter;
+  
+    if (content) {
+      content.setAttribute("inert", "true");
+    }
 
   reRenderPlaceholder();
 };
 
 const removeError = () => {
-  const content = document.querySelector(".tab__content") as HTMLDivElement;
+  const content = document.querySelector("[inert]") as HTMLDivElement;
 
   if (content && !store.locked) {
     content.removeAttribute("inert");
