@@ -147,7 +147,7 @@ export const Input = ({
 }: IField) => {
   const disabled = isDisabled ? "disabled" : "";
   const diffClass = isDiffer ? "class='diff-values'" : "";
-  const v = c === "accountItem" ? createVirtualGroupKey(row) : val;
+  const v = (c === "accountItem" || c === "accountItemClearing" || c === "accountItemClearing_RevC") ? createVirtualGroupKey(row) : val;
   return `<input placeholder="${v}"  ${disabled} ${diffClass} title="${v}" value="${changedVal || v}" onchange="onChange(this,'${theKey}','${c}')" />`;
 };
 
