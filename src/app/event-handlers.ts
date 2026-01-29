@@ -59,6 +59,7 @@ export async function onChangeFilters() {
   ).filter((i) => i.value !== "");
 
   const columnIds = notEmptyInputs.map((i) => i.id.split("_")[1]);
+    console.log({notEmptyInputs, columnIds})
 
   store.multiFilteredRowData = store.data.filter((row) => {
     const condition = (columnId: string) => {
@@ -72,6 +73,7 @@ export async function onChangeFilters() {
 
     return columnIds.every(condition);
   });
+    console.log({store})
   updateRows(false);
 }
 
