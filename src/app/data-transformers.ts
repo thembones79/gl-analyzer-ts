@@ -67,8 +67,14 @@ export const getColumns = (data: TRow[]) => {
 };
 
 export const createVirtualGroupKey = (row: TRow) => {
+  const isDebug = window.location.search.includes("debug=true");
   const changedRecordKey = row.ska1GlCode;
+  if(isDebug) console.log("Changed record key: " + changedRecordKey);
   const areChanges = store.changes && store.changes[changedRecordKey];
+  if(isDebug) console.log({ areChanges });
+  const storeIng = store.ingridients;
+  if(isDebug) console.log({ storeIng });
+  if(isDebug) console.log({ row });
   return store.ingridients
     ? store.ingridients
         .map((i) => {
@@ -103,9 +109,11 @@ export const createMappedValue = ({ type, row }: ICreateMappedValue) => {
 };
 
 export const createGroupedData = (storeData = store.data) => {
+  const isDebug = window.location.search.includes("debug=true");
   const groups: TGroups = {};
   storeData?.forEach((row) => {
     const vKey = createVirtualGroupKey(row);
+    if(isDebug) console.log("Virtual key: " + vKey);
     if (!groups[vKey]) {
       //@ts-ignore
       groups[vKey] = { ...row };
@@ -121,16 +129,18 @@ export const createGroupedData = (storeData = store.data) => {
       groups[vKey].groupChanged = true;
     }
   });
+  if(isDebug) console.log({ groups });
   return groups;
 };
 
 const createGroupedDataFiltered = () => {
+  const isDebug = window.location.search.includes("debug=true"); 
   const storeData = store.data;
-  console.log({ storeData });
+  if(isDebug) console.log({ storeData });
   if (!storeData) return {};
   const filteredData = storeData.filter((row) => {
     const changedValue = store.changes?.[row.ska1GlCode];
-    //console.log({ changedValue });
+    //if(isDebug) console.log({ changedValue });
     if (changedValue === undefined)
       return row.inScope || row.inScopeClearing || row.inScopeClearing_RevC;
     const scope =
@@ -143,7 +153,7 @@ const createGroupedDataFiltered = () => {
     console.log("return scope");
     return scope;
   });
-  console.log({ filteredData });
+  if(isDebug) console.log({ filteredData });
   return createGroupedData(filteredData);
 };
 
