@@ -9,7 +9,7 @@ const data = () => {
     glLookupFields: JSON.parse(fs.readFileSync("./mock/lookup.json", "utf-8")),
     glTableConfig: JSON.parse(fs.readFileSync("./mock/tabs.json", "utf-8")),
     glTableNames: JSON.parse(fs.readFileSync("./mock/types.json", "utf-8")),
-    glTable: JSON.parse(fs.readFileSync("./mock/demo_v2.json", "utf-8")),
+    glTable: JSON.parse(fs.readFileSync("./mock/demo_v3.json", "utf-8")),
   };
 };
 const app = express();

@@ -89,7 +89,7 @@ export type TRow = {
   approverRecon: string;
   reviewerRecon: string;
   ska1HouseBank: string;
-  ska1DelFi: string;
+  ska1DelFl: string;
   ska1PostingBlock: string;
   skb1MarkedForDeletion: string;
   skb1AccountCurrency: string;
@@ -159,7 +159,7 @@ export type TRow = {
   gL_PC_PPC_TP_DC_HTxt: string;
   gL_PC_PPC_TP_DC: string;
   gL_PC_PPC_TP_DC_LTxt_RevC: string;
-  gl_DC_ABSDC_RevC: string;
+  gL_DC_ABSDC_RevC: string;
   gL_PC_PPC_TP_DC_Ref_Vend: string;
   gL_PC_DC_ABSDC_ABSLC: string;
   gL_DC_ABSDC: string;

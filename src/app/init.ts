@@ -31,6 +31,7 @@ declare global {
 }
 
 export const initApp = async () => {
+  const isDebug = window.location.search.includes("debug=jobFile");
   // bind event handlers into global scope
   window.updateTab = updateTab;
   window.onChange = onChange;
@@ -47,7 +48,7 @@ export const initApp = async () => {
   store.tabs = await getData(`${URL}&get=glTableConfig`);
   store.types = await getData(`${URL}&get=glTableNames`);
   store.perm = await getData(`${URL}&get=perm`);
-  store.data = await getData(`${URL}&get=glTable`);
+  store.data = isDebug ? await getData(`${URL}&get=glTableFromJF`) : await getData(`${URL}&get=glTable`);
   store.activeTab = store.tabs && store.tabs[0].id;
   store.ingridients = ((store.lookup &&
     store.lookup[`virtualKey_${store.activeTab}` as keyof TLookup]) ||

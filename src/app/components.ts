@@ -147,7 +147,7 @@ export const Input = ({
 }: IField) => {
   const disabled = isDisabled ? "disabled" : "";
   const diffClass = isDiffer ? "class='diff-values'" : "";
-  const v = c === "accountItem" ? createVirtualGroupKey(row) : val;
+  const v = (c === "accountItem" || c === "accountItemClearing" || c === "accountItemClearing_RevC") ? createVirtualGroupKey(row) : val;
   return `<input placeholder="${v}"  ${disabled} ${diffClass} title="${v}" value="${changedVal || v}" onchange="onChange(this,'${theKey}','${c}')" />`;
 };
 
@@ -211,8 +211,12 @@ export const DynamicOptionsSelect = ({
   if (!store.lookup) return "";
   const inRowColumn = store.lookup[type];
 
+
+ //@ts-ignore 
+const source = Array.isArray(inRowColumn)? row[inRowColumn[0]]: [];
+
   //@ts-ignore
-  const options = (Array.isArray(inRowColumn) ? row[inRowColumn[0]] : [])
+  const options = (Array.isArray(source) ? source : [])
     .map((o: string) => {
       const value = changedVal || val;
       const selected = value === o ? "selected" : "";
@@ -258,18 +262,21 @@ export const Field = (options: IField) => {
 
 export const Row = ({ row, cols }: IRow) => {
   if (!store.tabs || !store.activeTab || !store.types) return "";
+  const isDebug = window.location.search.includes("debug=true");
+  if(isDebug) console.log("Active Tab: " + store.activeTab);
   const tab = store.tabs.find((t) => t.id === store.activeTab)?.columns;
   const colm: string[] = [];
   if (!tab) return "";
   const columns = cols
     .map((c) => {
+      //if(isDebug) console.log(c + ";" + tab[c]);
       const keyColumnName = "ska1GlCode";
       const typeItem = store.types && store.types[c as keyof TTypes];
       const type = typeItem ? typeItem.type : "freeText";
 
       const theKey = row[keyColumnName];
       const val = row[c as keyof TRow];
-      const changeable = tab[c].changeable as TCreateMappedValueType;
+      const changeable = (tab[c] ? tab[c].changeable : "n") as TCreateMappedValueType ;
       let mappedValue = changeable as string;
       if (changeable.startsWith("mapped")) {
         mappedValue = createMappedValue({ type: changeable, row }) as string;
@@ -433,7 +440,7 @@ export const Form = ({ row, cols }: IForm) => {
 };
 
 const AffectedItems = ({ row }: IAffectedItems) => {
-  const theKey = Object.keys(row.ska1GlCodes);
+  const theKey = row ? Object.keys(row.ska1GlCodes) : [];
   const affectedItems = theKey
     .map((ska1GlCode) => `<div${getStyle(ska1GlCode)}>${ska1GlCode}</div>`)
     .join("");
@@ -453,6 +460,7 @@ const getStyle = (ska1GlCode: string) => {
 export const AiCenter = (groupId = store.groupKeys && store.groupKeys[0]) => {
   if (!store.groups || !store.groupKeys) return "";
   const row = store.groups[groupId || store.groupKeys[0]];
+  if (!row) return "";
   const cols = Object.keys(row);
   return Form({ row, cols });
 };

@@ -24,7 +24,7 @@ export interface IHandleInheritedChanges {
 const aChng = (
   theKey: string,
   col: string,
-  val: string | boolean | string[] | Record<string, boolean>,
+  val: string | boolean | string[] | Record<string, boolean>
 ) => {
   if (!store.changes) return;
   if (!store.changes[theKey]) {
@@ -44,7 +44,7 @@ const rChng = (theKey: string, col: string) => {
 export const addChange = (
   theKey: string,
   col: string,
-  val: string | boolean | string[] | Record<string, boolean>,
+  val: string | boolean | string[] | Record<string, boolean>
 ) => {
   if (theKey.includes(",")) {
     theKey.split(",").forEach((k) => aChng(k, col, val));
@@ -61,11 +61,20 @@ export const removeChange = (theKey: string, col: string) => {
   }
 };
 
-export const getColumns = (data: TRow[]) => Object.keys(data[0]);
+export const getColumns = (data: TRow[]) => {
+  if (!data || data.length === 0) return [];
+  return Object.keys(data[0]);
+};
 
 export const createVirtualGroupKey = (row: TRow) => {
+  const isDebug = window.location.search.includes("debug=true");
   const changedRecordKey = row.ska1GlCode;
+  if(isDebug) console.log("Changed record key: " + changedRecordKey);
   const areChanges = store.changes && store.changes[changedRecordKey];
+  if(isDebug) console.log({ areChanges });
+  const storeIng = store.ingridients;
+  if(isDebug) console.log({ storeIng });
+  if(isDebug) console.log({ row });
   return store.ingridients
     ? store.ingridients
         .map((i) => {
@@ -100,9 +109,11 @@ export const createMappedValue = ({ type, row }: ICreateMappedValue) => {
 };
 
 export const createGroupedData = (storeData = store.data) => {
+  const isDebug = window.location.search.includes("debug=true");
   const groups: TGroups = {};
   storeData?.forEach((row) => {
     const vKey = createVirtualGroupKey(row);
+    if(isDebug) console.log("Virtual key: " + vKey);
     if (!groups[vKey]) {
       //@ts-ignore
       groups[vKey] = { ...row };
@@ -118,20 +129,32 @@ export const createGroupedData = (storeData = store.data) => {
       groups[vKey].groupChanged = true;
     }
   });
+  if(isDebug) console.log({ groups });
   return groups;
 };
 
 const createGroupedDataFiltered = () => {
+  const isDebug = window.location.search.includes("debug=true"); 
   const storeData = store.data;
-  if(!storeData) return {};
+  if(isDebug) console.log({ storeData });
+  if (!storeData) return {};
   const filteredData = storeData.filter((row) => {
-  const changedValue = store.changes?.[row.ska1GlCode]
-  if (changedValue === undefined) return row.inScope;
-  const scope = changedValue.inScope
-  if (scope === undefined) return row.inScope;
-  return scope;
-});
-return createGroupedData(filteredData);
+    const changedValue = store.changes?.[row.ska1GlCode];
+    //if(isDebug) console.log({ changedValue });
+    if (changedValue === undefined)
+      return row.inScope || row.inScopeClearing || row.inScopeClearing_RevC;
+    const scope =
+      changedValue.inScope ||
+      changedValue.inScopeClearing ||
+      changedValue.inScopeClearing_RevC;
+    console.log({ scope });
+    if (scope === undefined)
+      return row.inScope || row.inScopeClearing || row.inScopeClearing_RevC;
+    console.log("return scope");
+    return scope;
+  });
+  if(isDebug) console.log({ filteredData });
+  return createGroupedData(filteredData);
 };
 
 export const refreshGroups = () => {
@@ -187,7 +210,7 @@ export const handleInheritedChanges = ({
 export const updateRows = async (shouldSave = true) => {
   if (!store.data) return;
   const searchFilter = document.getElementById(
-    "filter-rows",
+    "filter-rows"
   ) as HTMLInputElement;
   const phrase = searchFilter ? searchFilter.value.toLowerCase() : "";
   refreshGroups();
@@ -196,14 +219,27 @@ export const updateRows = async (shouldSave = true) => {
   const theData = store?.multiFilteredRowData
     ? store.multiFilteredRowData
     : store.data;
-    store?.csv?.splice(1);
+  store?.csv?.splice(1);
+  console.log({
+    connd: type === "tableF" && store.groupsFiltered?.length && store.groupKeysFiltered?.length,
+    type,
+    store,
+  });
   if (type === "tableF" && store.groupsFiltered && store.groupKeysFiltered) {
     cols = Object.keys(store.groupsFiltered[store.groupKeysFiltered[0]] || {});
+    const grpKeyFil = store.groupKeysFiltered;
+    const fltrdRws = grpKeyFil.filter((r) =>
+      JSON.stringify(store.groupsFiltered ? store.groupsFiltered[r] : [])
+        .toLowerCase()
+        .includes(phrase)
+    );
+    const mpdRws = fltrdRws.map((rowStr) => RowF({ rowStr, cols }));
+    console.log(mpdRws);
     store.rows = store.groupKeysFiltered
       .filter((r) =>
         JSON.stringify(store.groupsFiltered ? store.groupsFiltered[r] : [])
           .toLowerCase()
-          .includes(phrase),
+          .includes(phrase)
       )
       .map((rowStr) => RowF({ rowStr, cols }));
   } else {
@@ -217,7 +253,7 @@ export const updateRows = async (shouldSave = true) => {
 
   refreshGroups();
   if (store.activeTab === "ai") {
-    renderAiTab(true);
+    renderAiTab(false);
   }
 
   store.changes && (await postData(`${URL}&save=true`, store.changes));

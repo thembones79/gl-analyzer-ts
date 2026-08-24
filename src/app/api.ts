@@ -1,23 +1,23 @@
 import { store, type TChanges } from "./store";
 import { updateRows } from "./data-transformers";
 import { reRenderPlaceholder } from "./renderers";
-const host = document.querySelector("body")?.dataset?.url || null;
+const host = document.querySelector("body")?.dataset?.url || "";
 export const params = window.location.search;
-export const URL = host ? host + params : window.location.href;
+export const URL = host + params;
 
 const ERROR_MESSAGE =
   "Ups something went wrong... on BACK END! Please login and refresh the app. If the issue would last longer than 15 minutes, please report it to trash@siemens.com";
 
-const setError = () => {
-  const tbody = document.querySelector("tbody") as HTMLDivElement;
-  const aiBoxCenter = document.querySelector(
-    ".ai-box__center",
-  ) as HTMLDivElement;
-  const content = tbody || aiBoxCenter;
-
-  if (content) {
-    content.setAttribute("inert", "true");
-  }
+  const setError = () => {
+    const tbody = document.querySelector("tbody") as HTMLDivElement;
+    const aiBoxCenter = document.querySelector(
+      ".ai-box__center",
+    ) as HTMLDivElement;
+    const content = tbody || aiBoxCenter;
+  
+    if (content) {
+      content.setAttribute("inert", "true");
+    }
 
   reRenderPlaceholder();
 };
