@@ -211,8 +211,12 @@ export const DynamicOptionsSelect = ({
   if (!store.lookup) return "";
   const inRowColumn = store.lookup[type];
 
+
+ //@ts-ignore 
+const source = Array.isArray(inRowColumn)? row[inRowColumn[0]]: [];
+
   //@ts-ignore
-  const options = (Array.isArray(inRowColumn) ? row[inRowColumn[0]] : [])
+  const options = (Array.isArray(source) ? source : [])
     .map((o: string) => {
       const value = changedVal || val;
       const selected = value === o ? "selected" : "";
