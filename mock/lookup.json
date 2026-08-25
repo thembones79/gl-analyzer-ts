@@ -1,4 +1,34 @@
 {
+  "template": ["Line Items", "Balances", ""],
+  "virtualKey_glF": [
+    "accountItemName",
+    "abdulSuffix1",
+    "abdulSuffix2",
+    "abdulSuffix3"
+  ],
+  "dueDate": ["U+01", "U+02", "U+03", "U+04", "U+05", "U+15"],
+  "virtualKey_clF": [
+    "accountItemNameClearing",
+    "clearingSuffix1",
+    "clearingSuffix2",
+    "clearingSuffix3"
+  ],
+  "t880": ["Yes", "No"],
+  "virtualKey_ai2": [
+    "accountItemNameClearing",
+    "clearingSuffix1",
+    "clearingSuffix2",
+    "clearingSuffix3"
+  ],
+  "frequency": ["Monthly", "Quarterly", "Yearly"],
+  "yesNo": ["Y", "N"],
+  "keyNo": ["Key", "Non Key"],
+  "virtualKey_cl2F": [
+    "accountItemNameClearing",
+    "clearingSuffix1",
+    "clearingSuffix2",
+    "clearingSuffix3"
+  ],
   "responsibilityGroups": [
     "CFAVF",
     "CFPEN",
@@ -13,57 +43,16 @@
     "GBSPO",
     ""
   ],
-  "template": [
-    "Line Items",
-    "Balances",
-    ""
-  ],
-  "oneTwo": [
-    "One-Sided",
-    "Two-Sided"
-  ],
-  "virtualKey_glF": [
-    "accountItemName",
-    "abdulSuffix1",
-    "oneSided",
-    "abdulSuffix3"
-  ],
-  "level": [
-    "Company Code",
-    "Segment",
-    "Depth Structure"
-  ],
-  "dueDate": [
-    "U+01",
-    "U+02",
-    "U+03",
-    "U+04",
-    "U+05",
-    "U+15"
-  ],
+  "oneTwo": ["1S", "2S"],
+  "certificationType": ["Manual", "Auto"],
+  "level": ["Company Code", "Segment", "Depth Structure"],
   "virtualKey_c2": [
-    "accountItemNameClearing_RevC",
-    "clearingSuffix1_RevC",
-    "clearingSuffix2_RevC",
-    "clearingSuffix3_RevC"
-  ],
-  "t880": [
-    "Yes",
-    "No"
+    "accountItemNameClearing",
+    "clearingSuffix1",
+    "clearingSuffix2",
+    "clearingSuffix3"
   ],
   "virtualKey_cl": [
-    "accountItemNameClearing",
-    "clearingSuffix1",
-    "clearingSuffix2",
-    "clearingSuffix3"
-  ],
-  "virtualKey_clF": [
-    "accountItemNameClearing",
-    "clearingSuffix1",
-    "clearingSuffix2",
-    "clearingSuffix3"
-  ],
-  "virtualKey_ai2": [
     "accountItemNameClearing",
     "clearingSuffix1",
     "clearingSuffix2",
@@ -72,94 +61,46 @@
   "virtualKey_gl": [
     "accountItemName",
     "abdulSuffix1",
-    "oneSided",
+    "abdulSuffix2",
     "abdulSuffix3"
   ],
-  "clearing": [
-    "A",
-    "S",
-    ""
-  ],
+  "clearing": ["A", "S", ""],
   "virtualKey_ai": [
     "accountItemName",
     "abdulSuffix1",
-    "oneSided",
+    "abdulSuffix2",
     "abdulSuffix3"
   ],
-  "frequency": [
-    "Monthly",
-    "Quarterly",
-    "Yearly"
-  ],
-  "yesNo": [
-    "Y",
-    "N"
-  ],
-  "recAcct": [
-    "D",
-    "K",
-    "GRIR"
-  ],
-  "keyNo": [
-    "Key",
-    "Non Key"
-  ],
+  "recAcct": ["D", "K", "GRIR"],
+  "suggested": ["S", ""],
   "virtualKey_ai3": [
-    "accountItemNameClearing_RevC",
-    "clearingSuffix1_RevC",
-    "clearingSuffix2_RevC",
-    "clearingSuffix3_RevC"
+    "accountItemNameClearing",
+    "clearingSuffix1",
+    "clearingSuffix2",
+    "clearingSuffix3"
   ],
-  "freeText": [
-    "all"
-  ],
-  "inRowColumn": [
-    "bc00"
-  ],
-  "checkBox": [
-    "all"
-  ],
-  "risk": [
-    "High",
-    "Medium",
-    "Low"
-  ],
+  "freeText": ["all"],
+  "inRowColumn": ["bc00"],
+  "checkBox": ["all"],
+  "risk": ["High", "Medium", "Low"],
   "mappedKeyAccountDueDate": {
     "source": "keyAccount",
-    "dict": {
-      "false": "U+8",
-      "true": "U+4"
-    }
+    "dict": { "false": "U+8", "true": "U+4" }
   },
   "mappedRiskLevelPreparerRecon": {
     "source": "riskLevel",
-    "dict": {
-      "Low": "y",
-      "Medium": "y",
-      "High": "y"
-    }
+    "dict": { "High": "y", "Low": "y", "Medium": "y" }
   },
   "mappedRiskLevelReviewerRecon": {
     "source": "riskLevel",
-    "dict": {
-      "Low": "n",
-      "Medium": "n",
-      "High": "y"
-    }
+    "dict": { "High": "y", "Low": "n", "Medium": "n" }
   },
   "mappedRiskLevelApproverRecon": {
     "source": "riskLevel",
-    "dict": {
-      "Low": "n",
-      "Medium": "y",
-      "High": "y"
-    }
+    "dict": { "High": "y", "Low": "n", "Medium": "y" }
   },
   "mappedInScopeSka1GlCodes": {
     "source": "inScope",
-    "dict": {
-      "true": "blue",
-      "false": "pink"
-    }
+    "dict": { "true": "green", "false": "blue" }
   }
 }

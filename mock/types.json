@@ -1,1003 +1,1072 @@
 {
-  "gL_PC_PPC_TP_DC_LTxt_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_LTxt_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
   "gL_PC_PPC_TP_DC_ABSDC_ABSLC": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "9",
     "name": "GL_PC_PPC_TP_DC_ABSDC_ABSLC",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_HTxt_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_HTxt_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
   },
   "gL_PC_PPC_TP_DC_ABSLC": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "14",
     "name": "GL_PC_PPC_TP_DC_ABSLC",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
   },
   "gL_PC_PPC_TP_DC_SDoc_SOI": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "51",
     "name": "GL_PC_PPC_TP_DC_SDoc_SOI",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "preparerClearing": {
-    "name": "Preparer",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "ai2:2"
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
   },
   "t880": {
+    "filter": "freeText",
+    "visibility": "ai:2",
+    "columnOrder": "75",
     "name": "T880 Mapping",
     "description": "???",
-    "type": "checkbox",
+    "source": "x",
+    "sourceName": "x",
+    "type": "checkbox"
+  },
+  "preparerClearing": {
     "filter": "freeText",
-    "visibility": "ai:2"
+    "visibility": "clF:2;cl2F:2",
+    "columnOrder": "49",
+    "name": "Preparer",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
   "reviewerClearing_RevC": {
+    "filter": "freeText",
+    "visibility": "cl2F:2",
+    "columnOrder": "56",
     "name": "Reviewer",
     "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "ai3:2"
-  },
-  "gL_PC_PPC_TP_DC_ABSDC_ABSLC_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSDC_ABSLC_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "approverRecon": {
-    "name": "Approver",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "ai:2"
-  },
-  "gL_PC_PPC_TP_DC_ABSDC_ABSLC_ABSLC2": {
-    "name": "GL_PC_PPC_TP_DC_ABSDC_ABSLC_ABSLC2",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_PCBlocked_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_PCBlocked_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "skb1LineItemDisplay": {
-    "name": "Line Item Display",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "gl:1"
-  },
-  "gL_PC_PPC_TP_DC_PCBlocked": {
-    "name": "GL_PC_PPC_TP_DC_PCBlocked",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Vend_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Vend_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "approverClearing": {
-    "name": "Approver",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "ai2:2"
-  },
-  "gL_PC_PPC_TP_DC_Assig": {
-    "name": "GL_PC_PPC_TP_DC_Assig",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_Ref": {
-    "name": "GL_PC_PPC_TP_DC_Ref",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "skb1AccountCurrency": {
-    "name": "Account Currency",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:1;cl:1;gl:1"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "bc00": {
-    "name": "bc00",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_SDoc_SOI_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_SDoc_SOI_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "accountItemName": {
-    "name": "BC00 Cons Description",
-    "description": "???",
-    "type": "inRowColumn",
-    "filter": "freeText",
-    "visibility": "c2:1;cl:1;gl:2"
-  },
-  "ska1PostingBlock": {
-    "name": "Posting Block",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:1;cl:1;gl:1"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Cust": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Cust",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Vend": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Vend",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_Ref_RevC": {
-    "name": "GL_PC_PPC_TP_DC_Ref_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "inScopeClearing_RevC": {
-    "name": "In Scope for Clearing",
-    "description": "???",
-    "type": "checkbox",
-    "filter": "freeText",
-    "visibility": "c2:2"
-  },
-  "skb1OpenItemManagement": {
-    "name": "Open Item Management",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:1;cl:1;gl:1"
-  },
-  "gL_PC_PPC_TP_DC_ABSDC": {
-    "name": "GL_PC_PPC_TP_DC_ABSDC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Assig": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Assig",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_LTxt": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_LTxt",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_SDoc_SOI_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_SDoc_SOI_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "accountItemNameClearing_RevC": {
-    "name": "BC00 Cons Description",
-    "description": "???",
-    "type": "inRowColumn",
-    "filter": "freeText",
-    "visibility": "c2:2"
-  },
-  "clearingSuffix2_RevC": {
-    "name": "Suffix2",
-    "description": "???",
-    "type": "responsibilityGroups",
-    "filter": "freeText",
-    "visibility": "c2:2"
-  },
-  "approverClearing_RevC": {
-    "name": "Approver",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "ai3:2"
-  },
-  "accountItemClearing": {
-    "name": "Account Item",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "cl:1"
-  },
-  "clearingSuffix1_RevC": {
-    "name": "Suffix1",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:1"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Cust": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Cust",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "skb1PostAutomatically": {
-    "name": "Post Automatically",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:1;cl:1;gl:1"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "twoSidedSource": {
-    "name": "Two Sided Rec  2nd Data Source derived from",
-    "description": "???",
-    "type": "freeText",
+  "type": {
     "filter": "freeText",
-    "visibility": "gl:2"
-  },
-  "gL_PC_PPC_TP_DC_HTxt": {
-    "name": "GL_PC_PPC_TP_DC_HTxt",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC": {
-    "name": "GL_PC_PPC_TP_DC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Vend_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Vend_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_DC_ABSDC_ABSLC": {
-    "name": "GL_PC_DC_ABSDC_ABSLC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "skb1GlAccount": {
-    "name": "G/L Account",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_HTxt_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_HTxt_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "reconciliationLevel": {
-    "name": "Reconciliation Level",
-    "description": "???",
-    "type": "level",
-    "filter": "freeText",
-    "visibility": "ai:2"
-  },
-  "gL_DC_ABSDC_RevC": {
-    "name": "GL_DC_ABSDC_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "ska1DelFl": {
-    "name": "DelFl",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:1;cl:1;gl:2;clF:1"
-  },
-  "skb1HouseBank": {
-    "name": "House Bank",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_LTxt_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_LTxt_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_HTxt_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_HTxt_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_SDoc_SOI_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_SDoc_SOI_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_ABSDC_ABSLC_ABSLC2_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSDC_ABSLC_ABSLC2_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_LTxt_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_LTxt_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_DC_ABSDC_RevC": {
-    "name": "GL_PC_DC_ABSDC_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_DC_ABSDC_RevC_RevC": {
-    "name": "GL_PC_DC_ABSDC_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_Ref_Cust_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_Ref_Cust_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "accountItemClearing_RevC": {
-    "name": "Account Item",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:1"
-  },
-  "accountItem": {
-    "name": "Account Item",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "gl:1"
-  },
-  "gL_PC_PPC_TP_DC_Ref_Cust_RevC": {
-    "name": "GL_PC_PPC_TP_DC_Ref_Cust_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "inScopeClearing": {
-    "name": "In Scope for Clearing",
-    "description": "???",
-    "type": "checkbox",
-    "filter": "freeText",
-    "visibility": "cl:2"
-  },
-  "gL_PC_PPC_TP_DC_Assig_RevC": {
-    "name": "GL_PC_PPC_TP_DC_Assig_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Cust_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Cust_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "abdulSuffix3": {
-    "name": "Suffix3",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "gl:2"
-  },
-  "gL_PC_DC_ABSDC_ABSLC_RevC": {
-    "name": "GL_PC_DC_ABSDC_ABSLC_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Vend_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Vend_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_Assig_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_Assig_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "dueDate": {
-    "name": "Reconciliation Due Date",
-    "description": "???",
-    "type": "mappedKeyAccountDueDate",
-    "filter": "freeText",
-    "visibility": "ai:1"
-  },
-  "ska1GlGroup": {
-    "name": "SAP Group Account Number",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "gl:1"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_Ref_Cust": {
-    "name": "GL_PC_PPC_TP_DC_Ref_Cust",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "oneSided": {
+    "visibility": "0",
+    "columnOrder": "77",
     "name": "One Sided / Two Sided Reconciliation Account",
     "description": "???",
-    "type": "checkbox",
-    "filter": "freeText",
-    "visibility": "gl:2"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "skb1ReconciliationAccount": {
-    "name": "Reconciliation Account",
+  "approverRecon": {
+    "filter": "freeText",
+    "visibility": "glF:2",
+    "columnOrder": "51",
+    "name": "Approver",
     "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:1;cl:1;gl:1"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "accountItemNameClearing": {
-    "name": "BC00 Cons Description",
+  "gL_PC_PPC_TP_DC_ABSDC_ABSLC_ABSLC2": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "10",
+    "name": "GL_PC_PPC_TP_DC_ABSDC_ABSLC_ABSLC2",
     "description": "???",
-    "type": "inRowColumn",
-    "filter": "freeText",
-    "visibility": "cl:2"
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
   },
-  "abdulSuffix1": {
-    "name": "Suffix1",
+  "spdBscRules": {
+    "filter": "freeText",
+    "visibility": "coe:2",
+    "columnOrder": "74",
+    "name": "SPD_BSC_RULES",
     "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "gl:2"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "frequency": {
-    "name": "Periodicity (Frequency)",
-    "description": "???",
-    "type": "frequency",
+  "t012kHouseBank": {
     "filter": "freeText",
-    "visibility": "ai:2"
+    "visibility": "gl:1",
+    "columnOrder": "33",
+    "name": "House Bank (T012K)",
+    "description": "data taken from t012k",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "gL_PC_PPC_TP_DC_SDoc_SOI_RevC": {
-    "name": "GL_PC_PPC_TP_DC_SDoc_SOI_RevC",
-    "description": "???",
-    "type": "clearing",
+  "skb1LineItemDisplay": {
     "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "skb1GlAccount2": {
-    "name": "G/L Account 2",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "0"
-  },
-  "gL_PC_PPC_TP_DC_Ref_Vend_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_Ref_Vend_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_Ref_Vend_RevC": {
-    "name": "GL_PC_PPC_TP_DC_Ref_Vend_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "accountGroupDescription": {
-    "name": "Account Group Description",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:1;cl:1;gl:1"
-  },
-  "gL_PC_PPC_TP_DC_ABSDC_ABSLC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSDC_ABSLC_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Vend_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Vend_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "accountType": {
-    "name": "Account Type",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:2;cl:2"
-  },
-  "skb1MarkedForDeletion": {
-    "name": "Marked For Deletion",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "gl:2"
-  },
-  "yh010Group": {
-    "name": "Group Account",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "gl:1"
-  },
-  "yh010GroupDescription": {
-    "name": "Group Account Description",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "gl:1"
-  },
-  "clearingSuffix3": {
-    "name": "Suffix3",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "cl:2"
-  },
-  "reconType": {
-    "name": "Recon type",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "ai:2"
-  },
-  "clearingSuffix2": {
-    "name": "Suffix2",
-    "description": "???",
-    "type": "responsibilityGroups",
-    "filter": "freeText",
-    "visibility": "cl:2"
-  },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "gL_PC_PPC_TP_DC_PCBlocked_RevC": {
-    "name": "GL_PC_PPC_TP_DC_PCBlocked_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "clearingSuffix1": {
-    "name": "Suffix1",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "cl:1"
-  },
-  "skb1PostingBlock": {
-    "name": "Posting Block 2",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "0"
-  },
-  "gL_PC_PPC_TP_DC_HTxt_RevC": {
-    "name": "GL_PC_PPC_TP_DC_HTxt_RevC",
-    "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
-  },
-  "bc00Level": {
-    "name": "bc00Level",
-    "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "0"
-  },
-  "lineItemDisplay": {
+    "visibility": "gl:1",
+    "columnOrder": "44",
     "name": "Line Item Display",
     "description": "???",
-    "type": "checkbox",
-    "filter": "freeText",
-    "visibility": "ai:2;gl:1"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_HTxt": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_HTxt",
+  "gL_PC_PPC_TP_DC_PCBlocked": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "40",
+    "name": "GL_PC_PPC_TP_DC_PCBlocked",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "suggested"
   },
-  "gL_PC_PPC_TP_DC_ABSDC_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSDC_RevC",
+  "accFilter": {
+    "filter": "freeText",
+    "visibility": "gl:1",
+    "columnOrder": "30",
+    "name": "Accounting Filter",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
+    "source": "accounting",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "riskLevel": {
-    "name": "Risk Level",
+  "certificationType": {
+    "filter": "freeText",
+    "visibility": "gl:2",
+    "columnOrder": "60",
+    "name": "Certification Type",
     "description": "???",
-    "type": "risk",
-    "filter": "freeText",
-    "visibility": "gl:1"
+    "source": "x",
+    "sourceName": "x",
+    "type": "certificationType"
   },
-  "accountCategory": {
-    "name": "Account Category",
+  "approverClearing": {
+    "filter": "freeText",
+    "visibility": "clF:2;cl2F:2",
+    "columnOrder": "52",
+    "name": "Approver",
     "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "gl:1"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "gL_PC_PPC_TP_DC_LTxt": {
-    "name": "GL_PC_PPC_TP_DC_LTxt",
+  "gL_PC_PPC_TP_DC_Assig": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "34",
+    "name": "GL_PC_PPC_TP_DC_Assig",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
   },
-  "skb1OpenItemManagementByLedgerGroup": {
-    "name": "Open Item Management By Ledger Group",
+  "gL_PC_PPC_TP_DC_Ref": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "42",
+    "name": "GL_PC_PPC_TP_DC_Ref",
     "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:1;cl:1;gl:1"
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
   },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Cust_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Cust_RevC",
+  "skb1AccountCurrency": {
+    "filter": "freeText",
+    "visibility": "c2:1;cl:1;gl:1",
+    "columnOrder": "37",
+    "name": "Account Currency",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "inScope": {
-    "name": "In Scope for BSC?",
+  "bc00": {
+    "filter": "freeText",
+    "visibility": "gl:1",
+    "columnOrder": "58",
+    "name": "bc00",
     "description": "???",
-    "type": "checkbox",
-    "filter": "freeText",
-    "visibility": "gl:2"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "ska1HouseBank": {
-    "name": "House Bank",
+  "accountItemName": {
+    "filter": "freeText",
+    "visibility": "gl:2",
+    "columnOrder": "14",
+    "name": "BC00 Cons Description",
     "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:1;cl:1;gl:1"
+    "source": "x",
+    "sourceName": "x",
+    "type": "inRowColumn"
   },
-  "skb1LocalCurrencyOnly": {
-    "name": "Local Currency Only",
+  "ska1PostingBlock": {
+    "filter": "freeText",
+    "visibility": "0",
+    "columnOrder": "68",
+    "name": "Posting Block",
     "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "gL_PC_PPC_TP_DC_Reversals": {
-    "name": "GL_PC_PPC_TP_DC_Reversals",
+  "accRuleOrder": {
+    "filter": "freeText",
+    "visibility": "gl:1",
+    "columnOrder": "26",
+    "name": "Accounting Rule Order",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "accounting",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "gL_PC_PPC_TP_DC_Reversals_RevC": {
-    "name": "GL_PC_PPC_TP_DC_Reversals_RevC",
+  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Cust": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "24",
+    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Cust",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
   },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Vend": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Vend",
+  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Vend": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "29",
+    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Vend",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
   },
-  "gL_PC_PPC_TP_DC_ABSDC_ABSLC_ABSLC2_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSDC_ABSLC_ABSLC2_RevC",
+  "skb1OpenItemManagement": {
+    "filter": "freeText",
+    "visibility": "c2:1;cl:1;gl:1",
+    "columnOrder": "45",
+    "name": "Open Item Management",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Assig_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Assig_RevC",
+  "inScopeClearing_RevC": {
+    "filter": "freeText",
+    "visibility": "c2:2",
+    "columnOrder": "8",
+    "name": "In Scope for Clearing",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "checkbox"
   },
-  "gL_PC_DC_ABSDC_ABSLC_RevC_RevC": {
-    "name": "GL_PC_DC_ABSDC_ABSLC_RevC",
+  "gL_PC_PPC_TP_DC_ABSDC": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "8",
+    "name": "GL_PC_PPC_TP_DC_ABSDC",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
   },
-  "reviewerClearing": {
-    "name": "Reviewer",
+  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_LTxt": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "21",
+    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_LTxt",
     "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "ai2:2"
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
   },
-  "gL_PC_PPC_TP_DC_LTxt_RevC": {
-    "name": "GL_PC_PPC_TP_DC_LTxt_RevC",
+  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Assig": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "15",
+    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Assig",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
   },
-  "gL_DC_ABSDC_RevC": {
-    "name": "GL_DC_ABSDC",
+  "clrRuleKey": {
+    "filter": "freeText",
+    "visibility": "cl:1;c2:1;gl:1",
+    "columnOrder": "27",
+    "name": "Clearing Rule Key",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
+    "source": "clearing",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "gL_PC_PPC_TP_DC_Ref_Vend": {
-    "name": "GL_PC_PPC_TP_DC_Ref_Vend",
+  "clrRuleOrder": {
+    "filter": "freeText",
+    "visibility": "cl:1;c2:1;gl:1",
+    "columnOrder": "27",
+    "name": "Clearing Rule Order",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "clearing",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Assig_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Assig_RevC",
+  "clearingSuffix2_RevC": {
+    "filter": "freeText",
+    "visibility": "c2:2",
+    "columnOrder": "23",
+    "name": "Suffix2",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "skatGlDescription": {
-    "name": "SAP (Operating) GL Account Description",
+  "accountItemNameClearing_RevC": {
+    "filter": "freeText",
+    "visibility": "c2:2",
+    "columnOrder": "16",
+    "name": "BC00 Cons Description",
     "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:1;cl:1;gl:1"
+    "source": "x",
+    "sourceName": "x",
+    "type": "inRowColumn"
   },
-  "gL_DC_ABSDC": {
-    "name": "GL_DC_ABSDC",
+  "approverClearing_RevC": {
+    "filter": "freeText",
+    "visibility": "cl2F:2",
+    "columnOrder": "53",
+    "name": "Approver",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "reviewerRecon": {
-    "name": "Reviewer",
+  "accountItemClearing": {
+    "filter": "freeText",
+    "visibility": "cl:1;clF:1;c2:1;cl2F:1",
+    "columnOrder": "12",
+    "name": "Account Item",
     "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "ai:2"
+    "source": "clearing",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "keyAccount": {
-    "name": "Key / Non Key Accounts (based on time line)",
+  "clearingSuffix1_RevC": {
+    "filter": "freeText",
+    "visibility": "c2:1",
+    "columnOrder": "21",
+    "name": "Suffix1",
     "description": "???",
-    "type": "checkbox",
-    "filter": "freeText",
-    "visibility": "ai:2"
+    "source": "x",
+    "sourceName": "x",
+    "type": "responsibilityGroups"
   },
-  "gL_PC_DC_ABSDC": {
-    "name": "GL_PC_DC_ABSDC",
+  "t012kCurrency": {
+    "filter": "freeText",
+    "visibility": "gl:1",
+    "columnOrder": "34",
+    "name": "Currency (T012K)",
+    "description": "data taken from t012k",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Cust": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "17",
+    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Cust",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
   },
-  "preparerRecon": {
-    "name": "Preparer",
+  "twoSidedSource": {
+    "filter": "freeText",
+    "visibility": "gl:2",
+    "columnOrder": "28",
+    "name": "Two Sided Rec  2nd Data Source derived from",
     "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "ai:2"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "gL_PC_PPC_TP_DC_ABSLC_SDoc_SOI": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_SDoc_SOI",
+  "skb1PostAutomatically": {
+    "filter": "freeText",
+    "visibility": "c2:1;cl:1;gl:1",
+    "columnOrder": "41",
+    "name": "Post Automatically",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "gL_PC_PPC_TP_DC_ABSDC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSDC_RevC",
+  "gL_PC_PPC_TP_DC_HTxt": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "36",
+    "name": "GL_PC_PPC_TP_DC_HTxt",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
   },
-  "ska1GlCode": {
-    "name": "SAP (Operating) GL Account Number",
+  "gL_PC_PPC_TP_DC": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "7",
+    "name": "GL_PC_PPC_TP_DC",
     "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:1;cl:1;gl:1"
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
   },
-  "gL_DC_ABSDC_RevC_RevC": {
-    "name": "GL_DC_ABSDC_RevC",
+  "spdBscAutoclearRules": {
+    "filter": "freeText",
+    "visibility": "coe:2",
+    "columnOrder": "72",
+    "name": "SPD_BSC_AUTOCLEAR_RULES",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "templateName": {
-    "name": "Template Name / Sub Process Chain",
+  "gL_PC_DC_ABSDC_ABSLC": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "4",
+    "name": "GL_PC_DC_ABSDC_ABSLC",
     "description": "???",
-    "type": "template",
-    "filter": "freeText",
-    "visibility": "ai:2"
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
   },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Cust_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Cust_RevC",
+  "skb1GlAccount": {
+    "filter": "freeText",
+    "visibility": "0",
+    "columnOrder": "69",
+    "name": "G/L Account",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "skb1AlternativeAccount": {
-    "name": "Alternative Account",
+  "reconciliationLevel": {
+    "filter": "freeText",
+    "visibility": "ai:2",
+    "columnOrder": "66",
+    "name": "Reconciliation Level",
     "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:1;cl:1;gl:1"
+    "source": "x",
+    "sourceName": "x",
+    "type": "level"
   },
-  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Cust_RevC": {
-    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Cust_RevC",
+  "skb1HouseBank": {
+    "filter": "freeText",
+    "visibility": "gl:1",
+    "columnOrder": "38",
+    "name": "House Bank (SKB1)",
+    "description": "data taken from skb1",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "clrFilter": {
+    "filter": "freeText",
+    "visibility": "cl:1;c2:1;gl:1;coe:1",
+    "columnOrder": "30",
+    "name": "Clearing Filter",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:0;cl:2;gl:0;ai2:0;ai3:0"
+    "source": "clearing",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "currencySplit": {
-    "name": "Additional Currency Split",
+  "ska1DelFl": {
+    "filter": "freeText",
+    "visibility": "0",
+    "columnOrder": "67",
+    "name": "DelFl",
     "description": "???",
-    "type": "checkbox",
-    "filter": "freeText",
-    "visibility": "ai:2"
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "gL_PC_PPC_TP_DC_Ref_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_Ref_RevC",
+  "autocertify": {
+    "filter": "freeText",
+    "visibility": "ai:2",
+    "columnOrder": "57",
+    "name": "Auto Certify",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "t880"
   },
-  "clearingSuffix3_RevC": {
+  "accountItemClearing_RevC": {
+    "filter": "freeText",
+    "visibility": "c2:1;cl2F:1",
+    "columnOrder": "13",
+    "name": "Account Item",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "accountItem": {
+    "filter": "freeText",
+    "visibility": "gl:1;glF:1",
+    "columnOrder": "11",
+    "name": "Account Item",
+    "description": "???",
+    "source": "accounting",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "inScopeClearing": {
+    "filter": "freeText",
+    "visibility": "cl:2;c2:2",
+    "columnOrder": "7",
+    "name": "In Scope for Clearing",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "checkbox"
+  },
+  "abdulSuffix3": {
+    "filter": "freeText",
+    "visibility": "gl:2",
+    "columnOrder": "19",
     "name": "Suffix3",
     "description": "???",
-    "type": "freeText",
-    "filter": "freeText",
-    "visibility": "c2:2"
+    "source": "accounting",
+    "sourceName": "x",
+    "type": "freeText"
   },
-  "gL_PC_PPC_TP_DC_Reversals_RevC_RevC": {
-    "name": "GL_PC_PPC_TP_DC_Reversals_RevC",
+  "dueDate": {
+    "filter": "freeText",
+    "visibility": "ai:1",
+    "columnOrder": "62",
+    "name": "Reconciliation Due Date",
     "description": "???",
-    "type": "clearing",
-    "filter": "freeText",
-    "visibility": "ai:0;c2:2;cl:0;gl:0;ai2:0;ai3:0"
+    "source": "x",
+    "sourceName": "x",
+    "type": "mappedKeyAccountDueDate"
   },
-  "preparerClearing_RevC": {
+  "ska1GlGroup": {
+    "filter": "freeText",
+    "visibility": "gl:1",
+    "columnOrder": "3",
+    "name": "SAP Group Account Number",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "gL_PC_PPC_TP_DC_Ref_Cust": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "43",
+    "name": "GL_PC_PPC_TP_DC_Ref_Cust",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
+  },
+  "agingBy": {
+    "filter": "freeText",
+    "visibility": "gl:2",
+    "columnOrder": "31",
+    "name": "Ageing By",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "skb1ReconciliationAccount": {
+    "filter": "freeText",
+    "visibility": "c2:1;cl:1;gl:1",
+    "columnOrder": "40",
+    "name": "Reconciliation Account",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "oneSided": {
+    "filter": "freeText",
+    "visibility": "gl:2",
+    "columnOrder": "65",
+    "name": "One Sided / Two Sided Reconciliation Account",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "oneTwo"
+  },
+  "accountItemNameClearing": {
+    "filter": "freeText",
+    "visibility": "cl:2;c2:2",
+    "columnOrder": "15",
+    "name": "BC00 Cons Description",
+    "description": "???",
+    "source": "clearing",
+    "sourceName": "x",
+    "type": "inRowColumn"
+  },
+  "abdulSuffix2": {
+    "filter": "freeText",
+    "visibility": "gl:2",
+    "columnOrder": "18",
+    "name": "Suffix2",
+    "description": "???",
+    "source": "accounting",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "abdulSuffix1": {
+    "filter": "freeText",
+    "visibility": "gl:2",
+    "columnOrder": "17",
+    "name": "Suffix1",
+    "description": "???",
+    "source": "accounting",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "frequency": {
+    "filter": "freeText",
+    "visibility": "ai:2;ai2:2;ai3:2",
+    "columnOrder": "63",
+    "name": "Periodicity (Frequency)",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "frequency"
+  },
+  "accountType_RevC": {
+    "filter": "freeText",
+    "visibility": "c2:2",
+    "columnOrder": "47",
+    "name": "Account Type",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "skb1GlAccount2": {
+    "filter": "freeText",
+    "visibility": "0",
+    "columnOrder": "70",
+    "name": "G/L Account 2",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "accountGroupDescription": {
+    "filter": "freeText",
+    "visibility": "c2:1;cl:1;gl:1",
+    "columnOrder": "10",
+    "name": "Account Group Description",
+    "description": "???",
+    "source": "accounting",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "accountType": {
+    "filter": "freeText",
+    "visibility": "cl:2;gl:1",
+    "columnOrder": "46",
+    "name": "Account Type",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "skb1MarkedForDeletion": {
+    "filter": "freeText",
+    "visibility": "gl:1;cl:1",
+    "columnOrder": "36",
+    "name": "Marked For Deletion",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "yh010GroupDescription": {
+    "filter": "freeText",
+    "visibility": "gl:1",
+    "columnOrder": "5",
+    "name": "Group Account Description",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "yh010Group": {
+    "filter": "freeText",
+    "visibility": "gl:1",
+    "columnOrder": "4",
+    "name": "Group Account",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "spdBscConditionalclearRules": {
+    "filter": "freeText",
+    "visibility": "coe:2",
+    "columnOrder": "73",
+    "name": "SPD_BSC_CONDITIONALCLEAR_RULES",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "reconType": {
+    "filter": "freeText",
+    "visibility": "ai:2;gl:2",
+    "columnOrder": "32",
+    "name": "Recon type",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "clearingSuffix3": {
+    "filter": "freeText",
+    "visibility": "cl:2;c2:2",
+    "columnOrder": "24",
+    "name": "Suffix3",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "clearingSuffix2": {
+    "filter": "freeText",
+    "visibility": "cl:2;c2:2",
+    "columnOrder": "22",
+    "name": "Suffix2",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "23",
+    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
+  },
+  "clearingSuffix1": {
+    "filter": "freeText",
+    "visibility": "cl:2;c2:2",
+    "columnOrder": "20",
+    "name": "Suffix1",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "responsibilityGroups"
+  },
+  "skb1PostingBlock": {
+    "filter": "freeText",
+    "visibility": "gl:1",
+    "columnOrder": "42",
+    "name": "Posting Block",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "bc00Level": {
+    "filter": "freeText",
+    "visibility": "gl:1",
+    "columnOrder": "59",
+    "name": "bc00Level",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "lineItemDisplay": {
+    "filter": "freeText",
+    "visibility": "ai:2;gl:1",
+    "columnOrder": "29",
+    "name": "Line Item Display",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "checkbox"
+  },
+  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_HTxt": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "19",
+    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_HTxt",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
+  },
+  "riskLevel": {
+    "filter": "freeText",
+    "visibility": "gl:1;glF:2;clF:2;cl2F:2",
+    "columnOrder": "30",
+    "name": "Risk Level",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "risk"
+  },
+  "accountCategory": {
+    "filter": "freeText",
+    "visibility": "gl:1",
+    "columnOrder": "9",
+    "name": "Account Category",
+    "description": "???",
+    "source": "accounting",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "gL_PC_PPC_TP_DC_LTxt": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "38",
+    "name": "GL_PC_PPC_TP_DC_LTxt",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
+  },
+  "skb1OpenItemManagementByLedgerGroup": {
+    "filter": "freeText",
+    "visibility": "c2:1;cl:1;gl:1",
+    "columnOrder": "39",
+    "name": "Open Item Management By Ledger Group",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "inScope": {
+    "filter": "freeText",
+    "visibility": "gl:2",
+    "columnOrder": "6",
+    "name": "In Scope for BSC?",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "checkbox"
+  },
+  "skb1LocalCurrencyOnly": {
+    "filter": "freeText",
+    "visibility": "0",
+    "columnOrder": "71",
+    "name": "Local Currency Only",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "ska1HouseBank": {
+    "filter": "freeText",
+    "visibility": "c2:1;cl:1;gl:1",
+    "columnOrder": "35",
+    "name": "Ac GP",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "gL_PC_PPC_TP_DC_Reversals": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "49",
+    "name": "GL_PC_PPC_TP_DC_Reversals",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "suggested"
+  },
+  "gL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Vend": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "27",
+    "name": "GL_PC_PPC_TP_DC_ABSLC_ABSLC2_Ref_Vend",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
+  },
+  "reviewerClearing": {
+    "filter": "freeText",
+    "visibility": "clF:2;cl2F:2",
+    "columnOrder": "55",
+    "name": "Reviewer",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "gL_PC_PPC_TP_DC_Ref_Vend": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "46",
+    "name": "GL_PC_PPC_TP_DC_Ref_Vend",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
+  },
+  "skatGlDescription": {
+    "filter": "freeText",
+    "visibility": "c2:1;cl:1;gl:1",
+    "columnOrder": "2",
+    "name": "SAP (Operating) GL Account Description",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "gL_DC_ABSDC": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "1",
+    "name": "GL_DC_ABSDC",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
+  },
+  "reviewerRecon": {
+    "filter": "freeText",
+    "visibility": "glF:2",
+    "columnOrder": "54",
+    "name": "Reviewer",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "keyAccount": {
+    "filter": "freeText",
+    "visibility": "ai:2",
+    "columnOrder": "64",
+    "name": "Key / Non Key Accounts (based on time line)",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "checkbox"
+  },
+  "accRuleKey": {
+    "filter": "freeText",
+    "visibility": "gl:1",
+    "columnOrder": "26",
+    "name": "Accounting Rule Key",
+    "description": "???",
+    "source": "accounting",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "gL_PC_DC_ABSDC": {
+    "filter": "freeText",
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "3",
+    "name": "GL_PC_DC_ABSDC",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
+  },
+  "preparerRecon": {
+    "filter": "freeText",
+    "visibility": "glF:2",
+    "columnOrder": "48",
     "name": "Preparer",
     "description": "???",
-    "type": "freeText",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "gL_PC_PPC_TP_DC_ABSLC_SDoc_SOI": {
     "filter": "freeText",
-    "visibility": "ai3:2"
+    "visibility": "ai:0;c2:2;cl:2;gl:0;ai2:0;ai3:0",
+    "columnOrder": "32",
+    "name": "GL_PC_PPC_TP_DC_ABSLC_SDoc_SOI",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "clearing"
+  },
+  "ska1GlCode": {
+    "filter": "freeText",
+    "visibility": "c2:1;cl:1;gl:1;coe:1",
+    "columnOrder": "1",
+    "name": "SAP (Operating) GL Account Number",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "templateName": {
+    "filter": "freeText",
+    "visibility": "ai:2",
+    "columnOrder": "76",
+    "name": "Template Name / Sub Process Chain",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "template"
+  },
+  "skb1AlternativeAccount": {
+    "filter": "freeText",
+    "visibility": "c2:1;cl:1;gl:1",
+    "columnOrder": "43",
+    "name": "Alternative Account",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "currencySplit": {
+    "filter": "freeText",
+    "visibility": "ai:2",
+    "columnOrder": "61",
+    "name": "Additional Currency Split",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "checkbox"
+  },
+  "clearingSuffix3_RevC": {
+    "filter": "freeText",
+    "visibility": "c2:2",
+    "columnOrder": "25",
+    "name": "Suffix3",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
+  },
+  "preparerClearing_RevC": {
+    "filter": "freeText",
+    "visibility": "cl2F:2",
+    "columnOrder": "50",
+    "name": "Preparer",
+    "description": "???",
+    "source": "x",
+    "sourceName": "x",
+    "type": "freeText"
   }
 }

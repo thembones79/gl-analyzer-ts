@@ -65,9 +65,10 @@ export const getColumns = (data: TRow[]) => {
   if (!data || data.length === 0) return [];
   return Object.keys(data[0]);
 };
+const isDebug = window.location.search.includes("debug=true");
 
 export const createVirtualGroupKey = (row: TRow) => {
-  const isDebug = window.location.search.includes("debug=true");
+ 
   const changedRecordKey = row.ska1GlCode;
   if(isDebug) console.log("Changed record key: " + changedRecordKey);
   const areChanges = store.changes && store.changes[changedRecordKey];
@@ -135,7 +136,7 @@ export const createGroupedData = (storeData = store.data) => {
 
 const createGroupedDataFiltered = () => {
   const isDebug = window.location.search.includes("debug=true"); 
-  const storeData = store.data;
+  const storeData = store.multiFilteredRowData ?? store.data;
   if(isDebug) console.log({ storeData });
   if (!storeData) return {};
   const filteredData = storeData.filter((row) => {
@@ -147,10 +148,10 @@ const createGroupedDataFiltered = () => {
       changedValue.inScope ||
       changedValue.inScopeClearing ||
       changedValue.inScopeClearing_RevC;
-    console.log({ scope });
+    //console.log({ scope });
     if (scope === undefined)
       return row.inScope || row.inScopeClearing || row.inScopeClearing_RevC;
-    console.log("return scope");
+    //console.log("return scope");
     return scope;
   });
   if(isDebug) console.log({ filteredData });
@@ -216,15 +217,11 @@ export const updateRows = async (shouldSave = true) => {
   refreshGroups();
   const type = store.tabs?.find((t) => t.id == store.activeTab)?.type;
   let cols: string[];
+
   const theData = store?.multiFilteredRowData
     ? store.multiFilteredRowData
     : store.data;
   store?.csv?.splice(1);
-  console.log({
-    connd: type === "tableF" && store.groupsFiltered?.length && store.groupKeysFiltered?.length,
-    type,
-    store,
-  });
   if (type === "tableF" && store.groupsFiltered && store.groupKeysFiltered) {
     cols = Object.keys(store.groupsFiltered[store.groupKeysFiltered[0]] || {});
     const grpKeyFil = store.groupKeysFiltered;
@@ -234,7 +231,7 @@ export const updateRows = async (shouldSave = true) => {
         .includes(phrase)
     );
     const mpdRws = fltrdRws.map((rowStr) => RowF({ rowStr, cols }));
-    console.log(mpdRws);
+    if(isDebug) console.log(mpdRws);
     store.rows = store.groupKeysFiltered
       .filter((r) =>
         JSON.stringify(store.groupsFiltered ? store.groupsFiltered[r] : [])
@@ -244,6 +241,7 @@ export const updateRows = async (shouldSave = true) => {
       .map((rowStr) => RowF({ rowStr, cols }));
   } else {
     cols = getColumns(store.data);
+
     store.rows = theData
       .filter((r) => JSON.stringify(r).toLowerCase().includes(phrase))
       .map((row) => Row({ row, cols }));
